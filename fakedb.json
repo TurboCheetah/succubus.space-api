@@ -1,0 +1,11 @@
+{
+    "hentai" : {
+        "1": {
+            "id": "1",
+            "title": "testing",
+            "plot": "interesting",
+            "episodes": "2",
+            "rating": "4/5"
+        }
+    }
+}
