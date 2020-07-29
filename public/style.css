@@ -11,14 +11,10 @@ body {
 .plot {
     font-size: 1.4rem;
     margin-bottom: -0.7rem;
+    max-width: 50%;
 }
 
-.episodes {
-    font-size: 1rem;
-    margin-bottom: -0.7rem;
-}
-
-.rating {
+.smol {
     font-size: 1rem;
     margin-bottom: -0.7rem;
 }
