@@ -8,7 +8,7 @@
     <title>HentaiList</title>
 </head>
 <body>
-    <p class="title">Title: <%= hanime.name %></p>
+    <a href="<%= hanime.url %>" target="_blank"><p class="title">Title: <%= hanime.name %></p></a>
     <p class="plot">Plot: <%= hanime.description.replace(/<p>/g, '').replace(/<\/p>/g, '') %></p>
     <p class="smol">ID: <%= hanime.id %></p>
     <p class="smol">Release Date: <%= hanime.released_at.slice(0, 10) %></p>

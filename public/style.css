@@ -22,5 +22,6 @@ body {
 
 img {
     padding-top: 2rem;
-    width: 25%;
+    max-width: 25%;
+    height:auto;
 }
