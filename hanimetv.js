@@ -16,8 +16,9 @@ const scrape = async (query) => {
   .then((html) => cheerio.load(html));
   
   const poster = $('.hvpi-cover-container').find('img').attr('src')
-  const video = results.hentai_video;
+  const video = results.hentai_video ? results.hentai_video : 'No results';
   video.poster_url = poster;
+  video.url = `https://hanime.tv/videos/hentai/${query}`
   return video;
 };
 

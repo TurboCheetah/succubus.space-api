@@ -35,6 +35,9 @@ app.get('/api/:hentaiID', (req, res) => {
 app.get('/api/hanime/:query', async (req, res) => {
     let query = req.params.query;
     const search = await hanime.scrape(query);
+    if (search == 'No results') {
+        res.sendStatus(404)
+    }
     res.send(search)
 })
 
