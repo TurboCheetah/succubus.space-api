@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Asap:400,700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <title>HentaiList</title>
+</head>
+<body>
+    <p class="title">Title: <%= hanime.name %></p>
+    <p class="plot">Plot: <%= hanime.description.replace(/<p>/g, '').replace(/<\/p>/g, '') %></p>
+    <p class="smol">ID: <%= hanime.id %></p>
+    <p class="smol">Release Date: <%= hanime.released_at.slice(0, 10) %></p>
+    <p class="smol">Views: <%= hanime.views %></p>
+    <p class="smol">Producer: <%= hanime.brand %></p>
+    <p class="smol">Censored: <%= hanime.is_censored %></p>
+    <p class="smol">Likes: <%= hanime.likes %></p>
+    <p class="smol">Dislikes: <%= hanime.dislikes %></p>
+    <p class="smol">Downloads: <%= hanime.downloads %></p>
+    <p class="smol">Alternate titles: <%for(var i=0; i<hanime.titles.length -1; i++) { %><%= hanime.titles[i].title %>, <% } %> <%= hanime.titles[hanime.titles.length -1].title %> 
+    <p class="smol">Tags: <%for(var i=0; i<hanime.hentai_tags.length -1; i++) { %><%= hanime.hentai_tags[i].text %>, <% } %> <%= hanime.hentai_tags[hanime.hentai_tags.length -1].text %>
+    
+    </p>
+</body>
+</html>
