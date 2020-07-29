@@ -15,9 +15,10 @@ const scrape = async (query) => {
   })
   .then((html) => cheerio.load(html));
   
-  const poster = $('.hvpi-cover-container').find('img').attr('src')
+  const cover = $('.hvpi-cover-container').find('img').attr('src')
   const video = results.hentai_video ? results.hentai_video : 'No results';
-  video.poster_url = poster;
+  video.poster_url = `${video.poster_url.replace(/https:\/\/static-assets.highwinds-cdn.com/g, 'https://i1.wp.com/static-assets.droidbuzz.top')}`;
+  video.cover_url = cover;
   video.url = `https://hanime.tv/videos/hentai/${query}`
   return video;
 };
