@@ -19,8 +19,7 @@
     <p class="smol">Dislikes: <%= hanime.dislikes %></p>
     <p class="smol">Downloads: <%= hanime.downloads %></p>
     <p class="smol">Alternate titles: <%for(var i=0; i<hanime.titles.length -1; i++) { %><%= hanime.titles[i].title %>, <% } %> <%= hanime.titles[hanime.titles.length -1].title %> 
-    <p class="smol">Tags: <%for(var i=0; i<hanime.hentai_tags.length -1; i++) { %><%= hanime.hentai_tags[i].text %>, <% } %> <%= hanime.hentai_tags[hanime.hentai_tags.length -1].text %>
-    
-    </p>
+    <p class="smol">Tags: <%for(var i=0; i<hanime.hentai_tags.length -1; i++) { %><%= hanime.hentai_tags[i].text %>, <% } %> <%= hanime.hentai_tags[hanime.hentai_tags.length -1].text %></p>
+    <img src="<%= hanime.poster_url %>" alt="<%= hanime.name %> Poster">
 </body>
 </html>
