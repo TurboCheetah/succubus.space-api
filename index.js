@@ -37,8 +37,9 @@ app.get('/api/hanime/:query', async (req, res) => {
     const search = await hanime.scrape(query);
     if (search == 'No results') {
         res.sendStatus(404)
+    } else {
+        res.send(search)
     }
-    res.send(search)
 })
 
 //Sends back a nice parsed page
