@@ -81,7 +81,11 @@ const scrape = async (query) => {
     var results = await fetch(`https://members.hanime.tv/rapi/v7/video?id=${query}`)
       .then((r) => r.json());
 
-    var results = results.hentai_video ? newQuery = results.hentai_video.name : 'No results';
+    if (results.hentai_video) {
+      var newQuery = results.hentai_video.name;
+    } else {
+      return 'No results';
+    }
 
     results = await search(newQuery);
 
