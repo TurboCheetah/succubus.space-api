@@ -21,7 +21,7 @@ const combine = async (query) => {
 
   malProducers.forEach(producer => {
     if (producer == hanimeSearch.brand) {
-      hanimeSearch.description = malSearch.synopsis
+      hanimeSearch.description = malSearch.synopsis.replace(/\n\n\[Written by MAL Rewrite\]/g, '')
       hanimeSearch.malURL = malSearch.url
       hanimeSearch.malID = malSearch.id
     }
