@@ -1,5 +1,4 @@
 const fetch = require("node-fetch");
-const cheerio = require("cheerio");
 const AbortController = require('abort-controller');
 
 const scrape = async (query) => {
