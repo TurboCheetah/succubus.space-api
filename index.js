@@ -14,7 +14,6 @@ app.use(express.static('public'))
 
 const getData = async (req, res, next) => {
   try {
-    console.log('Fetching Data...')
     const query = req.params.query
     const search = await combine(query)
     if (search == 'No results') {

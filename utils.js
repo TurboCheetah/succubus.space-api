@@ -7,6 +7,7 @@ const client = redis.createClient(config.redis.port, config.redis.host)
 
 const combine = async (query) => {
   try {
+    console.log(`Data is not in cache, fetching data...`)
     var hanimeSearch = await hanime.scrape(query)
 
     if (hanimeSearch == 'No results') return 'No results'
