@@ -37,7 +37,7 @@ const combine = async (query) => {
       'name', hanimeSearch.name,
       'titles', JSON.stringify(hanimeSearch.titles),
       'slug', hanimeSearch.slug,
-      'description', hanimeSearch.description,
+      'description', JSON.stringify(hanimeSearch.description),
       'views', hanimeSearch.views,
       'interests', hanimeSearch.interests,
       'poster_url', hanimeSearch.poster_url,
@@ -59,7 +59,6 @@ const combine = async (query) => {
       'malID', hanimeSearch.malID
     ], (err, reply) => {
       if (err) console.error(err)
-      console.log(reply)
       console.log(`Added ${hanimeSearch.id} to cache`)
     })
 
