@@ -14,6 +14,7 @@ app.use(express.static('public'))
 
 const getData = async (req, res, next) => {
   try {
+    console.log('Fetching Data...')
     const query = req.params.query
     const search = await combine(query)
     if (search == 'No results') {
@@ -29,7 +30,7 @@ const getData = async (req, res, next) => {
 
 // Caching
 const cache = (req, res, next) => {
-  client.hget(req.params.query, (err, data) => {
+  client.hgetall(req.params.query, (err, data) => {
     if (err) throw err
 
     if (data !== null) {
