@@ -34,6 +34,21 @@ const cache = (req, res, next) => {
     if (err) throw err
 
     if (data !== null) {
+      data.id = JSON.parse(data.id)
+      data.titles = JSON.parse(data.titles)
+      data.description = JSON.parse(data.description)
+      data.views = JSON.parse(data.views)
+      data.interests = JSON.parse(data.interests)
+      data.brand_id = JSON.parse(data.brand_id)
+      data.duration_in_ms = JSON.parse(data.duration_in_ms)
+      data.is_censored = JSON.parse(data.is_censored)
+      data.likes = JSON.parse(data.likes)
+      data.dislikes = JSON.parse(data.dislikes)
+      data.downloads = JSON.parse(data.downloads)
+      data.monthly_rank = JSON.parse(data.monthly_rank)
+      data.tags = JSON.parse(data.tags)
+      data.created_at = JSON.parse(data.created_at)
+      if (parseInt(data.malID)) data.malID = JSON.parse(data.malID)
       res.send(data)
     } else {
       next()
