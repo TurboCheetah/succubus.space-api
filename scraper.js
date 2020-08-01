@@ -33,18 +33,28 @@ setTimeout(async () => {
     ids.push(i)
   }
 
+  var promise = Promise.resolve()
   ids.forEach(id => {
+    promise = promise.then(() => {
     // Check if ID already exists in Redis
-    client.hgetall(id, async (err, data) => {
-      if (err) throw err
+      client.hgetall(id, async (err, data) => {
+        if (err) throw err
 
-      if (data == null) {
-        var results = await combine(id.toString())
-        console.log(`Scraping data for ID ${id}`)
-        return results
-      } else {
-        console.log(`ID ${id} is already in the database`)
-      }
+        if (data == null) {
+          var results = await combine(id.toString())
+          console.log(`Scraping data for ID ${id}`)
+          return results
+        } else {
+          console.log(`ID ${id} is already in the database`)
+        }
+      })
+      return new Promise((resolve) => {
+        setTimeout(resolve, 10000)
+      })
     })
+  })
+
+  promise.then(function () {
+    console.log('All IDs have been added to the database')
   })
 }, 1000)
