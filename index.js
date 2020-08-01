@@ -30,7 +30,7 @@ const getData = async (req, res, next) => {
 
 // Caching
 const cache = (req, res, next) => {
-  client.get(req.params.query, (err, data) => {
+  client.hget(req.params.query, (err, data) => {
     if (err) throw err
 
     if (data !== null) {
