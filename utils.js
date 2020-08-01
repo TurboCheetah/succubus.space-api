@@ -1,8 +1,9 @@
+const config = require('./config.json')
 const hanime = require('./sites/hanimetv')
 const mal = require('./sites/mal')
 const redis = require('redis')
 
-const client = redis.createClient()
+const client = redis.createClient(config.redis.port, config.redis.host)
 
 const combine = async (query) => {
   try {
