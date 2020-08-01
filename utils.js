@@ -2,7 +2,7 @@ const hanime = require('./sites/hanimetv')
 const mal = require('./sites/mal')
 const redis = require('redis')
 
-const client = redis.RedisClient('redis')
+const client = redis.createClient()
 
 const combine = async (query) => {
   try {

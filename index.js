@@ -6,7 +6,7 @@ const mal = require('./sites/mal')
 const { combine } = require('./utils')
 const redis = require('redis')
 
-const client = redis.RedisClient()
+const client = redis.createClient()
 
 const app = express()
 app.set('view engine', 'ejs')
