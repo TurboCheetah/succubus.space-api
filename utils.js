@@ -55,8 +55,8 @@ const combine = async (query) => {
       'created_at', hanimeSearch.created_at,
       'released_at', hanimeSearch.released_at,
       'url', hanimeSearch.url,
-      'malURL', hanimeSearch.malURL,
-      'malID', hanimeSearch.malID
+      'malURL', hanimeSearch.malURL ? hanimeSearch.malURL : 'Hentai is not on MAL',
+      'malID', hanimeSearch.malID ? hanimeSearch.malID : 'Hentai is not on MAL'
     ], (err, reply) => {
       if (err) console.error(err)
       console.log(`Added ${hanimeSearch.id} to cache`)
