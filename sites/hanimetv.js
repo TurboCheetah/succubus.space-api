@@ -93,6 +93,7 @@ const scrape = async (query) => {
       }
     })
 
+    results.description = results.description.replace(/(<([^>]+)>)/ig, '')
     results.cover_url = getImageURL(results.cover_url, 100, 'cps')
     results.poster_url = getImageURL(results.poster_url, 100, 'cps')
     results.url = `https://hanime.tv/videos/hentai/${results.slug}`
