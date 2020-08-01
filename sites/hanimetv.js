@@ -30,9 +30,9 @@ const scrape = async (query) => {
   const getDate = (releaseDate) => {
     var date = new Date(releaseDate * 1000)
 
-    year = date.getFullYear()
-    month = ('0' + (date.getMonth() + 1)).slice(-2)
-    day = ('0' + date.getDate()).slice(-2)
+    var year = date.getFullYear()
+    var month = ('0' + (date.getMonth() + 1)).slice(-2)
+    var day = ('0' + date.getDate()).slice(-2)
 
     return `${year}-${month}-${day}`
   }
@@ -74,7 +74,7 @@ const scrape = async (query) => {
 
     return results
   } else {
-    var results = await fetch(`https://members.hanime.tv/rapi/v7/video?id=${query}`)
+    results = await fetch(`https://members.hanime.tv/rapi/v7/video?id=${query}`)
       .then((r) => r.json())
 
     if (results.hentai_video) {
