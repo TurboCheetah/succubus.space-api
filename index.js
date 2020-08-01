@@ -102,7 +102,7 @@ app.get('/mal/:query', async (req, res) => {
 })
 
 // API with all the data that will later be saved to databse
-app.get('/api/hentai/:query', (cache, getData))
+app.get('/api/hentai/:query', cache, getData)
 
 app.listen(process.env.PORT || config.port, () => {
   console.log(`HentaiList running on port ${config.port}`)
