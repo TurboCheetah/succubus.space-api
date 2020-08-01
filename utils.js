@@ -9,7 +9,18 @@ const combine = async (query) => {
   try {
     var hanimeSearch = await hanime.scrape(query)
 
-    if (hanimeSearch == 'No results') return 'No results'
+    if (hanimeSearch == 'No results') {
+      client.hmset(query, [
+        'id', query,
+        'invalid', true
+      ], (err, reply) => {
+        if (err) console.error(err)
+        console.log(`Added ${query} to cache`)
+      })
+
+      client.expire(query, 86400)
+      return 'No results'
+    }
 
     isNaN(query) ? hanimeSearch = hanimeSearch[0] : hanimeSearch = hanimeSearch
 

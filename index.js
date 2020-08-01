@@ -33,7 +33,7 @@ const cache = (req, res, next) => {
   client.hgetall(req.params.query, (err, data) => {
     if (err) throw err
 
-    if (data !== null) {
+    if (data !== null && !data.invalid) {
       data.id = JSON.parse(data.id)
       data.titles = JSON.parse(data.titles)
       data.description = JSON.parse(data.description)
@@ -49,6 +49,10 @@ const cache = (req, res, next) => {
       data.tags = JSON.parse(data.tags)
       data.created_at = JSON.parse(data.created_at)
       if (parseInt(data.malID)) data.malID = JSON.parse(data.malID)
+      res.send(data)
+    } else if (data.invalid) {
+      data.id = JSON.parse(data.id)
+      if (data.invalid) data.invalid = JSON.parse(data.invalid)
       res.send(data)
     } else {
       next()
