@@ -8,7 +8,7 @@ const redis = require('redis')
 
 const client = redis.createClient(config.redis.port, config.redis.host)
 
-setTimeout(async () => {
+setInterval(async () => {
 // Get latest HAnime upload ID
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 5000)
@@ -56,4 +56,4 @@ setTimeout(async () => {
   promise.then(function () {
     console.log('All IDs have been added to the database')
   })
-}, 1000)
+}, 86400000)
