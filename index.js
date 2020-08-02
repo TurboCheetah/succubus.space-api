@@ -30,34 +30,41 @@ const getData = async (req, res, next) => {
 
 // Caching
 const cache = (req, res, next) => {
-  client.hgetall(req.params.query, (err, data) => {
-    if (err) throw err
+  try {
+    client.hgetall(req.params.query, (err, data) => {
+      if (err) throw err
 
-    if (data !== null && !data.invalid) {
-      data.id = JSON.parse(data.id)
-      data.titles = JSON.parse(data.titles)
-      data.description = JSON.parse(data.description)
-      data.views = JSON.parse(data.views)
-      data.interests = JSON.parse(data.interests)
-      data.brand_id = JSON.parse(data.brand_id)
-      data.duration_in_ms = JSON.parse(data.duration_in_ms)
-      data.is_censored = JSON.parse(data.is_censored)
-      data.likes = JSON.parse(data.likes)
-      data.dislikes = JSON.parse(data.dislikes)
-      data.downloads = JSON.parse(data.downloads)
-      data.monthly_rank = JSON.parse(data.monthly_rank)
-      data.tags = JSON.parse(data.tags)
-      data.created_at = JSON.parse(data.created_at)
-      if (parseInt(data.malID)) data.malID = JSON.parse(data.malID)
-      res.send(data)
-    } else if (data.invalid) {
-      data.id = JSON.parse(data.id)
-      if (data.invalid) data.invalid = JSON.parse(data.invalid)
-      res.send(data)
-    } else {
-      next()
-    }
-  })
+      if (data !== null && !data.invalid) {
+        data.id = JSON.parse(data.id)
+        data.titles = JSON.parse(data.titles)
+        data.description = JSON.parse(data.description)
+        data.views = JSON.parse(data.views)
+        data.interests = JSON.parse(data.interests)
+        data.brand_id = JSON.parse(data.brand_id)
+        data.duration_in_ms = JSON.parse(data.duration_in_ms)
+        data.is_censored = JSON.parse(data.is_censored)
+        data.likes = JSON.parse(data.likes)
+        data.dislikes = JSON.parse(data.dislikes)
+        data.downloads = JSON.parse(data.downloads)
+        data.monthly_rank = JSON.parse(data.monthly_rank)
+        data.tags = JSON.parse(data.tags)
+        data.created_at = JSON.parse(data.created_at)
+        if (parseInt(data.malID)) data.malID = JSON.parse(data.malID)
+        res.send(data)
+      } else if (data == null) {
+        next()
+      } else if (data.invalid) {
+        data.id = JSON.parse(data.id)
+        if (data.invalid) data.invalid = JSON.parse(data.invalid)
+        res.send(data)
+      } else {
+        next()
+      }
+    })
+  } catch (err) {
+    console.error(err)
+    next()
+  }
 }
 
 app.get('/', (req, res) => {
@@ -122,6 +129,8 @@ app.get('/mal/:query', async (req, res) => {
 
 // API with all the data that will later be saved to databse
 app.get('/api/hentai/:query', cache, getData)
+
+app.get('/api/scrape/:query', getData)
 
 app.listen(process.env.PORT || config.port, () => {
   console.log(`HentaiList running on port ${config.port}`)
