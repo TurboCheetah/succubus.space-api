@@ -79,7 +79,7 @@ const combine = async (query) => {
       console.log(`Added ${hanimeSearch.id} to cache`)
     })
 
-    client.expire(hanimeSearch.id, 86400)
+    client.expire(hanimeSearch.id, 604800)
 
     return hanimeSearch
   } catch (err) {
