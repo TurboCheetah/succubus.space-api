@@ -24,7 +24,13 @@ const combine = async (query) => {
 
     isNaN(query) ? hanimeSearch = hanimeSearch[0] : hanimeSearch = hanimeSearch
 
-    var malSearch = await mal.scrape(isNaN(query) ? shorten(query, 100) : shorten(hanimeSearch.titles[0], 100))
+    if (hanimeSearch.titles.length < 1) {
+      hanimeTitle = hanimeSearch.name
+    } else {
+     hanimeTitle = hanimeSearch.titles[0] 
+    }
+
+    var malSearch = await mal.scrape(isNaN(query) ? shorten(query, 100) : shorten(hanimeTitle, 100))
 
     if (malSearch.producers[0] !== hanimeSearch.brand) {
       malSearch = await mal.scrape(hanimeSearch.name)
@@ -82,7 +88,7 @@ const combine = async (query) => {
 }
 
 const shorten = (text, maxLen = 1024) => {
-  return text.length > maxLen ? `${text.substr(0, maxLen - 3)}...` : text;
+  return text.length > maxLen ? `${text.substr(0, maxLen - 3)}...` : text
 }
 
 exports.combine = combine
