@@ -1,5 +1,5 @@
 const config = require('./config.json')
-const { combine } = require('./utils')
+const utils = require('./utils')
 const hanime = require('./sites/hanimetv')
 const fetch = require('node-fetch')
 const AbortController = require('abort-controller')
@@ -26,6 +26,25 @@ setInterval(async () => {
 
   newestID = newestID[0].id
   console.log(`Beginning to scrape data from ${newestID} entries`)
+  const body = {
+    username: 'HentaiList',
+    avatar_url: 'https://please-fuck.me/fUUmyR.png',
+    embeds: [
+      {
+        description: `Beginning to scrape data from ${newestID} entries`,
+        color: 11076351,
+        author: {
+          name: 'HentaiList Cache',
+          url: 'https://hentailist.io',
+          icon_url: 'https://please-fuck.me/fUUmyR.png'
+        },
+        footer: {
+          text: 'Powered by HentaiList.io'
+        }
+      }
+    ]
+  }
+  utils.webhook(config.webhookURL, body)
 
   // Begin scraping
   var ids = []
@@ -41,7 +60,7 @@ setInterval(async () => {
 
       if (data == null) {
         promise = promise.then(async () => {
-          var results = await combine(id.toString())
+          var results = await utils.combine(id.toString())
           console.log(`Scraping data for ID ${id}`)
           return new Promise((resolve) => {
             setTimeout(resolve, 10000)
@@ -55,5 +74,24 @@ setInterval(async () => {
 
   promise.then(function () {
     console.log('All IDs have been added to the database')
+    const body = {
+      username: 'HentaiList',
+      avatar_url: 'https://please-fuck.me/fUUmyR.png',
+      embeds: [
+        {
+          description: `Finished caching ${newestID} entries!`,
+          color: 11076351,
+          author: {
+            name: 'HentaiList Cache',
+            url: 'https://hentailist.io',
+            icon_url: 'https://please-fuck.me/fUUmyR.png'
+          },
+          footer: {
+            text: 'Powered by HentaiList.io'
+          }
+        }
+      ]
+    }
+    utils.webhook(config.webhookURL, body)
   })
 }, 86400000)
