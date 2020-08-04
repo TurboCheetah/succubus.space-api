@@ -97,7 +97,7 @@ const webhook = (url, body) => {
     method: 'POST',
     body: JSON.stringify(body),
     headers: { 'Content-Type': 'application/json' }
-  }).then(res => console.log(res))
+  })
 }
 
 exports.combine = combine

@@ -8,7 +8,7 @@ const redis = require('redis')
 
 const client = redis.createClient(config.redis.port, config.redis.host)
 
-setInterval(async () => {
+setTimeout(async () => {
 // Get latest HAnime upload ID
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 5000)
@@ -93,5 +93,9 @@ setInterval(async () => {
       ]
     }
     utils.webhook(config.webhookURL, body)
+    setTimeout(() => {
+      process.exit()
+    }, 3000);
+    
   })
-}, 86400000)
+}, 300)
