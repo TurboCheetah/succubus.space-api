@@ -52,27 +52,40 @@ setTimeout(async () => {
     ids.push(i)
   }
 
-  var promise = Promise.resolve()
+  var cached = 0
+  var uncached = []
+
   ids.forEach(id => {
     // Check if ID already exists in Redis
     client.hgetall(id, async (err, data) => {
       if (err) throw err
 
       if (data == null) {
-        promise = promise.then(async () => {
-          var results = await utils.combine(id.toString())
-          console.log(`Scraping data for ID ${id}`)
-          return new Promise((resolve) => {
-            setTimeout(resolve, 10000)
-          })
-        })
-      } else {
-        console.log(`ID ${id} is already in the database`)
+        uncached.push(id)
+        console.log(`Added ${id} to caching queue`)
       }
     })
   })
 
-  promise.then(function () {
+  setTimeout(() => {
+    uncached.forEach(uncached => {
+      cached++
+      setTimeout(function () {
+        client.hgetall(uncached, async (err, data) => {
+          if (err) throw err
+
+          if (data == null) {
+            var results = await utils.combine(uncached.toString())
+            console.log(`Scraping data for ID ${uncached}`)
+          } else {
+            console.log(`ID ${uncached} is already in the database`)
+          }
+        })
+      }, cached * 10000)
+    })
+  }, 3000)
+
+  if (cached === ids.length) {
     console.log('All IDs have been added to the database')
     const body = {
       username: 'HentaiList',
@@ -95,7 +108,6 @@ setTimeout(async () => {
     utils.webhook(config.webhookURL, body)
     setTimeout(() => {
       process.exit()
-    }, 3000);
-    
-  })
+    }, 5000)
+  }
 }, 300)
