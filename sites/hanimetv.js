@@ -1,5 +1,4 @@
-const fetch = require('node-fetch')
-const AbortController = require('abort-controller')
+const c = require('@aero/centra')
 
 const scrape = async (query) => {
   let results
@@ -28,14 +27,11 @@ const scrape = async (query) => {
       order_by: 'created_at_unix',
       ordering: 'desc'
     }
-    results = await fetch('https://search.htv-services.com/', {
-      method: 'POST',
-      body: JSON.stringify(config),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      signal: controller.signal
-    }).then((r) => r.json())
+
+    results = await c('https://search.htv-services.com/', 'POST')
+      .header('Content-Type', 'application/json')
+      .body(JSON.stringify(config))
+      .json()
     clearTimeout(timeout)
     return results
   }
@@ -51,8 +47,7 @@ const scrape = async (query) => {
 
     return results
   } else {
-    results = await fetch(`https://members.hanime.tv/rapi/v7/video?id=${query}`)
-      .then((r) => r.json())
+    results = await c(`https://members.hanime.tv/rapi/v7/video?id=${query}`).json()
 
     let newQuery
 

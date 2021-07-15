@@ -1,7 +1,6 @@
 const config = require('./config.json')
 const hanime = require('./sites/hanimetv')
 const mal = require('./sites/mal')
-const fetch = require('node-fetch')
 const redis = require('redis')
 
 const client = redis.createClient(config.redis.port, config.redis.host)
@@ -66,14 +65,5 @@ const shorten = (text, maxLen = 1024) => {
   return text.length > maxLen ? `${text.substr(0, maxLen - 3)}...` : text
 }
 
-const webhook = (url, body) => {
-  return fetch(url, {
-    method: 'POST',
-    body: JSON.stringify(body),
-    headers: { 'Content-Type': 'application/json' }
-  })
-}
-
 exports.combine = combine
 exports.shorten = shorten
-exports.webhook = webhook
