@@ -1,12 +1,10 @@
 const fetch = require('node-fetch')
 const AbortController = require('abort-controller')
 
-const scrape = async query => {
-  let results
-
+const scrape = async (query) => {
   if (!query.length) return "Baka! You didn't provide a search query! What am I supposed to search for?"
 
-  const getDate = releaseDate => {
+  const getDate = (releaseDate) => {
     const date = new Date(releaseDate * 1000)
 
     const year = date.getFullYear()
@@ -16,7 +14,7 @@ const scrape = async query => {
     return `${year}-${month}-${day}`
   }
 
-  const search = async query => {
+  const search = async (query) => {
     const controller = new AbortController()
     const timeout = setTimeout(() => controller.abort(), 5000)
     const config = {
@@ -28,20 +26,20 @@ const scrape = async query => {
       order_by: 'created_at_unix',
       ordering: 'desc'
     }
-    results = await fetch('https://search.htv-services.com/', {
+    const results = await fetch('https://search.htv-services.com/', {
       method: 'POST',
       body: JSON.stringify(config),
       headers: {
         'Content-Type': 'application/json'
       },
       signal: controller.signal
-    }).then(r => r.json())
+    }).then((r) => r.json())
     clearTimeout(timeout)
     return results
   }
 
   if (isNaN(query)) {
-    results = await search(query)
+    var results = await search(query)
 
     results = results.nbHits > 0 ? JSON.parse(results.hits) : 'No results'
     for (let i = 0; i < results.length; i++) {
@@ -51,24 +49,27 @@ const scrape = async query => {
 
     return results
   } else {
-    results = await fetch(`https://members.hanime.tv/rapi/v7/video?id=${query}`).then(r => r.json())
+    results = await fetch(`https://members.hanime.tv/rapi/v7/video?id=${query}`)
+      .then((r) => r.json())
 
     if (results.hentai_video) {
-      query = results.hentai_video.name
+      var newQuery = results.hentai_video.name
     } else {
       return 'No results'
     }
 
-    results = await search(query)
+    results = await search(newQuery)
 
     results = results.nbHits > 0 ? JSON.parse(results.hits) : 'No results'
 
     results.forEach(el => {
-      if (el.id === query) results = el
+      if (el.id === query) {
+        results = el
+      }
     })
 
-    results.description = results.description.replace(/(<([^>]+)>)/gi, '')
-    results.rating = results.rating == null ? (results.rating = 'Unrated') : results.rating
+    results.description = results.description.replace(/(<([^>]+)>)/ig, '')
+    results.rating = results.rating == null ? results.rating = 'Unrated' : results.rating
     results.url = `https://hanime.tv/videos/hentai/${results.slug}`
     results.released_at = getDate(results.released_at)
 
