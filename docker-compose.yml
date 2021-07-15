@@ -1,8 +1,0 @@
-version: '3.3'
-services:
-    hentailist:
-        build: .
-        container_name: hentailist
-        restart: always
-        ports:
-            - '4445:4445'

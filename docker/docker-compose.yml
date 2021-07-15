@@ -1,0 +1,28 @@
+version: '3.5'
+services:
+    hentailist:
+        build:
+            context: ../
+            dockerfile: docker/hentailist/Dockerfile
+        container_name: hentailist
+        restart: always
+        ports:
+           - '4445:4445'
+        environment:
+           - VIRTUAL_HOST=api.succubus.space
+           - VIRTUAL_PORT=4445
+           - LETSENCRYPT_HOST=api.succubus.space
+        depends_on:
+           - redis
+
+    redis:
+        build:
+            context: ../
+            dockerfile: docker/redis/Dockerfile
+        container_name: hentailist-redis
+        restart: always
+
+networks:
+  default:
+    external:
+      name: nginx-proxy
