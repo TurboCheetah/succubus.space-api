@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.14](https://github.com/TurboCheetah/hentai-list/compare/v1.1.13...v1.1.14) (2021-07-15)
+
+
+### Bug Fixes
+
+* increase rate limit to prevent antibot ([a907070](https://github.com/TurboCheetah/hentai-list/commit/a90707071673719d0ab5141c2f20bafc534688b3))
+
 ### [1.1.13](https://github.com/TurboCheetah/hentai-list/compare/v1.1.12...v1.1.13) (2021-07-15)
 
 
