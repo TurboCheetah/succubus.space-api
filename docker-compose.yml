@@ -2,6 +2,7 @@ version: '3.5'
 services:
     hentailist:
         build:
+            context: .
             dockerfile: docker/hentailist/Dockerfile
         container_name: hentailist
         restart: always
@@ -16,6 +17,7 @@ services:
 
     redis:
         build:
+            context: .
             dockerfile: docker/redis/Dockerfile
         container_name: hentailist-redis
         restart: always
