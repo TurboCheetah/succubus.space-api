@@ -2,9 +2,11 @@ const config = require('./config.json')
 const hanime = require('./sites/hanimetv')
 const mal = require('./sites/mal')
 const { combine } = require('./utils')
+const { scrape } = require('./scraper')
 const express = require('express')
 const morgan = require('morgan')
 const redis = require('redis')
+const cron = require('node-cron')
 
 const client = redis.createClient(config.redis.port, config.redis.host)
 
@@ -93,3 +95,6 @@ app.get('/scrape/:query', getData)
 app.listen(process.env.PORT || config.port, () => {
   console.log(`Succubus.space running on port ${process.env.PORT || config.port}`)
 })
+
+// Scrape data every 24 hours
+cron.schedule('0 0 * * *', () => scrape(config, client))
