@@ -15,8 +15,11 @@ const getData = async (req, res, next) => {
   try {
     console.log('Fetching Data...')
     const search = await combine(req.params.query)
-    if (search === 'No results') res.sendStatus(404)
-    res.send(search)
+    if (search === 'No results') {
+      res.sendStatus(404)
+    } else {
+      res.send(search)
+    }
   } catch (err) {
     console.error(err)
     res.sendStatus(500)
@@ -52,8 +55,9 @@ const cache = (req, res, next) => {
         data.id = JSON.parse(data.id)
         if (data.invalid) data.invalid = JSON.parse(data.invalid)
         res.send(data)
+      } else {
+        next()
       }
-      next()
     })
   } catch (err) {
     console.error(err)
