@@ -22,29 +22,21 @@ module.exports = class Utils {
 
     // Begin scraping
     const ids = []
-    for (let i = 5; i < newestID + 1; i++) {
-      ids.push(i)
-    }
+    for (let i = 5; i < newestID + 1; i++) ids.push(i)
 
-    let promise = Promise.resolve()
     ids.forEach(async id => {
       // Check if ID already exists in Redis
       const data = await client.get(id)
 
       if (!data) {
-        promise = promise.then(async () => {
-          console.log(`Scraping data for ID ${id}`)
-          return new Promise(resolve => {
-            setTimeout(resolve, 10000)
-          })
-        })
-      } else {
-        console.log(`ID ${id} is already in the database`)
+        console.log(`Scraping data for ID ${id}`)
+        return await this.cache(client, id)
       }
+      console.log(`ID ${id} is already in the database`)
     })
   }
 
-  static async combine(client, query) {
+  static async cache(client, query) {
     let hanimeTitle
 
     try {

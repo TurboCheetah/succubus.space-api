@@ -10,21 +10,23 @@ const cron = require('node-cron')
 const ioRedis = new Redis({ host: process.env.REDIS_HOST, port: process.env.REDIS_PORT })
 const client = new JSONCache(ioRedis)
 
+// Scrape new data every 24 hours
+cron.schedule('0 0 * * *', () => utils.scrape(client))
+
 const app = express()
+
+// Request logging
 if (process.argv.includes('--dev') || process.env.NODE_ENV === 'dev') app.use(morgan('dev'))
 
 const getData = async (req, res) => {
   try {
-    console.log('Fetching Data...')
-    const search = await utils.combine(client, req.params.query)
-    if (search === 'No results') {
-      res.sendStatus(404)
-    } else {
-      res.send(search)
-    }
+    console.log('Fetching new data...')
+    const search = await utils.cache(client, req.params.query)
+    if (search === 'No results') return res.sendStatus(404)
+    res.send(search)
   } catch (err) {
     console.error(err)
-    res.sendStatus(500)
+    return res.sendStatus(500)
   }
 }
 
@@ -48,31 +50,21 @@ const cache = async (req, res, next) => {
 // Sends back raw JSON response from HAnime.tv API
 app.get('/hanime/:query', async (req, res) => {
   const search = await hanime.scrape(req.params.query)
-  if (search === 'No results') {
-    res.sendStatus(404)
-  } else {
-    res.send(search)
-  }
+  if (search === 'No results') return res.sendStatus(404)
+  res.send(search)
 })
 
 // Sends back raw JSON response from MAL API
 app.get('/mal/:query', async (req, res) => {
   const search = await mal.scrape(req.params.query)
-  if (search === 'No results') {
-    res.sendStatus(404)
-  } else {
-    res.send(search)
-  }
+  if (search === 'No results') return res.sendStatus(404)
+  res.send(search)
 })
 
-// API with all the data that will later be saved to databse
+// Query the cache first and scrape new data if entry not found
 app.get('/hentai/:query', cache, getData)
 
+// Force scrape an ID and cache it
 app.get('/scrape/:query', getData)
 
-app.listen(process.env.PORT, () => {
-  console.log(`Succubus.space running on port ${process.env.PORT}`)
-})
-
-// Scrape data every 24 hours
-cron.schedule('0 0 * * *', () => utils.scrape(client))
+app.listen(process.env.PORT || 4445, () => console.log(`Succubus.space running on port ${process.env.PORT || 4445}`))
