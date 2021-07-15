@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.13](https://github.com/TurboCheetah/hentai-list/compare/v1.1.12...v1.1.13) (2021-07-15)
+
+
+### Bug Fixes
+
+* clean Dockerfile ([2b2bb10](https://github.com/TurboCheetah/hentai-list/commit/2b2bb103eea80f342244ddbc29050ef83cf83e6f))
+* typo in REDIS_HOST environment var ([8aba371](https://github.com/TurboCheetah/hentai-list/commit/8aba3716d3203328150751b6697eb5b65b4e9feb))
+
 ### [1.1.12](https://github.com/TurboCheetah/hentai-list/compare/v1.1.11...v1.1.12) (2021-07-15)
 
 
