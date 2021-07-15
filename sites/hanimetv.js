@@ -2,6 +2,8 @@ const fetch = require('node-fetch')
 const AbortController = require('abort-controller')
 
 const scrape = async query => {
+  let results
+
   if (!query.length) return "Baka! You didn't provide a search query! What am I supposed to search for?"
 
   const getDate = releaseDate => {
@@ -26,7 +28,7 @@ const scrape = async query => {
       order_by: 'created_at_unix',
       ordering: 'desc'
     }
-    const results = await fetch('https://search.htv-services.com/', {
+    results = await fetch('https://search.htv-services.com/', {
       method: 'POST',
       body: JSON.stringify(config),
       headers: {
@@ -37,8 +39,6 @@ const scrape = async query => {
     clearTimeout(timeout)
     return results
   }
-
-  let results
 
   if (isNaN(query)) {
     results = await search(query)
