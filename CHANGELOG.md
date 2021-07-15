@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.12](https://github.com/TurboCheetah/hentai-list/compare/v1.1.11...v1.1.12) (2021-07-15)
+
+
+### Features
+
+* clean up stuff ([2c152d5](https://github.com/TurboCheetah/hentai-list/commit/2c152d5f4acbd0bf929fbbb833c1d74d27e10e0c))
+* clean yarn cache ([dcbed89](https://github.com/TurboCheetah/hentai-list/commit/dcbed89fe1e101584f51fb31bbe34fd72fef402c))
+* use Bull queue ([3f5e05a](https://github.com/TurboCheetah/hentai-list/commit/3f5e05aec0feabbf33878a67ed7e503ca4575115))
+
 ### [1.1.11](https://github.com/TurboCheetah/hentai-list/compare/v1.1.10...v1.1.11) (2021-07-15)
 
 
