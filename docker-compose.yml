@@ -1,10 +1,10 @@
 version: '3.5'
 services:
-    hentailist:
+    succubus.space:
         build:
             context: .
             dockerfile: docker/hentailist/Dockerfile
-        container_name: hentailist
+        container_name: succubus.space
         restart: always
         ports:
            - '4445:4445'
@@ -19,7 +19,7 @@ services:
         build:
             context: .
             dockerfile: docker/redis/Dockerfile
-        container_name: hentailist-redis
+        container_name: succubus.space-redis
         restart: always
 
 networks:
