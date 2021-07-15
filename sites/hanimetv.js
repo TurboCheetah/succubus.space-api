@@ -2,14 +2,16 @@ const fetch = require('node-fetch')
 const AbortController = require('abort-controller')
 
 const scrape = async (query) => {
+  let results
+
   if (!query.length) return "Baka! You didn't provide a search query! What am I supposed to search for?"
 
   const getDate = (releaseDate) => {
-    var date = new Date(releaseDate * 1000)
+    const date = new Date(releaseDate * 1000)
 
-    var year = date.getFullYear()
-    var month = ('0' + (date.getMonth() + 1)).slice(-2)
-    var day = ('0' + date.getDate()).slice(-2)
+    const year = date.getFullYear()
+    const month = ('0' + (date.getMonth() + 1)).slice(-2)
+    const day = ('0' + date.getDate()).slice(-2)
 
     return `${year}-${month}-${day}`
   }
@@ -26,7 +28,7 @@ const scrape = async (query) => {
       order_by: 'created_at_unix',
       ordering: 'desc'
     }
-    var results = await fetch('https://search.htv-services.com/', {
+    results = await fetch('https://search.htv-services.com/', {
       method: 'POST',
       body: JSON.stringify(config),
       headers: {
@@ -39,10 +41,10 @@ const scrape = async (query) => {
   }
 
   if (isNaN(query)) {
-    var results = await search(query)
+    results = await search(query)
 
     results = results.nbHits > 0 ? JSON.parse(results.hits) : 'No results'
-    for (var i = 0; i < results.length; i++) {
+    for (let i = 0; i < results.length; i++) {
       results[i].url = `https://hanime.tv/videos/hentai/${results[i].slug}`
       results[i].released_at = getDate(results[i].released_at)
     }
@@ -52,8 +54,10 @@ const scrape = async (query) => {
     results = await fetch(`https://members.hanime.tv/rapi/v7/video?id=${query}`)
       .then((r) => r.json())
 
+    let newQuery
+
     if (results.hentai_video) {
-      var newQuery = results.hentai_video.name
+      newQuery = results.hentai_video.name
     } else {
       return 'No results'
     }
@@ -63,9 +67,7 @@ const scrape = async (query) => {
     results = results.nbHits > 0 ? JSON.parse(results.hits) : 'No results'
 
     results.forEach(el => {
-      if (el.id == query) {
-        results = el
-      }
+      if (el.id.toString() === query) results = el
     })
 
     results.description = results.description.replace(/(<([^>]+)>)/ig, '')
