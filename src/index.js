@@ -1,7 +1,6 @@
-const hanime = require('./sites/hanimetv')
-const mal = require('./sites/mal')
-const { combine } = require('./utils')
-const { scrape } = require('./scraper')
+const hanime = require('./lib/hanimetv')
+const mal = require('./lib/mal')
+const utils = require('./utils')
 const express = require('express')
 const morgan = require('morgan')
 const Redis = require('ioredis')
@@ -14,10 +13,10 @@ const client = new JSONCache(ioRedis)
 const app = express()
 if (process.argv.includes('--dev') || process.env.NODE_ENV === 'dev') app.use(morgan('dev'))
 
-const getData = async (req, res, next) => {
+const getData = async (req, res) => {
   try {
     console.log('Fetching Data...')
-    const search = await combine(client, req.params.query)
+    const search = await utils.combine(client, req.params.query)
     if (search === 'No results') {
       res.sendStatus(404)
     } else {
@@ -76,4 +75,4 @@ app.listen(process.env.PORT, () => {
 })
 
 // Scrape data every 24 hours
-cron.schedule('0 0 * * *', () => scrape(client))
+cron.schedule('0 0 * * *', () => utils.scrape(client))
