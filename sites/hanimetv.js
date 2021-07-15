@@ -5,11 +5,11 @@ const scrape = async (query) => {
   if (!query.length) return "Baka! You didn't provide a search query! What am I supposed to search for?"
 
   const getDate = (releaseDate) => {
-    const date = new Date(releaseDate * 1000)
+    var date = new Date(releaseDate * 1000)
 
-    const year = date.getFullYear()
-    const month = ('0' + (date.getMonth() + 1)).slice(-2)
-    const day = ('0' + date.getDate()).slice(-2)
+    var year = date.getFullYear()
+    var month = ('0' + (date.getMonth() + 1)).slice(-2)
+    var day = ('0' + date.getDate()).slice(-2)
 
     return `${year}-${month}-${day}`
   }
@@ -26,7 +26,7 @@ const scrape = async (query) => {
       order_by: 'created_at_unix',
       ordering: 'desc'
     }
-    const results = await fetch('https://search.htv-services.com/', {
+    var results = await fetch('https://search.htv-services.com/', {
       method: 'POST',
       body: JSON.stringify(config),
       headers: {
@@ -42,7 +42,7 @@ const scrape = async (query) => {
     var results = await search(query)
 
     results = results.nbHits > 0 ? JSON.parse(results.hits) : 'No results'
-    for (let i = 0; i < results.length; i++) {
+    for (var i = 0; i < results.length; i++) {
       results[i].url = `https://hanime.tv/videos/hentai/${results[i].slug}`
       results[i].released_at = getDate(results[i].released_at)
     }
@@ -63,7 +63,7 @@ const scrape = async (query) => {
     results = results.nbHits > 0 ? JSON.parse(results.hits) : 'No results'
 
     results.forEach(el => {
-      if (el.id === query) {
+      if (el.id == query) {
         results = el
       }
     })
