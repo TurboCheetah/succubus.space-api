@@ -12,6 +12,9 @@ services:
            - VIRTUAL_HOST=api.succubus.space
            - VIRTUAL_PORT=4445
            - LETSENCRYPT_HOST=api.succubus.space
+           - PORT=4445
+           - REDIS_HOST=redis
+           - REDIS_PORT=6379
         depends_on:
            - redis
 

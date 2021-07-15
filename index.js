@@ -1,4 +1,3 @@
-const config = require('./config.json')
 const hanime = require('./sites/hanimetv')
 const mal = require('./sites/mal')
 const { combine } = require('./utils')
@@ -9,7 +8,7 @@ const Redis = require('ioredis')
 const JSONCache = require('redis-json')
 const cron = require('node-cron')
 
-const ioRedis = new Redis({ host: config.redis.host, port: config.redis.port })
+const ioRedis = new Redis({ host: process.env.REDIS_HOST, port: process.env.REDIS_PORT })
 const client = new JSONCache(ioRedis)
 
 const app = express()
@@ -72,8 +71,8 @@ app.get('/hentai/:query', cache, getData)
 
 app.get('/scrape/:query', getData)
 
-app.listen(process.env.PORT || config.port, () => {
-  console.log(`Succubus.space running on port ${process.env.PORT || config.port}`)
+app.listen(process.env.PORT, () => {
+  console.log(`Succubus.space running on port ${process.env.PORT}`)
 })
 
 // Scrape data every 24 hours
