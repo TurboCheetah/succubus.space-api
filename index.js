@@ -36,7 +36,7 @@ const cache = async (req, res, next) => {
     const data = await client.get(req.params.query)
     if (data && !data.invalid) {
       res.send(data)
-    } else if (data.invalid) {
+    } else if (data && data.invalid) {
       res.sendStatus(404)
     } else {
       next()
