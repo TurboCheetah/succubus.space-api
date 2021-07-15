@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.11](https://github.com/TurboCheetah/hentai-list/compare/v1.1.10...v1.1.11) (2021-07-15)
+
+
+### Bug Fixes
+
+* Dockerfile index path ([8480660](https://github.com/TurboCheetah/hentai-list/commit/84806609833e4313581aeac54046da0c1202fe17))
+
 ### [1.1.10](https://github.com/TurboCheetah/hentai-list/compare/v1.1.9...v1.1.10) (2021-07-15)
 
 
