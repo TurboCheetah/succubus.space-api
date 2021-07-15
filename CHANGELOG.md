@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.9](https://github.com/TurboCheetah/hentai-list/compare/v1.1.8...v1.1.9) (2021-07-15)
+
+
+### Features
+
+* prebuild docker image ([6bf8dde](https://github.com/TurboCheetah/hentai-list/commit/6bf8dde0a5fb4203eaab9dc7cf0cbc37d58800f7))
+
 ### [1.1.8](https://github.com/TurboCheetah/hentai-list/compare/v1.1.7...v1.1.8) (2021-07-15)
 
 
