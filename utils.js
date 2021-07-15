@@ -8,10 +8,8 @@ const combine = async (client, query) => {
     let hanimeSearch = await hanime.scrape(query)
 
     if (hanimeSearch === 'No results') {
-      await client.set(query, { id: query, invalid: true })
+      await client.set(query, { id: query, invalid: true }, { expire: 86400 })
       console.log(`Added ${query} to cache`)
-
-      await client.expire(query, 86400)
       return 'No results'
     }
 
@@ -67,11 +65,9 @@ const combine = async (client, query) => {
       url: hanimeSearch.url,
       malURL: hanimeSearch.malURL ? hanimeSearch.malURL : 'Hentai is not on MAL',
       malID: hanimeSearch.malID ? hanimeSearch.malID : 'Hentai is not on MAL'
-    })
+    }, { expire: 604800 })
       .then(() => console.log(`Added ${hanimeSearch.id} to cache`))
       .catch(err => console.error(err))
-
-    await client.expire(hanimeSearch.id, 604800)
 
     return hanimeSearch
   } catch (err) {
