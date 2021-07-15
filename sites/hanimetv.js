@@ -16,8 +16,6 @@ const scrape = async (query) => {
   }
 
   const search = async (query) => {
-    const controller = new AbortController()
-    const timeout = setTimeout(() => controller.abort(), 5000)
     const config = {
       search_text: query,
       tags: [],
@@ -32,7 +30,6 @@ const scrape = async (query) => {
       .header('Content-Type', 'application/json')
       .body(JSON.stringify(config))
       .json()
-    clearTimeout(timeout)
     return results
   }
 

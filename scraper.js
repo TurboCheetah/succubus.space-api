@@ -1,15 +1,11 @@
 const hanime = require('./sites/hanimetv')
 const c = require('@aero/centra')
-const AbortController = require('abort-controller')
 const cheerio = require('cheerio')
 
 const scrape = async (config, client) => {
   // Get latest HAnime upload ID
-  const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), 5000)
   const $ = await c('https://hanime.tv/').text()
     .then(html => cheerio.load(html))
-  clearTimeout(timeout)
 
   let newestID = $('.elevation-3.mb-3.hvc.item.card').first().find('a').attr('alt')
 
