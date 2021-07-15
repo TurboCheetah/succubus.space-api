@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.10](https://github.com/TurboCheetah/hentai-list/compare/v1.1.9...v1.1.10) (2021-07-15)
+
+
+### Features
+
+* organization ([5f90ea9](https://github.com/TurboCheetah/hentai-list/commit/5f90ea9c8c59461c050fded58809fb1c57d02724))
+
+
+### Bug Fixes
+
+* docker-compose formatting ([d3575f8](https://github.com/TurboCheetah/hentai-list/commit/d3575f88a4c60d9acb7f42de05bf69a1f203dbde))
+
 ### [1.1.9](https://github.com/TurboCheetah/hentai-list/compare/v1.1.8...v1.1.9) (2021-07-15)
 
 
