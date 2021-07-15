@@ -98,4 +98,4 @@ const scrape = async (config, client) => {
   }, 300)
 }
 
-module.exports = scrape
+exports.scrape = scrape
