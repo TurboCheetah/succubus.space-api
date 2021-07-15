@@ -10,7 +10,9 @@ const ioRedis = new Redis({ host: process.env.REDIS_HOST, port: process.env.REDI
 const client = new JSONCache(ioRedis)
 
 const queue = new Queue('scraper', {
-  redis: process.env.REDIS_HOST,
+  redis: {
+    host: process.env.REDIS_HOST
+  },
   limiter: {
     max: 1,
     duration: 3000
