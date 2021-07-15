@@ -5,13 +5,12 @@ const express = require('express')
 const morgan = require('morgan')
 const Redis = require('ioredis')
 const JSONCache = require('redis-json')
-const cron = require('node-cron')
 
 const ioRedis = new Redis({ host: process.env.REDIS_HOST, port: process.env.REDIS_PORT })
 const client = new JSONCache(ioRedis)
 
 // Scrape new data every 24 hours
-cron.schedule('0 0 * * *', () => utils.scrape(client))
+utils.scrape()
 
 const app = express()
 
@@ -21,7 +20,7 @@ if (process.argv.includes('--dev') || process.env.NODE_ENV === 'dev') app.use(mo
 const getData = async (req, res) => {
   try {
     console.log('Fetching new data...')
-    const search = await utils.cache(client, req.params.query)
+    const search = await utils.cache(req.params.query)
     if (search === 'No results') return res.sendStatus(404)
     res.send(search)
   } catch (err) {

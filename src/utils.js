@@ -2,13 +2,27 @@ const hanime = require('./lib/hanimetv')
 const mal = require('./lib/mal')
 const c = require('@aero/centra')
 const cheerio = require('cheerio')
+const Redis = require('ioredis')
+const JSONCache = require('redis-json')
+const Queue = require('bull')
 
-module.exports = class Utils {
+const ioRedis = new Redis({ host: process.env.REDIS_HOST, port: process.env.REDIS_PORT })
+const client = new JSONCache(ioRedis)
+
+const queue = new Queue('scraper', {
+  redis: process.env.REDIS_URL,
+  limiter: {
+    max: 1,
+    duration: 3000
+  }
+})
+
+class Utils {
   constructor() {
     throw new Error('Utils is a static class and cannot be instantiated.')
   }
 
-  static async scrape(client) {
+  static async scrape() {
     // Get latest HAnime upload ID
     const $ = await c('https://hanime.tv/').text()
       .then(html => cheerio.load(html))
@@ -30,13 +44,13 @@ module.exports = class Utils {
 
       if (!data) {
         console.log(`Scraping data for ID ${id}`)
-        return await this.cache(client, id)
+        return await queue.add({ client: client, id: id }, { repeat: { cron: '0 0 * * *' } })
       }
       console.log(`ID ${id} is already in the database`)
     })
   }
 
-  static async cache(client, query) {
+  static async cache(query) {
     let hanimeTitle
 
     try {
@@ -114,3 +128,9 @@ module.exports = class Utils {
     return text.length > maxLen ? `${text.substr(0, maxLen - 3)}...` : text
   }
 }
+
+queue.process(async (job) => {
+  return await Utils.cache(job.data.id.toString())
+})
+
+module.exports = Utils
