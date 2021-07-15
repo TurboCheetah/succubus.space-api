@@ -1,6 +1,6 @@
 {
   "name": "succubus.space",
-  "version": "1.2.0",
+  "version": "1.0.1",
   "description": "hentai metadata in a user-readable format similar to MAL",
   "main": "index.js",
   "scripts": {
