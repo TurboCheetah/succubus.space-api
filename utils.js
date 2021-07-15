@@ -1,23 +1,17 @@
-const config = require('./config.json')
 const hanime = require('./sites/hanimetv')
 const mal = require('./sites/mal')
-const redis = require('redis')
 
-const client = redis.createClient(config.redis.port, config.redis.host)
-
-const combine = async query => {
+const combine = async (client, query) => {
   let hanimeTitle
 
   try {
     let hanimeSearch = await hanime.scrape(query)
 
     if (hanimeSearch === 'No results') {
-      client.hmset(query, ['id', query, 'invalid', true], (err, reply) => {
-        if (err) console.error(err)
-        console.log(`Added ${query} to cache`)
-      })
+      await client.set(query, { id: query, invalid: true })
+      console.log(`Added ${query} to cache`)
 
-      client.expire(query, 86400)
+      await client.expire(query, 86400)
       return 'No results'
     }
 
@@ -48,12 +42,36 @@ const combine = async query => {
       }
     })
 
-    client.hmset(hanimeSearch.id, ['id', hanimeSearch.id, 'name', hanimeSearch.name, 'titles', JSON.stringify(hanimeSearch.titles), 'slug', hanimeSearch.slug, 'description', JSON.stringify(hanimeSearch.description), 'views', hanimeSearch.views, 'interests', hanimeSearch.interests, 'poster_url', hanimeSearch.poster_url, 'cover_url', hanimeSearch.cover_url, 'brand', hanimeSearch.brand, 'brand_id', hanimeSearch.brand_id, 'duration_in_ms', hanimeSearch.duration_in_ms, 'is_censored', hanimeSearch.is_censored, 'rating', hanimeSearch.rating, 'likes', hanimeSearch.likes, 'dislikes', hanimeSearch.dislikes, 'downloads', hanimeSearch.downloads, 'monthly_rank', hanimeSearch.monthly_rank, 'tags', JSON.stringify(hanimeSearch.tags), 'created_at', hanimeSearch.created_at, 'released_at', hanimeSearch.released_at, 'url', hanimeSearch.url, 'malURL', hanimeSearch.malURL ? hanimeSearch.malURL : 'Hentai is not on MAL', 'malID', hanimeSearch.malID ? hanimeSearch.malID : 'Hentai is not on MAL'], (err, reply) => {
-      if (err) console.error(err)
-      console.log(`Added ${hanimeSearch.id} to cache`)
+    await client.set(hanimeSearch.id, {
+      id: hanimeSearch.id,
+      name: hanimeSearch.name,
+      titles: JSON.stringify(hanimeSearch.titles),
+      slug: hanimeSearch.slug,
+      description: JSON.stringify(hanimeSearch.description),
+      views: hanimeSearch.views,
+      interests: hanimeSearch.interests,
+      poster_url: hanimeSearch.poster_url,
+      cover_url: hanimeSearch.cover_url,
+      brand: hanimeSearch.brand,
+      brand_id: hanimeSearch.brand_id,
+      duration_in_ms: hanimeSearch.duration_in_ms,
+      is_censored: hanimeSearch.is_censored,
+      rating: hanimeSearch.rating,
+      likes: hanimeSearch.likes,
+      dislikes: hanimeSearch.dislikes,
+      downloads: hanimeSearch.downloads,
+      monthly_rank: hanimeSearch.monthly_rank,
+      tags: JSON.stringify(hanimeSearch.tags),
+      created_at: hanimeSearch.created_at,
+      released_at: hanimeSearch.released_at,
+      url: hanimeSearch.url,
+      malURL: hanimeSearch.malURL ? hanimeSearch.malURL : 'Hentai is not on MAL',
+      malID: hanimeSearch.malID ? hanimeSearch.malID : 'Hentai is not on MAL'
     })
+      .then(() => console.log(`Added ${hanimeSearch.id} to cache`))
+      .catch(err => console.error(err))
 
-    client.expire(hanimeSearch.id, 604800)
+    await client.expire(hanimeSearch.id, 604800)
 
     return hanimeSearch
   } catch (err) {

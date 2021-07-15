@@ -5,10 +5,12 @@ const { combine } = require('./utils')
 const { scrape } = require('./scraper')
 const express = require('express')
 const morgan = require('morgan')
-const redis = require('redis')
+const Redis = require('ioredis')
+const JSONCache = require('redis-json')
 const cron = require('node-cron')
 
-const client = redis.createClient(config.redis.port, config.redis.host)
+const ioRedis = new Redis({ host: config.redis.host, port: config.redis.port })
+const client = new JSONCache(ioRedis)
 
 const app = express()
 if (process.argv.includes('--dev') || process.env.NODE_ENV === 'dev') app.use(morgan('dev'))
@@ -16,7 +18,7 @@ if (process.argv.includes('--dev') || process.env.NODE_ENV === 'dev') app.use(mo
 const getData = async (req, res, next) => {
   try {
     console.log('Fetching Data...')
-    const search = await combine(req.params.query)
+    const search = await combine(client, req.params.query)
     if (search === 'No results') {
       res.sendStatus(404)
     } else {
@@ -29,38 +31,14 @@ const getData = async (req, res, next) => {
 }
 
 // Caching
-const cache = (req, res, next) => {
+const cache = async (req, res, next) => {
   try {
-    client.hgetall(req.params.query, (err, data) => {
-      if (err) throw err
-
-      if (data !== null && !data.invalid) {
-        data.id = JSON.parse(data.id)
-        data.titles = JSON.parse(data.titles)
-        data.description = JSON.parse(data.description)
-        data.views = JSON.parse(data.views)
-        data.interests = JSON.parse(data.interests)
-        data.brand_id = JSON.parse(data.brand_id)
-        data.duration_in_ms = JSON.parse(data.duration_in_ms)
-        data.is_censored = JSON.parse(data.is_censored)
-        data.likes = JSON.parse(data.likes)
-        data.dislikes = JSON.parse(data.dislikes)
-        data.downloads = JSON.parse(data.downloads)
-        data.monthly_rank = JSON.parse(data.monthly_rank)
-        data.tags = JSON.parse(data.tags)
-        data.created_at = JSON.parse(data.created_at)
-        if (parseInt(data.malID)) data.malID = JSON.parse(data.malID)
-        res.send(data)
-      } else if (data == null) {
-        next()
-      } else if (data.invalid) {
-        data.id = JSON.parse(data.id)
-        if (data.invalid) data.invalid = JSON.parse(data.invalid)
-        res.send(data)
-      } else {
-        next()
-      }
-    })
+    const data = await client.get(req.params.query)
+    if (data && !data.invalid) {
+      res.send(data)
+    } else {
+      next()
+    }
   } catch (err) {
     console.error(err)
     next()
@@ -97,4 +75,4 @@ app.listen(process.env.PORT || config.port, () => {
 })
 
 // Scrape data every 24 hours
-cron.schedule('0 0 * * *', () => scrape(config, client))
+cron.schedule('0 0 * * *', () => scrape(client))

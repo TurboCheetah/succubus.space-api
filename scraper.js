@@ -2,7 +2,7 @@ const hanime = require('./sites/hanimetv')
 const c = require('@aero/centra')
 const cheerio = require('cheerio')
 
-const scrape = async (config, client) => {
+const scrape = async (client) => {
   // Get latest HAnime upload ID
   const $ = await c('https://hanime.tv/').text()
     .then(html => cheerio.load(html))
@@ -21,22 +21,20 @@ const scrape = async (config, client) => {
   }
 
   let promise = Promise.resolve()
-  ids.forEach(id => {
+  ids.forEach(async id => {
     // Check if ID already exists in Redis
-    client.hgetall(id, async (err, data) => {
-      if (err) throw err
+    const data = await client.get(id)
 
-      if (data == null) {
-        promise = promise.then(async () => {
-          console.log(`Scraping data for ID ${id}`)
-          return new Promise(resolve => {
-            setTimeout(resolve, 10000)
-          })
+    if (!data) {
+      promise = promise.then(async () => {
+        console.log(`Scraping data for ID ${id}`)
+        return new Promise(resolve => {
+          setTimeout(resolve, 10000)
         })
-      } else {
-        console.log(`ID ${id} is already in the database`)
-      }
-    })
+      })
+    } else {
+      console.log(`ID ${id} is already in the database`)
+    }
   })
 }
 

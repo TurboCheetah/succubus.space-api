@@ -3,7 +3,7 @@ services:
     succubus.space:
         build:
             context: .
-            dockerfile: docker/hentailist/Dockerfile
+            dockerfile: ./Dockerfile
         container_name: succubus.space
         restart: always
         ports:
@@ -16,10 +16,8 @@ services:
            - redis
 
     redis:
-        build:
-            context: .
-            dockerfile: docker/redis/Dockerfile
         container_name: succubus.space-redis
+        image: redislabs/rejson:latest
         restart: always
 
 networks:
