@@ -6,12 +6,12 @@ const Redis = require('ioredis')
 const JSONCache = require('redis-json')
 const Queue = require('bull')
 
-const ioRedis = new Redis({ host: 'localhost', port: 6379 })
+const ioRedis = new Redis({ host: process.env.REDIS_HOST, port: process.env.REDIS_PORT })
 const client = new JSONCache(ioRedis)
 
 const queue = new Queue('scraper', {
   redis: {
-    host: 'localhost'
+    host: process.env.REDIS_HOST
   },
   limiter: {
     max: 1,
