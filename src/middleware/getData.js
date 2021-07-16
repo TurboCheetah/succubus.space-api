@@ -1,4 +1,4 @@
-const { cache } = require('./lib/utils')
+const { cache } = require('../lib/utils')
 module.exports = async (req, res) => {
   // Scrape new data
   console.log('Fetching new data...')
