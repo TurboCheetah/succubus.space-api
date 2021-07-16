@@ -31,7 +31,7 @@ class Utils {
 
     let newestID = $('.elevation-3.mb-3.hvc.item.card').first().find('a').attr('alt')
 
-    newestID = (await hanime.scrape(newestID))[0].id
+    newestID = (await hanime(newestID))[0].id
 
     console.log(`Beginning to scrape data from ${newestID} entries`)
 
@@ -54,7 +54,7 @@ class Utils {
     let hanimeTitle
 
     try {
-      let hanimeSearch = await hanime.scrape(query)
+      let hanimeSearch = await hanime(query)
 
       // If no results save to cache with invalid property
       if (hanimeSearch === 'No results') {
@@ -71,10 +71,10 @@ class Utils {
         hanimeTitle = hanimeSearch.titles[0]
       }
 
-      let malSearch = await mal.scrape(isNaN(query) ? this.shorten(query, 100) : this.shorten(hanimeTitle, 100))
+      let malSearch = await mal(isNaN(query) ? this.shorten(query, 100) : this.shorten(hanimeTitle, 100))
 
       if (malSearch.producers[0] !== hanimeSearch.brand) {
-        malSearch = await mal.scrape(hanimeSearch.name)
+        malSearch = await mal(hanimeSearch.name)
       }
       if (!malSearch) {
         return hanimeSearch
