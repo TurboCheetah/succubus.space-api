@@ -1,6 +1,6 @@
 const c = require('@aero/centra')
 
-const scrape = async query => {
+module.exports = async query => {
   if (!query) return "Baka! You didn't provide a search query! What am I supposed to search for?"
 
   const getDate = (releaseDate) => {
@@ -63,5 +63,3 @@ const scrape = async query => {
     return results
   }
 }
-
-exports.scrape = scrape

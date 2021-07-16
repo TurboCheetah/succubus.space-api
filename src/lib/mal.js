@@ -1,6 +1,6 @@
 const { getInfoFromName } = require('mal-scraper')
 
-const scrape = async query => {
+module.exports = async query => {
   if (!query) return "Baka! You didn't provide a search query! What am I supposed to search for?"
 
   const search = async query => {
@@ -11,5 +11,3 @@ const scrape = async query => {
 
   return await search(query)
 }
-
-exports.scrape = scrape

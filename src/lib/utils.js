@@ -1,5 +1,5 @@
-const hanime = require('./lib/hanimetv')
-const mal = require('./lib/mal')
+const hanime = require('./hanimetv')
+const mal = require('./mal')
 const c = require('@aero/centra')
 const cheerio = require('cheerio')
 const Redis = require('ioredis')
