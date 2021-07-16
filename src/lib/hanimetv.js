@@ -1,9 +1,7 @@
 const c = require('@aero/centra')
 
-const scrape = async (query) => {
-  let results
-
-  if (!query.length) return "Baka! You didn't provide a search query! What am I supposed to search for?"
+const scrape = async query => {
+  if (!query) return "Baka! You didn't provide a search query! What am I supposed to search for?"
 
   const getDate = (releaseDate) => {
     const date = new Date(releaseDate * 1000)
@@ -15,7 +13,7 @@ const scrape = async (query) => {
     return `${year}-${month}-${day}`
   }
 
-  const search = async (query) => {
+  const search = async query => {
     const config = {
       search_text: query,
       tags: [],
@@ -26,15 +24,14 @@ const scrape = async (query) => {
       ordering: 'desc'
     }
 
-    results = await c('https://search.htv-services.com/', 'POST')
+    return await c('https://search.htv-services.com/', 'POST')
       .header('Content-Type', 'application/json')
       .body(JSON.stringify(config))
       .json()
-    return results
   }
 
   if (isNaN(query)) {
-    results = await search(query)
+    let results = await search(query)
 
     results = results.nbHits > 0 ? JSON.parse(results.hits) : 'No results'
     for (let i = 0; i < results.length; i++) {
@@ -44,17 +41,13 @@ const scrape = async (query) => {
 
     return results
   } else {
-    results = await c(`https://members.hanime.tv/rapi/v7/video?id=${query}`).json()
-
-    let newQuery
+    let results = await c(`https://members.hanime.tv/rapi/v7/video?id=${query}`).json()
 
     if (results.hentai_video) {
-      newQuery = results.hentai_video.name
+      results = await search(results.hentai_video.name)
     } else {
       return 'No results'
     }
-
-    results = await search(newQuery)
 
     results = results.nbHits > 0 ? JSON.parse(results.hits) : 'No results'
 

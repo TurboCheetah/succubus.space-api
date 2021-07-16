@@ -6,12 +6,12 @@ const Redis = require('ioredis')
 const JSONCache = require('redis-json')
 const Queue = require('bull')
 
-const ioRedis = new Redis({ host: process.env.REDIS_HOST, port: process.env.REDIS_PORT })
+const ioRedis = new Redis({ host: 'localhost', port: 6379 })
 const client = new JSONCache(ioRedis)
 
 const queue = new Queue('scraper', {
   redis: {
-    host: process.env.REDIS_HOST
+    host: 'localhost'
   },
   limiter: {
     max: 1,
@@ -31,9 +31,8 @@ class Utils {
 
     let newestID = $('.elevation-3.mb-3.hvc.item.card').first().find('a').attr('alt')
 
-    newestID = await hanime.scrape(newestID)
+    newestID = (await hanime.scrape(newestID))[0].id
 
-    newestID = newestID[0].id
     console.log(`Beginning to scrape data from ${newestID} entries`)
 
     // Begin scraping
@@ -46,9 +45,8 @@ class Utils {
 
       if (!data) {
         console.log(`Scraping data for ID ${id}`)
-        return await queue.add({ client: client, id: id }, { repeat: { cron: '0 0 * * *' } })
+        return await queue.add({ id })
       }
-      console.log(`ID ${id} is already in the database`)
     })
   }
 
@@ -58,6 +56,7 @@ class Utils {
     try {
       let hanimeSearch = await hanime.scrape(query)
 
+      // If no results save to cache with invalid property
       if (hanimeSearch === 'No results') {
         await client.set(query, { id: query, invalid: true }, { expire: 86400 })
         console.log(`Added ${query} to cache`)
@@ -116,7 +115,7 @@ class Utils {
         url: hanimeSearch.url,
         malURL: hanimeSearch.malURL ? hanimeSearch.malURL : 'Hentai is not on MAL',
         malID: hanimeSearch.malID ? hanimeSearch.malID : 'Hentai is not on MAL'
-      }, { expire: 604800 })
+      })
         .then(() => console.log(`Added ${hanimeSearch.id} to cache`))
         .catch(err => console.error(err))
 

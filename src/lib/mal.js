@@ -1,20 +1,15 @@
-const malScraper = require('mal-scraper')
+const { getInfoFromName } = require('mal-scraper')
 
 const scrape = async query => {
-  if (!query.length) return "Baka! You didn't provide a search query! What am I supposed to search for?"
+  if (!query) return "Baka! You didn't provide a search query! What am I supposed to search for?"
 
   const search = async query => {
-    const results = await malScraper
-      .getInfoFromName(query)
+    return await getInfoFromName(query)
       .then(r => r)
-      .catch(err => console.log(err))
-
-    return results
+      .catch(err => console.error(err))
   }
 
-  const results = await search(query)
-
-  return results
+  return await search(query)
 }
 
 exports.scrape = scrape
