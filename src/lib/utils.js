@@ -63,13 +63,32 @@ class Utils {
         return 'No results'
       }
 
-      if (isNaN(query)) hanimeSearch = hanimeSearch[0]
+      if (isNaN(query)) (hanimeSearch = hanimeSearch[0])
 
-      hanimeSearch.titles.length < 1 ? hanimeTitle = hanimeSearch.name : hanimeTitle = hanimeSearch.titles[0]
+      if (hanimeSearch.titles.length < 1) {
+        hanimeTitle = hanimeSearch.name
+      } else {
+        hanimeTitle = hanimeSearch.titles[0]
+      }
 
       let malSearch = await mal(isNaN(query) ? this.shorten(query, 100) : this.shorten(hanimeTitle, 100))
 
-      if (malSearch.producers[0] !== hanimeSearch.brand) malSearch = await mal(hanimeSearch.name)
+      if (malSearch.producers[0] !== hanimeSearch.brand) {
+        malSearch = await mal(hanimeSearch.name)
+      }
+      if (!malSearch) {
+        return hanimeSearch
+      }
+
+      const malProducers = malSearch.producers
+
+      malProducers.forEach(producer => {
+        if (producer === hanimeSearch.brand) {
+          hanimeSearch.description = malSearch.synopsis.replace(/\n\n\[Written by MAL Rewrite\]/g, '')
+          hanimeSearch.malURL = malSearch.url
+          hanimeSearch.malID = malSearch.id
+        }
+      })
 
       await client.set(hanimeSearch.id, {
         id: hanimeSearch.id,
@@ -93,27 +112,12 @@ class Utils {
         tags: hanimeSearch.tags,
         created_at: hanimeSearch.created_at,
         released_at: hanimeSearch.released_at,
-        url: hanimeSearch.url
+        url: hanimeSearch.url,
+        malURL: hanimeSearch.malURL ? hanimeSearch.malURL : 'Hentai is not on MAL',
+        malID: hanimeSearch.malID ? hanimeSearch.malID : 'Hentai is not on MAL'
       })
         .then(() => console.log(`Added ${hanimeSearch.id} to cache`))
-
-      if (!malSearch) return hanimeSearch
-
-      const malProducers = malSearch.producers
-
-      malProducers.forEach(producer => {
-        if (producer === hanimeSearch.brand) {
-          hanimeSearch.description = malSearch.synopsis.replace(/\n\n\[Written by MAL Rewrite\]/g, '')
-          hanimeSearch.malURL = malSearch.url
-          hanimeSearch.malID = malSearch.id
-        }
-      })
-
-      await client.set(hanimeSearch.id, {
-        description: hanimeSearch.description,
-        malURL: hanimeSearch.malURL,
-        malID: hanimeSearch.malID
-      })
+        .catch(err => console.error(err))
 
       return hanimeSearch
     } catch (err) {
