@@ -51,8 +51,9 @@ class Utils {
   }
 
   static async cache(query) {
+    let hanimeTitle
+
     try {
-      let hanimeTitle
       let hanimeSearch = await hanime(query)
 
       // If no results save to cache with invalid property
