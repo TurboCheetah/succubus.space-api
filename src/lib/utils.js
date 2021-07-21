@@ -24,6 +24,10 @@ class Utils {
     throw new Error('Utils is a static class and cannot be instantiated.')
   }
 
+  static shorten(text, maxLen = 1024) {
+    return text.length > maxLen ? `${text.substr(0, maxLen - 3)}...` : text
+  }
+
   static async scrape() {
     // Get latest HAnime upload ID
     const $ = await c('https://hanime.tv/').text()
@@ -123,10 +127,6 @@ class Utils {
     } catch (err) {
       console.error(err)
     }
-  }
-
-  static shorten(text, maxLen = 1024) {
-    return text.length > maxLen ? `${text.substr(0, maxLen - 3)}...` : text
   }
 }
 
