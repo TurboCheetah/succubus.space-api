@@ -75,7 +75,7 @@ class Utils {
         hanimeTitle = hanimeSearch.titles[0]
       }
 
-      let malSearch = await mal(isNaN(query) ? this.shorten(query, 100) : this.shorten(hanimeTitle, 100))
+      let malSearch = await mal(isNaN(query) ? Utils.shorten(query, 100) : Utils.shorten(hanimeTitle, 100))
 
       if (malSearch.producers[0] !== hanimeSearch.brand) {
         malSearch = await mal(hanimeSearch.name)
