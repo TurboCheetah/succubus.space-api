@@ -15,7 +15,7 @@ const queue = new Queue('scraper', {
   },
   limiter: {
     max: 1,
-    duration: 5000
+    duration: 10000
   }
 })
 
