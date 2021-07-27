@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.30](https://github.com/TurboCheetah/hentai-list/compare/v1.1.29...v1.1.30) (2021-07-27)
+
+
+### Bug Fixes
+
+* release date ([107abe0](https://github.com/TurboCheetah/hentai-list/commit/107abe02b61a31783339922efd0d70c704efa0e8))
+
 ### [1.1.29](https://github.com/TurboCheetah/hentai-list/compare/v1.1.28...v1.1.29) (2021-07-27)
 
 
