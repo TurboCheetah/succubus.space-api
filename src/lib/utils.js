@@ -72,7 +72,7 @@ class Utils {
       if (hanimeSearch.titles.length < 1) {
         hanimeTitle = hanimeSearch.name
       } else {
-        hanimeTitle = hanimeSearch.titles[0]
+        hanimeTitle = hanimeSearch.titles[0].title
       }
 
       let malSearch = await mal(isNaN(query) ? Utils.shorten(query, 100) : Utils.shorten(hanimeTitle, 100))
