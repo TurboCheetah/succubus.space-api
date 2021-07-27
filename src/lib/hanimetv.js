@@ -50,6 +50,7 @@ module.exports = async query => {
     result.url = `https://hanime.tv/videos/hentai/${result.slug}`
     result.released_at = getDate(result.released_at)
     result.streamURL = vManifest ? vManifest.servers[0].streams[1].url : ''
+    result.titles = result.titles.forEach(t => t.title)
 
     return result
   }
