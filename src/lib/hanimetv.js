@@ -45,12 +45,19 @@ module.exports = async query => {
 
     if (!result) return 'No results'
 
+    const titles = []
+    result.titles.forEach(t => titles.push(t.title))
+
+    const tags = []
+    result.hentai_tags.forEach(t => tags.push(t.text))
+
     result.description = result.description.replace(/(<([^>]+)>)/ig, '')
     result.rating = result.rating ? result.rating : 'Unrated'
     result.url = `https://hanime.tv/videos/hentai/${result.slug}`
     result.released_at = getDate(result.released_at)
     result.streamURL = vManifest ? vManifest.servers[0].streams[1].url : ''
-    result.titles = result.titles.forEach(t => t.title)
+    result.titles = titles
+    result.tags = tags
 
     return result
   }
