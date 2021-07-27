@@ -41,25 +41,16 @@ module.exports = async query => {
 
     return results
   } else {
-    let results = await c(`https://members.hanime.tv/rapi/v7/video?id=${query}`).json()
+    const { hentai_video: result, videos_manifest: vManifest } = await c(`https://hw.hanime.tv/api/v8/video?id=${query}`).json()
 
-    if (results.hentai_video) {
-      results = await search(results.hentai_video.name)
-    } else {
-      return 'No results'
-    }
+    if (!result) return 'No results'
 
-    results = results.nbHits > 0 ? JSON.parse(results.hits) : 'No results'
+    result.description = result.description.replace(/(<([^>]+)>)/ig, '')
+    result.rating = result.rating ? result.rating : 'Unrated'
+    result.url = `https://hanime.tv/videos/hentai/${result.slug}`
+    result.released_at = getDate(result.released_at)
+    result.streamURL = vManifest ? vManifest.servers[0].streams[1].url : ''
 
-    results.forEach(el => {
-      if (el.id.toString() === query) results = el
-    })
-
-    results.description = results.description.replace(/(<([^>]+)>)/ig, '')
-    results.rating = results.rating == null ? results.rating = 'Unrated' : results.rating
-    results.url = `https://hanime.tv/videos/hentai/${results.slug}`
-    results.released_at = getDate(results.released_at)
-
-    return results
+    return result
   }
 }

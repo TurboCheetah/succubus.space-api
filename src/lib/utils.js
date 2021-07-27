@@ -117,7 +117,7 @@ class Utils {
         created_at: hanimeSearch.created_at,
         released_at: hanimeSearch.released_at,
         url: hanimeSearch.url,
-        streamURL: hanimeSearch.videos_manifest.servers[0].streams[1].url,
+        streamURL: hanimeSearch.streamURL,
         malURL: hanimeSearch.malURL ? hanimeSearch.malURL : 'Hentai is not on MAL',
         malID: hanimeSearch.malID ? hanimeSearch.malID : 'Hentai is not on MAL'
       })
