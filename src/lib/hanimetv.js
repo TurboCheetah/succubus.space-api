@@ -54,7 +54,7 @@ module.exports = async query => {
     result.description = result.description.replace(/(<([^>]+)>)/ig, '')
     result.rating = result.rating ? result.rating : 'Unrated'
     result.url = `https://hanime.tv/videos/hentai/${result.slug}`
-    result.released_at = getDate(result.released_at)
+    result.released_at = result.released_at.split('T')[0]
     result.streamURL = vManifest ? vManifest.servers[0].streams[1].url : ''
     result.titles = titles
     result.tags = tags
