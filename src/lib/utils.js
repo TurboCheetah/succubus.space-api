@@ -94,7 +94,7 @@ class Utils {
         }
       })
 
-      await client.set(hanimeSearch.id, {
+      const data = {
         id: hanimeSearch.id,
         name: hanimeSearch.name,
         titles: hanimeSearch.titles,
@@ -120,9 +120,17 @@ class Utils {
         streamURL: hanimeSearch.streamURL,
         malURL: hanimeSearch.malURL ? hanimeSearch.malURL : 'Hentai is not on MAL',
         malID: hanimeSearch.malID ? hanimeSearch.malID : 'Hentai is not on MAL'
-      })
-        .then(() => console.log(`Added ${hanimeSearch.id} to cache`))
-        .catch(err => console.error(err))
+      }
+
+      if (isNaN(query)) {
+        await client.set(query, data, { expire: 86400 })
+          .then(() => console.log(`Added search "${query}" to cache`))
+          .catch(err => console.error(err))
+      } else {
+        await client.set(hanimeSearch.id, data, { expire: 86400 })
+          .then(() => console.log(`Added ${hanimeSearch.id} to cache`))
+          .catch(err => console.error(err))
+      }
 
       return hanimeSearch
     } catch (err) {
