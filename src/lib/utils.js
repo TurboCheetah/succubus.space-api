@@ -48,7 +48,6 @@ class Utils {
       const data = await client.get(id)
 
       if (!data) {
-        console.log(`Scraping data for ID ${id}`)
         return await queue.add({ id })
       }
     })
@@ -63,7 +62,6 @@ class Utils {
       // If no results save to cache with invalid property
       if (hanimeSearch === 'No results') {
         await client.set(query, { id: query, invalid: true }, { expire: 86400 })
-        console.log(`Added ${query} to cache`)
         return 'No results'
       }
 
@@ -80,6 +78,7 @@ class Utils {
       if (malSearch.producers[0] !== hanimeSearch.brand) {
         malSearch = await mal(hanimeSearch.name)
       }
+
       if (!malSearch) {
         return hanimeSearch
       }
@@ -122,15 +121,7 @@ class Utils {
         malID: hanimeSearch.malID ? hanimeSearch.malID : 'Hentai is not on MAL'
       }
 
-      if (isNaN(query)) {
-        await client.set(query, data, { expire: 86400 })
-          .then(() => console.log(`Added search "${query}" to cache`))
-          .catch(err => console.error(err))
-      } else {
-        await client.set(hanimeSearch.id, data, { expire: 86400 })
-          .then(() => console.log(`Added ${hanimeSearch.id} to cache`))
-          .catch(err => console.error(err))
-      }
+      isNaN(query) ? await client.set(query, data, { expire: 86400 }) : await client.set(hanimeSearch.id, data)
 
       return hanimeSearch
     } catch (err) {
