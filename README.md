@@ -8,4 +8,7 @@ At the moment, **[Succubus.space](https://succubus.space)** allows one to:
 * Gather information about a hentai
 * Integrate all this into your own app via an API
 
+## Docs
+Documentation can be found [here](https://docs.succubus.space)
+
 _the code is terrible but idc_
