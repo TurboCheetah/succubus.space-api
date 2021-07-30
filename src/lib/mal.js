@@ -1,10 +1,10 @@
-const { getInfoFromName } = require('mal-scraper')
+import malScraper from 'mal-scraper'
 
-module.exports = async query => {
+export const mal = async (query) => {
   if (!query) return "Baka! You didn't provide a search query! What am I supposed to search for?"
 
   const search = async query => {
-    return await getInfoFromName(query)
+    return await malScraper.getInfoFromName(query)
       .then(r => r)
       .catch(err => console.error(err))
   }

@@ -1,6 +1,6 @@
-const c = require('@aero/centra')
+import c from '@aero/centra'
 
-module.exports = async query => {
+export const hanime = async (query) => {
   if (!query) return "Baka! You didn't provide a search query! What am I supposed to search for?"
 
   const getDate = (releaseDate) => {

@@ -1,10 +1,10 @@
-const hanime = require('./hanimetv')
-const mal = require('./mal')
-const c = require('@aero/centra')
-const cheerio = require('cheerio')
-const Redis = require('ioredis')
-const JSONCache = require('redis-json')
-const Queue = require('bull')
+import { hanime } from './hanimetv.js'
+import { mal } from './mal.js'
+import c from '@aero/centra'
+import cheerio from 'cheerio'
+import Redis from 'ioredis'
+import JSONCache from 'redis-json'
+import Queue from 'bull'
 
 const ioRedis = new Redis({ host: process.env.REDIS_HOST, port: process.env.REDIS_PORT })
 const client = new JSONCache(ioRedis)
@@ -19,7 +19,7 @@ const queue = new Queue('scraper', {
   }
 })
 
-class Utils {
+export class Utils {
   constructor() {
     throw new Error('Utils is a static class and cannot be instantiated.')
   }
@@ -135,5 +135,3 @@ class Utils {
 queue.process(async (job) => {
   return await Utils.cache(job.data.id.toString())
 })
-
-module.exports = Utils

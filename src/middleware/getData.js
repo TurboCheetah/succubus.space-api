@@ -1,8 +1,8 @@
-const { cache } = require('../lib/utils')
+import { Utils } from '../lib/Utils.js'
 
-module.exports = async (req, res) => {
+export const getData = async (req, res) => {
   // Scrape new data
-  const search = await cache(req.params.query).catch(err => {
+  const search = await Utils.cache(req.params.query).catch(err => {
     console.error(err)
     return res.sendStatus(500)
   })

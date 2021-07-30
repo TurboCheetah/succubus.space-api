@@ -1,9 +1,10 @@
-const Redis = require('ioredis')
-const JSONCache = require('redis-json')
+import Redis from 'ioredis'
+import JSONCache from 'redis-json'
+
 const ioRedis = new Redis({ host: process.env.REDIS_HOST, port: process.env.REDIS_PORT })
 const client = new JSONCache(ioRedis)
 
-module.exports = async (req, res, next) => {
+export const cache = async (req, res, next) => {
   // Fetch data from cache
   if (req.path === '/random') req.params.query = Math.floor(Math.random() * parseInt(await ioRedis.get('newestID'))) + 1
 
