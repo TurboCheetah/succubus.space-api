@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.38](https://github.com/TurboCheetah/hentai-list/compare/v1.1.37...v1.1.38) (2021-07-30)
+
+
+### Features
+
+* remove useless MAL route ([86fb1d7](https://github.com/TurboCheetah/hentai-list/commit/86fb1d790024fc3f88cac6785f84dff0f51c6dde))
+
 ### [1.1.37](https://github.com/TurboCheetah/hentai-list/compare/v1.1.36...v1.1.37) (2021-07-30)
 
 
