@@ -33,10 +33,14 @@ export const hanime = async (query) => {
   if (isNaN(query)) {
     let results = await search(query)
 
-    results = results.nbHits > 0 ? JSON.parse(results.hits) : 'No results'
-    for (let i = 0; i < results.length; i++) {
-      results[i].url = `https://hanime.tv/videos/hentai/${results[i].slug}`
-      results[i].released_at = getDate(results[i].released_at)
+    if (results.nbHits > 0) {
+      results = JSON.parse(results.hits)
+      for (let i = 0; i < results.length; i++) {
+        results[i].url = `https://hanime.tv/videos/hentai/${results[i].slug}`
+        results[i].released_at = getDate(results[i].released_at)
+      }
+    } else {
+      results = 'No results'
     }
 
     return results
