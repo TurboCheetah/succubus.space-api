@@ -5,6 +5,8 @@ const client = new JSONCache(ioRedis)
 
 module.exports = async (req, res, next) => {
   // Fetch data from cache
+  if (req.path === '/random') req.params.query = Math.floor(Math.random() * parseInt(await ioRedis.get('newestID'))) + 1
+
   const data = await client.get(req.params.query).catch(err => {
     console.error(err)
     next()

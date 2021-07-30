@@ -35,4 +35,7 @@ app.get('/hentai/:query', cache, getData)
 // Force scrape an ID and cache it
 app.get('/scrape/:query', getData)
 
+// Retrieve a random hentai
+app.get('/random', cache, getData)
+
 app.listen(process.env.PORT || 4445, () => console.log(`Succubus.space running on port ${process.env.PORT || 4445}`))

@@ -37,6 +37,8 @@ class Utils {
 
     newestID = (await hanime(newestID))[0].id
 
+    await ioRedis.set('newestID', newestID)
+
     console.log(`Beginning to scrape data from ${newestID} entries`)
 
     // Begin scraping
