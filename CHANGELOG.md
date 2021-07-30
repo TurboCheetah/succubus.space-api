@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.36](https://github.com/TurboCheetah/hentai-list/compare/v1.1.35...v1.1.36) (2021-07-30)
+
+
+### Features
+
+* use es6 import/export ([bacf098](https://github.com/TurboCheetah/hentai-list/commit/bacf098c351a434fc53ac2fdc688165655d406b8))
+
 ### [1.1.35](https://github.com/TurboCheetah/hentai-list/compare/v1.1.34...v1.1.35) (2021-07-30)
 
 
