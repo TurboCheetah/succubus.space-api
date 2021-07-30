@@ -2,20 +2,12 @@ import express from 'express'
 import { cache } from '../middleware/cache.js'
 import { getData } from '../middleware/getData.js'
 import { hanime } from '../lib/hanimetv.js'
-import { mal } from '../lib/mal.js'
 
 const router = express.Router()
 
 // Sends back raw JSON response from HAnime.tv API
 router.get('/hanime/:query', async (req, res) => {
   const search = await hanime(req.params.query)
-  if (search === 'No results') return res.sendStatus(404)
-  res.send(search)
-})
-
-// Sends back raw JSON response from MAL API
-router.get('/mal/:query', async (req, res) => {
-  const search = await mal(req.params.query)
   if (search === 'No results') return res.sendStatus(404)
   res.send(search)
 })
