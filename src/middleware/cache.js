@@ -1,8 +1,4 @@
-import Redis from 'ioredis'
-import JSONCache from 'redis-json'
-
-const ioRedis = new Redis({ host: process.env.REDIS_HOST, port: process.env.REDIS_PORT })
-const client = new JSONCache(ioRedis)
+import { ioRedis, client } from '../lib/redis.js'
 
 export const cache = async (req, res, next) => {
   // Fetch data from cache

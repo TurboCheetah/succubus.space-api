@@ -2,12 +2,8 @@ import { hanime } from './hanimetv.js'
 import { mal } from './mal.js'
 import c from '@aero/centra'
 import cheerio from 'cheerio'
-import Redis from 'ioredis'
-import JSONCache from 'redis-json'
+import { ioRedis, client } from './redis.js'
 import Queue from 'bull'
-
-const ioRedis = new Redis({ host: process.env.REDIS_HOST, port: process.env.REDIS_PORT })
-const client = new JSONCache(ioRedis)
 
 const queue = new Queue('scraper', {
   redis: {
