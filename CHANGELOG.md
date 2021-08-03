@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/TurboCheetah/succubus.space-api/compare/v1.1.40...v1.2.0) (2021-08-03)
+
+
+### Features
+
+* Rewrite Succubus.Space in Typescript ([3d90c1a](https://github.com/TurboCheetah/succubus.space-api/commit/3d90c1a2d857fbf627af9723aa60c1e65ece81d1))
+* use modulus ([4303bd3](https://github.com/TurboCheetah/succubus.space-api/commit/4303bd3e005c86c04c3789ac9f95a29006908118))
+
 ### [1.1.40](https://github.com/TurboCheetah/hentai-list/compare/v1.1.39...v1.1.40) (2021-08-01)
 
 
