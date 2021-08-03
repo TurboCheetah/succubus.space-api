@@ -1,24 +1,23 @@
-version: "3.5"
+version: '3.7'
+
 services:
-  succubus.space:
-    container_name: succubus.space
-    image: ghcr.io/turbocheetah/succubus.space-api:latest
-    restart: always
-    environment:
-      - VIRTUAL_HOST=api.succubus.space
-      - VIRTUAL_PORT=4445
-      - LETSENCRYPT_HOST=api.succubus.space
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
+  succubus.space-api:
+    build:
+      context: .
+    container_name: succubus.space-api
+    ports:
+      - '4445:4445'
+    restart: 'unless-stopped'
     depends_on:
       - redis
+      - mongo
 
   redis:
-    container_name: succubus.space-redis
     image: redislabs/rejson:latest
-    restart: always
+    container_name: succubus.space-redis
+    restart: 'unless-stopped'
 
-networks:
-  default:
-    external:
-      name: nginx-proxy
+  mongo:
+    image: mongo
+    container_name: succubus.space-mongo
+    restart: 'unless-stopped'

@@ -1,9 +1,8 @@
+import { Hentai } from '@/interfaces/hentai.interface'
 import c from '@aero/centra'
 
-export const hanime = async (query) => {
-  if (!query) return "Baka! You didn't provide a search query! What am I supposed to search for?"
-
-  const getDate = (releaseDate) => {
+export const hanime = async (query: string | number): Promise<Hentai> => {
+  const getDate = releaseDate => {
     const date = new Date(releaseDate * 1000)
 
     const year = date.getFullYear()
@@ -24,13 +23,10 @@ export const hanime = async (query) => {
       ordering: 'desc'
     }
 
-    return await c('https://search.htv-services.com/', 'POST')
-      .header('Content-Type', 'application/json')
-      .body(JSON.stringify(config))
-      .json()
+    return await c('https://search.htv-services.com/', 'POST').header('Content-Type', 'application/json').body(JSON.stringify(config)).json()
   }
 
-  if (isNaN(query)) {
+  if (isNaN(+query)) {
     let results = await search(query)
 
     if (results.nbHits > 0) {
@@ -40,22 +36,22 @@ export const hanime = async (query) => {
         results[i].released_at = getDate(results[i].released_at)
       }
     } else {
-      results = 'No results'
+      results = { id: query, invalid: true }
     }
 
-    return results
+    return results as Hentai
   } else {
     const { hentai_video: result, videos_manifest: vManifest } = await c(`https://hw.hanime.tv/api/v8/video?id=${query}`).json()
 
-    if (!result) return 'No results'
+    if (!result) return { id: query, invalid: true }
 
     const titles = []
-    result.titles.forEach(t => titles.push(t.title))
+    result.titles.forEach((title: { title: string }) => titles.push(title.title))
 
     const tags = []
-    result.hentai_tags.forEach(t => tags.push(t.text))
+    result.hentai_tags.forEach((tag: { text: string }) => tags.push(tag.text))
 
-    result.description = result.description.replace(/(<([^>]+)>)/ig, '')
+    result.description = result.description.replace(/(<([^>]+)>)/gi, '')
     result.rating = result.rating ? result.rating : 'Unrated'
     result.url = `https://hanime.tv/videos/hentai/${result.slug}`
     result.released_at = result.released_at.split('T')[0]
@@ -63,6 +59,6 @@ export const hanime = async (query) => {
     result.titles = titles
     result.tags = tags
 
-    return result
+    return result as Hentai
   }
 }

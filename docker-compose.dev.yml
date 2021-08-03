@@ -1,20 +1,16 @@
-version: "3.5"
-services:
-  succubus.space:
-    container_name: succubus.space
-    build: 
-        context: .
-    restart: always
-    ports: 
-        - 4445:4445
-    environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - NODE_ENV=dev
-    depends_on:
-      - redis
+version: '3.7'
 
+services:
   redis:
-    container_name: succubus.space-redis
     image: redislabs/rejson:latest
-    restart: always
+    container_name: succubus.space-redis
+    restart: 'unless-stopped'
+    ports:
+      - '6379:6379'
+
+  mongo:
+    image: mongo
+    container_name: succubus.space-mongo
+    restart: 'unless-stopped'
+    ports:
+      - '27017:27017'

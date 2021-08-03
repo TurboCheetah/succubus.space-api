@@ -1,64 +1,37 @@
-import { hanime } from './hanimetv.js'
-import { mal } from './mal.js'
-import c from '@aero/centra'
-import cheerio from 'cheerio'
-import { ioRedis, client } from './redis.js'
-import Queue from 'bull'
+/**
+ * @method isEmpty
+ * @param {String | Number | Object} value
+ * @returns {Boolean} true & false
+ * @description this value is Empty Check
+ */
+import { Hentai } from '@/interfaces/hentai.interface'
+import { client } from '@databases/redis'
+import { hanime } from '@utils/hanime'
+import malScraper, { malInfoFromName } from 'mal-scraper'
 
-const queue = new Queue('scraper', {
-  redis: {
-    host: process.env.REDIS_HOST
-  },
-  limiter: {
-    max: 1,
-    duration: 10000
-  }
-})
-
-export const shorten = (text, maxLen = 1024) => {
+export const shorten = (text: string, maxLen = 1024) => {
   return text.length > maxLen ? `${text.substr(0, maxLen - 3)}...` : text
 }
 
-export const scrape = async () => {
-  // Get latest HAnime upload ID
-  const $ = await c('https://hanime.tv/').text()
-    .then(html => cheerio.load(html))
+export const mal = async (query: string): Promise<malInfoFromName> => {
+  const malData = await malScraper.getInfoFromName(query)
 
-  let newestID = $('.elevation-3.mb-3.hvc.item.card').first().find('a').attr('alt')
-
-  newestID = (await hanime(newestID))[0].id
-
-  await ioRedis.set('newestID', newestID)
-
-  console.log(`Beginning to scrape data from ${newestID} entries`)
-
-  // Begin scraping
-  const ids = []
-  for (let i = 5; i < newestID + 1; i++) ids.push(i)
-
-  ids.forEach(async id => {
-    // Check if ID already exists in Redis
-    const data = await client.get(id)
-
-    if (!data) {
-      return await queue.add({ id })
-    }
-  })
+  return malData
 }
 
-export const cache = async (query) => {
+export const cacheData = async (query: string): Promise<Hentai> => {
   let hanimeTitle
 
   try {
     let hanimeSearch = await hanime(query)
 
     // If no results save to cache with invalid property
-    if (hanimeSearch === 'No results') {
+    if (hanimeSearch.invalid) {
       await client.set(query, { id: query, invalid: true }, { expire: 86400 })
-      return 'No results'
+      return { id: query, invalid: true }
     }
 
-    if (isNaN(query)) (hanimeSearch = hanimeSearch[0])
+    if (isNaN(+query)) hanimeSearch = hanimeSearch[0]
 
     if (hanimeSearch.titles.length < 1) {
       hanimeTitle = hanimeSearch.name
@@ -66,7 +39,7 @@ export const cache = async (query) => {
       hanimeTitle = hanimeSearch.titles[0]
     }
 
-    let malSearch = await mal(isNaN(query) ? shorten(query, 100) : shorten(hanimeTitle, 100))
+    let malSearch = await mal(isNaN(+query) ? shorten(query, 100) : shorten(hanimeTitle, 100))
 
     if (malSearch.producers[0] !== hanimeSearch.brand) {
       malSearch = await mal(hanimeSearch.name)
@@ -114,14 +87,10 @@ export const cache = async (query) => {
       malID: hanimeSearch.malID ? hanimeSearch.malID : 'Hentai is not on MAL'
     }
 
-    isNaN(query) ? await client.set(query, data, { expire: 86400 }) : await client.set(hanimeSearch.id, data)
+    isNaN(+query) ? await client.set(query, data, { expire: 86400 }) : await client.set(hanimeSearch.id.toString(), data)
 
     return hanimeSearch
   } catch (err) {
     console.error(err)
   }
 }
-
-queue.process(async (job) => {
-  return await cache(job.data.id.toString())
-})
