@@ -28,6 +28,8 @@
   "dependencies": {
     "@aero/centra": "^1.0.6",
     "bcrypt": "^5.0.1",
+    "bull": "^3.27.0",
+    "cheerio": "^1.0.0-rc.10",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "compression": "^1.7.4",
@@ -45,6 +47,7 @@
     "mal-scraper": "^2.11.3",
     "mongoose": "^5.13.5",
     "morgan": "^1.10.0",
+    "node-cron": "^3.0.0",
     "rate-limiter-flexible": "^2.2.4",
     "redis-json": "^6.0.1",
     "ts-jest": "^27.0.4",
@@ -55,6 +58,8 @@
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/bull": "^3.15.3",
+    "@types/cheerio": "^0.22.30",
     "@types/compression": "^1.7.1",
     "@types/config": "^0.0.39",
     "@types/cookie-parser": "^1.4.2",
@@ -70,6 +75,7 @@
     "@types/mongoose": "^5.10.1",
     "@types/morgan": "^1.9.3",
     "@types/node": "^16.0.1",
+    "@types/node-cron": "^2.0.4",
     "@types/supertest": "^2.0.11",
     "@types/winston": "^2.4.4",
     "@typescript-eslint/eslint-plugin": "^4.28.2",
