@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.1](https://github.com/TurboCheetah/succubus.space-api/compare/v2.2.0...v2.2.1) (2021-08-05)
+
+
+### Features
+
+* add Sentry integration ([59d27e5](https://github.com/TurboCheetah/succubus.space-api/commit/59d27e501cc3c77735a98d579f54a459fe29ab72))
+* add version to index ([143d90a](https://github.com/TurboCheetah/succubus.space-api/commit/143d90acec24902923d4c182cd62218f02c30fd5))
+
+
+### Bug Fixes
+
+* searching a name caused Mongo to die ([3dff95b](https://github.com/TurboCheetah/succubus.space-api/commit/3dff95b347463a75753a71ee45c8b5786bccb4e6))
+
 ## [2.2.0](https://github.com/TurboCheetah/succubus.space-api/compare/v2.1.0...v2.2.0) (2021-08-05)
 
 
