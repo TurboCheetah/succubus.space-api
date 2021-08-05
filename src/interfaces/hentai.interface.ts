@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 export interface Hentai {
+  _id?: string
   id?: number | string
   name?: string
   titles?: string[]

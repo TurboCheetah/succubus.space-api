@@ -1,11 +1,14 @@
 /* eslint-disable camelcase */
 import { client, ioRedis } from '@/databases/redis'
 import { Hentai } from '@/interfaces/hentai.interface'
-import { cacheData } from '@/utils/util'
+import { scrapeData } from '@/utils/util'
 import { Arg, Field, ID, ObjectType, Query, Resolver } from 'type-graphql'
 
 @ObjectType()
 class hentaiType {
+  @Field(() => ID)
+  _id?: string
+
   @Field(() => ID)
   id?: number
 
@@ -90,7 +93,7 @@ export class HentaiResolver {
 
     let data = await client.get(`${query}`)
 
-    if (!data) data = await cacheData(`${query}`)
+    if (!data) data = await scrapeData(`${query}`)
     if (data.invalid) data.id = null
 
     return data
@@ -101,7 +104,7 @@ export class HentaiResolver {
     const query = `${Math.floor(Math.random() * +(await ioRedis.get('newestID'))) + 1}`
 
     let data = await client.get(query)
-    if (!data) data = await cacheData(query)
+    if (!data) data = await scrapeData(query)
 
     return data
   }

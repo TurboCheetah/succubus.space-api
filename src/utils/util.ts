@@ -1,10 +1,5 @@
-/**
- * @method isEmpty
- * @param {String | Number | Object} value
- * @returns {Boolean} true & false
- * @description this value is Empty Check
- */
 import { Hentai } from '@/interfaces/hentai.interface'
+import hentaiModel from '@/models/hentai.model'
 import { client } from '@databases/redis'
 import { hanime } from '@utils/hanime'
 import malScraper, { malInfoFromName } from 'mal-scraper'
@@ -19,8 +14,8 @@ export const mal = async (query: string): Promise<malInfoFromName> => {
   return malData
 }
 
-export const cacheData = async (query: string): Promise<Hentai> => {
-  let hanimeTitle
+export const scrapeData = async (query: string): Promise<Hentai> => {
+  let hanimeTitle: string
 
   try {
     let hanimeSearch = await hanime(query)
@@ -87,7 +82,8 @@ export const cacheData = async (query: string): Promise<Hentai> => {
       malID: hanimeSearch.malID ? hanimeSearch.malID : 'Hentai is not on MAL'
     }
 
-    isNaN(+query) ? await client.set(query, data, { expire: 86400 }) : await client.set(hanimeSearch.id.toString(), data)
+    isNaN(+query) ? await client.set(query, data) : await client.set(hanimeSearch.id.toString(), data)
+    await hentaiModel.create(data)
 
     return data
   } catch (err) {

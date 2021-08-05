@@ -1,7 +1,7 @@
 import c from '@aero/centra'
 import { hanime } from '@utils/hanime'
 import { ioRedis, client } from '@databases/redis'
-import { cacheData } from '@utils/util'
+import { scrapeData } from '@utils/util'
 import { load } from 'cheerio'
 import { schedule } from 'node-cron'
 import Queue from 'bull'
@@ -18,7 +18,7 @@ const queue = new Queue('scraper', {
 })
 
 queue.process(async job => {
-  return await cacheData(job.data.id.toString())
+  return await scrapeData(job.data.id.toString())
 })
 
 schedule('0 * * * *', async () => {
