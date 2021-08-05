@@ -1,4 +1,5 @@
 import { config } from 'dotenv-cra'
+import * as pkg from '../package.json'
 import { envParseBoolean, envParseInteger, envParseString } from '@utils/env'
 
 // Unless explicitly defined, set NODE_ENV as development:
@@ -8,6 +9,7 @@ config()
 
 export const app = {
   name: envParseString('APP_NAME'),
+  version: pkg.version,
   port: envParseInteger('PORT')
 }
 
