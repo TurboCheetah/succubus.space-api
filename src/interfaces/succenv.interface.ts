@@ -7,13 +7,6 @@ export interface SuccEnv {
   APP_NAME: string
   PORT: IntegerString
 
-  MONGO_HOST: string
-  MONGO_PORT: IntegerString
-  MONGO_DATABASE: string
-
-  REDIS_HOST: string
-  REDIS_PORT: IntegerString
-
   JWT_SECRET: string
 
   LOG_FORMAT: string
@@ -21,6 +14,16 @@ export interface SuccEnv {
 
   MONITOR_ENABLED: BooleanString
   MONITOR_ROUTE: string
+
+  MONGO_HOST: string
+  MONGO_PORT: IntegerString
+  MONGO_DATABASE: string
+
+  REDIS_HOST: string
+  REDIS_PORT: IntegerString
+
+  SENTRY_ENABLED: BooleanString
+  SENTRY_DSN: string
 }
 
 export type SuccEnvAny = keyof SuccEnv

@@ -13,17 +13,6 @@ export const app = {
   port: envParseInteger('PORT')
 }
 
-export const mongo = {
-  host: envParseString('MONGO_HOST'),
-  port: envParseInteger('MONGO_PORT'),
-  database: envParseString('MONGO_DATABASE')
-}
-
-export const redis = {
-  host: envParseString('REDIS_HOST'),
-  port: envParseInteger('REDIS_PORT')
-}
-
 export const jwtSecret = envParseString('JWT_SECRET')
 
 export const log = {
@@ -31,7 +20,23 @@ export const log = {
   dir: envParseString('LOG_DIR')
 }
 
+export const mongo = {
+  host: envParseString('MONGO_HOST'),
+  port: envParseInteger('MONGO_PORT'),
+  database: envParseString('MONGO_DATABASE')
+}
+
 export const monitor = {
   enabled: envParseBoolean('MONITOR_ENABLED'),
   route: envParseString('MONITOR_ROUTE')
+}
+
+export const redis = {
+  host: envParseString('REDIS_HOST'),
+  port: envParseInteger('REDIS_PORT')
+}
+
+export const sentry = {
+  enabled: envParseBoolean('SENTRY_ENABLED'),
+  dsn: envParseString('SENTRY_DSN')
 }

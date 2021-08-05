@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-import { app, log, monitor as mon } from '@/config'
+import { app, log, monitor as mon, sentry } from '@/config'
 import { dbConnection } from '@databases/mongo'
 import { ioRedis } from '@databases/redis'
 import { Routes } from '@interfaces/routes.interface'
@@ -93,8 +93,22 @@ class App {
     })
   }
 
-  private initializeErrorHandling() {
+  private async initializeErrorHandling() {
     this.app.use(errorMiddleware)
+
+    if (this.env === 'production' && sentry.enabled) {
+      const Sentry = await import('@sentry/node')
+      const { hostname } = await import('os')
+
+      Sentry.init({
+        dsn: sentry.dsn,
+        release: `${app.name}@${app.version}`,
+        autoSessionTracking: true,
+        tracesSampleRate: 1.0
+      })
+      Sentry.setTag('host', hostname())
+      Sentry.setTag('version', app.version)
+    }
   }
 }
 
