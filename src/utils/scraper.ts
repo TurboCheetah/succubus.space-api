@@ -5,6 +5,7 @@ import { cacheData } from '@utils/util'
 import { load } from 'cheerio'
 import { schedule } from 'node-cron'
 import Queue from 'bull'
+import { logger } from './logger'
 
 const queue = new Queue('scraper', {
   redis: {
@@ -21,29 +22,33 @@ queue.process(async job => {
 })
 
 schedule('0 * * * *', async () => {
-  // Get latest HAnime upload ID
-  const $ = await c('https://hanime.tv/')
-    .text()
-    .then(html => load(html))
+  try {
+    // Get latest HAnime upload ID
+    const $ = await c('https://hanime.tv/')
+      .text()
+      .then(html => load(html))
 
-  let newestID = $('.elevation-3.mb-3.hvc.item.card').first().find('a').attr('alt')
+    let newestID = $('.elevation-3.mb-3.hvc.item.card').first().find('a').attr('alt')
 
-  newestID = (await hanime(newestID))[0].id
+    newestID = (await hanime(newestID))[0].id
 
-  await ioRedis.set('newestID', newestID)
+    await ioRedis.set('newestID', newestID)
 
-  console.log(`Beginning to scrape data from ${newestID} entries`)
+    console.log(`Beginning to scrape data from ${newestID} entries`)
 
-  // Begin scraping
-  const ids = []
-  for (let i = 5; i < newestID + 1; i++) ids.push(i)
+    // Begin scraping
+    const ids = []
+    for (let i = 5; i < newestID + 1; i++) ids.push(i)
 
-  ids.forEach(async id => {
-    // Check if ID already exists in Redis
-    const data = await client.get(id)
+    ids.forEach(async id => {
+      // Check if ID already exists in Redis
+      const data = await client.get(id)
 
-    if (!data) {
-      return await queue.add({ id })
-    }
-  })
+      if (!data) {
+        return await queue.add({ id })
+      }
+    })
+  } catch (err) {
+    logger.error(err)
+  }
 })

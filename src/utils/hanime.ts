@@ -1,7 +1,7 @@
-import { Hentai } from '@/interfaces/hentai.interface'
+import { HAnime } from '@/interfaces/hentai.interface'
 import c from '@aero/centra'
 
-export const hanime = async (query: string | number): Promise<Hentai> => {
+export const hanime = async (query: string | number): Promise<HAnime> => {
   const getDate = releaseDate => {
     const date = new Date(releaseDate * 1000)
 
@@ -39,7 +39,7 @@ export const hanime = async (query: string | number): Promise<Hentai> => {
       results = { id: query, invalid: true }
     }
 
-    return results as Hentai
+    return results as HAnime
   } else {
     const { hentai_video: result, videos_manifest: vManifest } = await c(`https://hw.hanime.tv/api/v8/video?id=${query}`).json()
 
@@ -58,7 +58,8 @@ export const hanime = async (query: string | number): Promise<Hentai> => {
     result.streamURL = vManifest ? vManifest.servers[0].streams[1].url : ''
     result.titles = titles
     result.tags = tags
+    delete result.hentai_tags
 
-    return result as Hentai
+    return result as HAnime
   }
 }

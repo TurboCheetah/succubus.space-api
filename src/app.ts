@@ -1,16 +1,22 @@
-import { app, monitor as mon, log } from '@/config'
+import 'reflect-metadata'
+import { app, log, monitor as mon } from '@/config'
+import { dbConnection } from '@databases/mongo'
+import { ioRedis } from '@databases/redis'
+import { Routes } from '@interfaces/routes.interface'
+import errorMiddleware from '@middlewares/error.middleware'
+import { HentaiResolver } from '@resolvers/hentai.resolver'
+import { logger, stream } from '@utils/logger'
+import { BaseRedisCache } from 'apollo-server-cache-redis'
+import { ApolloServer } from 'apollo-server-express'
 import compression from 'compression'
 import cors from 'cors'
 import express from 'express'
+import monitor from 'express-status-monitor'
 import helmet from 'helmet'
 import hpp from 'hpp'
-import morgan from 'morgan'
-import monitor from 'express-status-monitor'
 import { connect, set } from 'mongoose'
-import { dbConnection } from '@databases/mongo'
-import { Routes } from '@interfaces/routes.interface'
-import errorMiddleware from '@middlewares/error.middleware'
-import { logger, stream } from '@utils/logger'
+import morgan from 'morgan'
+import { buildSchema } from 'type-graphql'
 
 class App {
   public app: express.Application
@@ -47,7 +53,7 @@ class App {
     connect(dbConnection.url, dbConnection.options)
   }
 
-  private initializeMiddlewares() {
+  private async initializeMiddlewares() {
     if (mon.enabled) {
       this.app.use(
         monitor({
@@ -66,6 +72,13 @@ class App {
     }
 
     this.app.use(morgan(log.format, { stream }))
+    const apollo = new ApolloServer({
+      schema: await buildSchema({ resolvers: [HentaiResolver], nullableByDefault: true }),
+      cache: new BaseRedisCache({ client: ioRedis }),
+      context: ({ req, res }) => ({ req, res })
+    })
+    await apollo.start()
+    apollo.applyMiddleware({ app: this.app, cors: true })
     this.app.use(cors())
     this.app.use(hpp())
     this.app.use(helmet())

@@ -40,4 +40,40 @@ describe('Testing Hentai', () => {
       return request(app.getServer()).get(`${hentaiRoute.path}hentai/1226`).expect(200)
     })
   })
+
+  describe('[POST] /graphql', () => {
+    it('response statusCode 200', () => {
+      const app = new App([])
+
+      return request(app.getServer())
+        .post('/graphql')
+        .send({
+          query: `query {
+        hentai(id: 1226) {
+          id
+          name
+        }
+      }`
+        })
+        .expect(200)
+    })
+  })
+
+  describe('[POST] /graphql', () => {
+    it('response statusCode 200', () => {
+      const app = new App([])
+
+      return request(app.getServer())
+        .post('/graphql')
+        .send({
+          query: `query {
+        random {
+          id
+          name
+        }
+      }`
+        })
+        .expect(200)
+    })
+  })
 })

@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import '@/config'
 import '@utils/scraper'
 import App from '@/app'
