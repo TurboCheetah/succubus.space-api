@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/TurboCheetah/succubus.space-api/compare/v2.1.0...v2.2.0) (2021-08-05)
+
+
+### Features
+
+* implement MongoDB intermediary layer ([3a0570d](https://github.com/TurboCheetah/succubus.space-api/commit/3a0570d9d91209a8b976b93a01d464ca1516833c))
+* save data to MongoDB ([e2304a0](https://github.com/TurboCheetah/succubus.space-api/commit/e2304a0a8a7963eb875cdc2af51f39020fb9e83e))
+
+
+### Bug Fixes
+
+* cache middleware typo in file name ([ed6db8c](https://github.com/TurboCheetah/succubus.space-api/commit/ed6db8c5bbf69a2872d699aa1be74f550c16548f))
+
 ## [2.1.0](https://github.com/TurboCheetah/succubus.space-api/compare/v2.0.0...v2.1.0) (2021-08-05)
 
 
