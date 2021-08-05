@@ -89,7 +89,7 @@ export const cacheData = async (query: string): Promise<Hentai> => {
 
     isNaN(+query) ? await client.set(query, data, { expire: 86400 }) : await client.set(hanimeSearch.id.toString(), data)
 
-    return hanimeSearch
+    return data
   } catch (err) {
     console.error(err)
   }
