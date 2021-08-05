@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/TurboCheetah/succubus.space-api/compare/v2.0.0...v2.1.0) (2021-08-05)
+
+
+### Features
+
+* implement graphql ([edcfb29](https://github.com/TurboCheetah/succubus.space-api/commit/edcfb29fad56e13c485ce378750e5ebc734a1a23))
+
+
+### Bug Fixes
+
+* include .env.test ([ae213d6](https://github.com/TurboCheetah/succubus.space-api/commit/ae213d625c3e3fa1987592e666b01008af4c985a))
+* include scraper ([249c96e](https://github.com/TurboCheetah/succubus.space-api/commit/249c96edece869d860a1d21fb34b766666b4c78d))
+* returning un-formatted data ([587eeb6](https://github.com/TurboCheetah/succubus.space-api/commit/587eeb6007a132a901571601b363787efb0dea36))
+
 ## [2.0.0](https://github.com/TurboCheetah/succubus.space-api/compare/v1.2.0...v2.0.0) (2021-08-03)
 
 ## [1.2.0](https://github.com/TurboCheetah/succubus.space-api/compare/v1.1.40...v1.2.0) (2021-08-03)
