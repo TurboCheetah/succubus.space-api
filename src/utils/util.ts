@@ -83,7 +83,12 @@ export const scrapeData = async (query: string): Promise<Hentai> => {
     }
 
     isNaN(+query) ? await client.set(query, data) : await client.set(hanimeSearch.id.toString(), data)
-    await hentaiModel.create(data)
+
+    if (await hentaiModel.findOne({ id: data.id })) {
+      return data
+    } else {
+      await hentaiModel.create(data)
+    }
 
     return data
   } catch (err) {
