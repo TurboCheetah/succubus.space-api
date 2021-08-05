@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 export interface Hentai {
-  _id?: string
   id?: number | string
   name?: string
   titles?: string[]
@@ -8,32 +7,41 @@ export interface Hentai {
   description?: string
   views?: number
   interests?: number
-  poster_url?: string
-  cover_url?: string
+  posterURL?: string
+  coverURL?: string
   brand?: string
-  brand_id?: string
-  duration_in_ms?: number
-  is_censored?: boolean
+  brandID?: string
+  durationInMs?: number
+  isCensored?: boolean
   rating?: string
   likes?: number
   dislikes?: number
   downloads?: number
-  monthly_rank?: number
+  monthlyRank?: number
   tags?:
     | {
         id?: number
         text?: string
       }[]
     | string[]
-  created_at?: string
-  released_at?: string
+  createdAt?: string
+  releasedAt?: string
   url?: string
   streamURL?: string
   malURL?: string
   malID?: number | string
+  updatedAt?: Date
   invalid?: boolean
 }
 export interface HAnime extends Hentai {
+  poster_url?: string
+  cover_url?: string
+  brand_id?: string
+  duration_in_ms?: number
+  is_censored?: boolean
+  monthly_rank?: number
+  created_at?: string
+  released_at?: string
   is_visible?: boolean
   is_hard_subtitled?: boolean
   is_banned_in?: string | string[]

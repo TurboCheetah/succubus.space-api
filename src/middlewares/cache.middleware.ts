@@ -4,8 +4,6 @@ import { logger } from '@utils/logger'
 
 const cacheMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    console.log('cache', req.params.query)
-
     // Fetch data from cache
     if (req.path === '/random') req.params.query = (Math.floor(Math.random() * +(await ioRedis.get('newestID'))) + 1).toString()
 

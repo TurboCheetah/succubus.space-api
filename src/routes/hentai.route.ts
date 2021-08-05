@@ -21,8 +21,6 @@ class HentaiRoute implements Routes {
     this.router.get(`${this.path}hentai/:query`, ratelimitMiddleware(1), cacheMiddleware, mongoMiddleware, scraperMiddleware)
     this.router.get(`${this.path}mongo`, ratelimitMiddleware(1), async (req, res) => {
       const data = await hentaiModel.find()
-      console.log(data)
-
       return res.send(data)
     })
     this.router.get(`${this.path}scrape/:query`, ratelimitMiddleware(300), scraperMiddleware)

@@ -5,8 +5,8 @@
   "author": "Turbo",
   "license": "ISC",
   "scripts": {
-    "start": "npm run build && cross-env NODE_ENV=production node dist/server.js",
-    "dev": "cross-env NODE_ENV=development nodemon",
+    "start": "yarn build && cross-env NODE_ENV=production node dist/server.js",
+    "dev": "yarn docker:dev && cross-env NODE_ENV=development nodemon",
     "build": "tsc && tsc-alias",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
     "lint:fix": "yarn lint --fix && prettier --write src/",

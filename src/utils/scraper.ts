@@ -34,7 +34,7 @@ schedule('0 * * * *', async () => {
 
     await ioRedis.set('newestID', newestID)
 
-    console.log(`Beginning to scrape data from ${newestID} entries`)
+    logger.info(`Beginning to scrape data from ${newestID} entries`)
 
     // Begin scraping
     const ids = []

@@ -7,9 +7,6 @@ import { Arg, Field, ID, ObjectType, Query, Resolver } from 'type-graphql'
 @ObjectType()
 class hentaiType {
   @Field(() => ID)
-  _id?: string
-
-  @Field(() => ID)
   id?: number
 
   @Field()
@@ -31,19 +28,19 @@ class hentaiType {
   interests?: number
 
   @Field()
-  poster_url?: string
+  posterURL?: string
 
   @Field()
-  cover_url?: string
+  coverURL?: string
 
   @Field()
   brand?: string
 
   @Field()
-  duration_in_ms?: number
+  durationInMs?: number
 
   @Field()
-  is_censored?: boolean
+  isCensored?: boolean
 
   @Field()
   rating?: string
@@ -58,16 +55,16 @@ class hentaiType {
   downloads?: number
 
   @Field()
-  monthly_rank?: number
+  monthlyRank?: number
 
   @Field(() => [String])
   tags?: string[]
 
   @Field()
-  created_at: string
+  createdAt: string
 
   @Field()
-  released_at?: string
+  releasedAt?: string
 
   @Field()
   url: string
@@ -80,6 +77,9 @@ class hentaiType {
 
   @Field(() => ID)
   malID: number
+
+  @Field(() => String)
+  updatedAt: Date
 
   @Field()
   invalid: boolean
