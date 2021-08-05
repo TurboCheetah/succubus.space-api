@@ -1,5 +1,5 @@
 # [Succubus.space](https://succubus.space)
-![Contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat) ![Discord](https://img.shields.io/discord/615732714783375371?color=%239E36FF)
+[![CodeFactor](https://www.codefactor.io/repository/github/turbocheetah/succubus.space-api/badge)](https://www.codefactor.io/repository/github/turbocheetah/succubus.space-api) ![Discord](https://img.shields.io/discord/615732714783375371?color=%239E36FF)
 
 Have you ever wanted to find hentai? **[Succubus.space](https://succubus.space)** puts it all in one elegant website!
 
