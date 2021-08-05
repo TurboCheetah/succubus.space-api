@@ -21,7 +21,7 @@ services:
     image: mongo
     container_name: succubus.space-mongo
     restart: 'unless-stopped'
-    volumes: 
+    volumes:
       - mongo:/data/db
 
 volumes:
