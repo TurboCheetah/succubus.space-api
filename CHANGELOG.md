@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com/TurboCheetah/succubus.space-api/compare/v2.2.1...v2.3.0) (2021-08-06)
+
+
+### Features
+
+* add MongoDB to GraphQL resolver ([e3bb5e1](https://github.com/TurboCheetah/succubus.space-api/commit/e3bb5e17dbb1d2576a2a42bcd87434c6d8a1d2aa))
+
+
+### Bug Fixes
+
+* clean up deps ([ed5aa4c](https://github.com/TurboCheetah/succubus.space-api/commit/ed5aa4c328f77ec822543cd1ec716bec8ea35372))
+* properly integrate Sentry ([ed8c3c5](https://github.com/TurboCheetah/succubus.space-api/commit/ed8c3c55c9610bb0ccb3e177b740e8da51d9cd0f))
+
 ### [2.2.1](https://github.com/TurboCheetah/succubus.space-api/compare/v2.2.0...v2.2.1) (2021-08-05)
 
 
