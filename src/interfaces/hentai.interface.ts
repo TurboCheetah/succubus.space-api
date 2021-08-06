@@ -24,7 +24,6 @@ export interface Hentai {
         text?: string
       }[]
     | string[]
-  createdAt?: string
   releasedAt?: string
   url?: string
   streamURL?: string

@@ -4,7 +4,6 @@ import { client } from '@/databases/redis'
 
 const mongoMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    // Scrape new data
     const query = req.params.query
 
     const data = await hentaiModel.findOne({ id: query })
@@ -30,7 +29,6 @@ const mongoMiddleware = async (req: Request, res: Response, next: NextFunction) 
         downloads: data.downloads,
         monthlyRank: data.monthlyRank,
         tags: data.tags,
-        createdAt: data.createdAt,
         releasedAt: data.releasedAt,
         url: data.url,
         streamURL: data.streamURL,

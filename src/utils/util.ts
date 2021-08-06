@@ -54,7 +54,7 @@ export const scrapeData = async (query: string): Promise<Hentai> => {
       }
     })
 
-    const data = {
+    const data: Hentai = {
       id: hanimeSearch.id,
       name: hanimeSearch.name,
       titles: hanimeSearch.titles,
@@ -74,12 +74,11 @@ export const scrapeData = async (query: string): Promise<Hentai> => {
       downloads: hanimeSearch.downloads,
       monthlyRank: hanimeSearch.monthly_rank,
       tags: hanimeSearch.tags,
-      createdAt: hanimeSearch.created_at,
       releasedAt: hanimeSearch.released_at,
       url: hanimeSearch.url,
       streamURL: hanimeSearch.streamURL,
-      malURL: hanimeSearch.malURL ? hanimeSearch.malURL : 'Hentai is not on MAL',
-      malID: hanimeSearch.malID ? hanimeSearch.malID : 'Hentai is not on MAL'
+      malURL: hanimeSearch.malURL ? hanimeSearch.malURL : null,
+      malID: hanimeSearch.malID ? hanimeSearch.malID : null
     }
 
     isNaN(+query) ? await client.set(query, data) : await client.set(hanimeSearch.id.toString(), data)
