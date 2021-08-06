@@ -6,7 +6,7 @@ const mongoMiddleware = async (req: Request, res: Response, next: NextFunction) 
   try {
     const query = req.params.query
 
-    const data = await hentaiModel.findOne({ id: query })
+    const data = isNaN(+query) ? await hentaiModel.findOne({ name: { $regex: query } }) : await hentaiModel.findOne({ id: query })
 
     if (data && !data.invalid) {
       await client.set(query, {

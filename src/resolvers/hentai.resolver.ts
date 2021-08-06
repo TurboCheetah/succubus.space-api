@@ -92,7 +92,7 @@ export class HentaiResolver {
     let data = await client.get(`${query}`)
 
     if (!data) {
-      data = id ? await hentaiModel.findOne({ id: id }) : await hentaiModel.findOne({ name: name })
+      data = id ? await hentaiModel.findOne({ id: id }) : await hentaiModel.findOne({ name: { $regex: name } })
 
       if (data && !data.invalid) {
         await client.set(`${query}`, {
