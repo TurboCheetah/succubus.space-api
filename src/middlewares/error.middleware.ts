@@ -11,7 +11,7 @@ const errorMiddleware = (error: HttpException, req: Request, res: Response, next
 
     logger.error(`[${req.method}] ${req.path} >> StatusCode:: ${status}, Message:: ${message}`)
     res.status(status).json({ message })
-    if (process.env.NODE_ENV === 'development' && sentry.enabled) captureException(error)
+    if (process.env.NODE_ENV === 'production' && sentry.enabled) captureException(error)
   } catch (error) {
     next(error)
   }
