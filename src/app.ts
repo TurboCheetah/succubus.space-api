@@ -17,6 +17,7 @@ import hpp from 'hpp'
 import { connect, set } from 'mongoose'
 import morgan from 'morgan'
 import { buildSchema } from 'type-graphql'
+import { Handlers, init } from '@sentry/node'
 
 class App {
   public app: express.Application
@@ -71,6 +72,17 @@ class App {
       )
     }
 
+    if (process.env.NODE_ENV === 'development' && sentry.enabled) {
+      init({
+        dsn: sentry.dsn,
+        release: `${app.name}@${app.version}`,
+        autoSessionTracking: true,
+        tracesSampleRate: 1.0
+      })
+
+      this.app.use(Handlers.requestHandler({ serverName: false }) as express.RequestHandler)
+    }
+
     this.app.use(morgan(log.format, { stream }))
     const apollo = new ApolloServer({
       schema: await buildSchema({ resolvers: [HentaiResolver], nullableByDefault: true }),
@@ -93,22 +105,9 @@ class App {
     })
   }
 
-  private async initializeErrorHandling() {
+  private initializeErrorHandling() {
+    this.app.use(Handlers.errorHandler() as express.ErrorRequestHandler)
     this.app.use(errorMiddleware)
-
-    if (this.env === 'production' && sentry.enabled) {
-      const Sentry = await import('@sentry/node')
-      const { hostname } = await import('os')
-
-      Sentry.init({
-        dsn: sentry.dsn,
-        release: `${app.name}@${app.version}`,
-        autoSessionTracking: true,
-        tracesSampleRate: 1.0
-      })
-      Sentry.setTag('host', hostname())
-      Sentry.setTag('version', app.version)
-    }
   }
 }
 
