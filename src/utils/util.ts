@@ -1,4 +1,4 @@
-import { Hentai } from '@/interfaces/hentai.interface'
+import { HAnime, Hentai } from '@/interfaces/hentai.interface'
 import hentaiModel from '@/models/hentai.model'
 import { client } from '@databases/redis'
 import { hanime } from '@utils/hanime'
@@ -6,6 +6,35 @@ import malScraper, { malInfoFromName } from 'mal-scraper'
 
 export const shorten = (text: string, maxLen = 1024) => {
   return text.length > maxLen ? `${text.substr(0, maxLen - 3)}...` : text
+}
+
+export const dataBuilder = (data: HAnime): Hentai => {
+  return {
+    id: data.id,
+    name: data.name,
+    titles: data.titles,
+    slug: data.slug,
+    description: data.description,
+    views: data.views,
+    interests: data.interests,
+    posterURL: data.poster_url || data.posterURL,
+    coverURL: data.cover_url || data.coverURL,
+    brand: data.brand,
+    brandID: data.brand_id || data.brandID,
+    durationInMs: data.duration_in_ms || data.durationInMs,
+    isCensored: data.is_censored || data.isCensored,
+    rating: data.rating,
+    likes: data.likes,
+    dislikes: data.dislikes,
+    downloads: data.downloads,
+    monthlyRank: data.monthly_rank || data.monthlyRank,
+    tags: data.tags,
+    releasedAt: data.released_at || data.releasedAt,
+    url: data.url,
+    streamURL: data.streamURL,
+    malURL: data.malURL ? data.malURL : null,
+    malID: data.malID ? data.malID : null
+  }
 }
 
 export const mal = async (query: string): Promise<malInfoFromName> => {
@@ -54,32 +83,7 @@ export const scrapeData = async (query: string): Promise<Hentai> => {
       }
     })
 
-    const data: Hentai = {
-      id: hanimeSearch.id,
-      name: hanimeSearch.name,
-      titles: hanimeSearch.titles,
-      slug: hanimeSearch.slug,
-      description: hanimeSearch.description,
-      views: hanimeSearch.views,
-      interests: hanimeSearch.interests,
-      posterURL: hanimeSearch.poster_url,
-      coverURL: hanimeSearch.cover_url,
-      brand: hanimeSearch.brand,
-      brandID: hanimeSearch.brand_id,
-      durationInMs: hanimeSearch.duration_in_ms,
-      isCensored: hanimeSearch.is_censored,
-      rating: hanimeSearch.rating,
-      likes: hanimeSearch.likes,
-      dislikes: hanimeSearch.dislikes,
-      downloads: hanimeSearch.downloads,
-      monthlyRank: hanimeSearch.monthly_rank,
-      tags: hanimeSearch.tags,
-      releasedAt: hanimeSearch.released_at,
-      url: hanimeSearch.url,
-      streamURL: hanimeSearch.streamURL,
-      malURL: hanimeSearch.malURL ? hanimeSearch.malURL : null,
-      malID: hanimeSearch.malID ? hanimeSearch.malID : null
-    }
+    const data: Hentai = dataBuilder(hanimeSearch)
 
     isNaN(+query) ? await client.set(query, data) : await client.set(hanimeSearch.id.toString(), data)
 
