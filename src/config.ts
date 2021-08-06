@@ -13,8 +13,6 @@ export const app = {
   port: envParseInteger('PORT')
 }
 
-export const jwtSecret = envParseString('JWT_SECRET')
-
 export const log = {
   format: envParseString('LOG_FORMAT'),
   dir: envParseString('LOG_DIR')

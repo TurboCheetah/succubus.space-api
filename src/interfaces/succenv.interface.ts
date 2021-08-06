@@ -7,8 +7,6 @@ export interface SuccEnv {
   APP_NAME: string
   PORT: IntegerString
 
-  JWT_SECRET: string
-
   LOG_FORMAT: string
   LOG_DIR: string
 
