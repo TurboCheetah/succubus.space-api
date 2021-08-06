@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.2](https://github.com/TurboCheetah/succubus.space-api/compare/v2.3.1...v2.3.2) (2021-08-06)
+
+
+### Features
+
+* if query is a name search MongoDB with regex ([f6a39ba](https://github.com/TurboCheetah/succubus.space-api/commit/f6a39ba65973d343decdbfe8c2b4e6fa01bf1ea9))
+
+
+### Bug Fixes
+
+* Remove duplicate code ([d17de75](https://github.com/TurboCheetah/succubus.space-api/commit/d17de75903562aa432a04b1d2f61f8e447669aea))
+
 ### [2.3.1](https://github.com/TurboCheetah/succubus.space-api/compare/v2.3.0...v2.3.1) (2021-08-06)
 
 
