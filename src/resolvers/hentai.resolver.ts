@@ -85,8 +85,7 @@ class hentaiType {
 
 @Resolver()
 export class HentaiResolver {
-  @Query(() => hentaiType)
-  public async hentai(@Arg('id') id: number, @Arg('name') name: string): Promise<Hentai> {
+  private async getData({ id, name }: { id?: number; name?: string }): Promise<Hentai> {
     const query = id || name
 
     let data = await client.get(`${query}`)
@@ -111,12 +110,12 @@ export class HentaiResolver {
   }
 
   @Query(() => hentaiType)
+  public async hentai(@Arg('id') id: number, @Arg('name') name: string): Promise<Hentai> {
+    return await this.getData({ id, name })
+  }
+
+  @Query(() => hentaiType)
   public async random(): Promise<Hentai> {
-    const query = `${Math.floor(Math.random() * +(await ioRedis.get('newestID'))) + 1}`
-
-    let data = await client.get(query)
-    if (!data) data = await scrapeData(query)
-
-    return data
+    return await this.getData({ id: Math.floor(Math.random() * +(await ioRedis.get('newestID'))) + 1 })
   }
 }
