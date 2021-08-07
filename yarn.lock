@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@aero/centra@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@aero/centra/-/centra-1.0.6.tgz#0151359a4c6a9054d36fa6c31353b2fd3d860e6f"
-  integrity sha512-e7sUh/VjugT8LsHb4/hcbmhaVVi9deWWPQnlMnU0RAnF8+iCdGdCcKvoHnDNl/ELykwjpbKpBYbWPx0yKZaDpw==
+"@aero/centra@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@aero/centra/-/centra-1.0.7.tgz#a6dea5f79c50a1140b73da75d235b87348524236"
+  integrity sha512-NI6TGmbaoGsudBkEQ1wFDuG6dyy83YpLInBs7YRYnDDQvJvslkBXfb5gTcSNFCkB0oWuzvU9ASHgogiY+VpMlw==
 
 "@apollo/protobufjs@1.2.2":
   version "1.2.2"
