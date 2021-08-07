@@ -10,9 +10,6 @@ export interface SuccEnv {
   LOG_FORMAT: string
   LOG_DIR: string
 
-  MONITOR_ENABLED: BooleanString
-  MONITOR_ROUTE: string
-
   MONGO_HOST: string
   MONGO_PORT: IntegerString
   MONGO_DATABASE: string

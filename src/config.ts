@@ -22,11 +22,6 @@ export const mongo = {
   database: envParseString('MONGO_DATABASE')
 }
 
-export const monitor = {
-  enabled: envParseBoolean('MONITOR_ENABLED'),
-  route: envParseString('MONITOR_ROUTE')
-}
-
 export const redis = {
   host: envParseString('REDIS_HOST'),
   port: envParseInteger('REDIS_PORT')
