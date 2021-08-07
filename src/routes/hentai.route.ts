@@ -19,7 +19,7 @@ class HentaiRoute implements Routes {
     this.router.get(`${this.path}hanime/:query`, ratelimitMiddleware(300), this.hentaiController.hanime)
     this.router.get(`${this.path}hentai/:query`, ratelimitMiddleware(1), cacheMiddleware, mongoMiddleware, scraperMiddleware)
     this.router.get(`${this.path}scrape/:query`, ratelimitMiddleware(300), scraperMiddleware)
-    this.router.get(`${this.path}random`, ratelimitMiddleware(1), cacheMiddleware, scraperMiddleware)
+    this.router.get(`${this.path}random`, ratelimitMiddleware(1), cacheMiddleware, mongoMiddleware, scraperMiddleware)
   }
 }
 
