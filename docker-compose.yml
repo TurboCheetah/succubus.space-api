@@ -2,8 +2,7 @@ version: '3.7'
 
 services:
   succubus.space-api:
-    build:
-      context: .
+    image: ghcr.io/turbocheetah/succubus.space-api:latest
     container_name: succubus.space-api
     ports:
       - '4445:4445'
