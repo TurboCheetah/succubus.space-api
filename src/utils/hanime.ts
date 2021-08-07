@@ -2,7 +2,7 @@ import { HAnime } from '@/interfaces/hentai.interface'
 import c from '@aero/centra'
 
 export const hanime = async (query: string | number): Promise<HAnime> => {
-  const getDate = releaseDate => {
+  const getDate = (releaseDate: number) => {
     const date = new Date(releaseDate * 1000)
 
     const year = date.getFullYear()
@@ -12,7 +12,7 @@ export const hanime = async (query: string | number): Promise<HAnime> => {
     return `${year}-${month}-${day}`
   }
 
-  const search = async query => {
+  const search = async (query: string) => {
     const config = {
       search_text: query,
       tags: [],
@@ -27,7 +27,7 @@ export const hanime = async (query: string | number): Promise<HAnime> => {
   }
 
   if (isNaN(+query)) {
-    let results = await search(query)
+    let results = await search(query as string)
 
     if (results.nbHits > 0) {
       results = JSON.parse(results.hits)

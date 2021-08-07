@@ -6,7 +6,7 @@ class HentaiController {
     try {
       const search = await hanime(req.params.query)
 
-      if (search.invalid) return res.send(search)
+      return res.send(search)
     } catch (error) {
       next(error)
     }
