@@ -14,7 +14,7 @@ const mongoMiddleware = async (req: Request, res: Response, next: NextFunction) 
       return res.send(data)
     } else if (data && data.invalid) {
       await client.set(query, { id: query, invalid: true }, { expire: 86400 })
-      return res.sendStatus(404)
+      return res.send(data)
     }
 
     next()

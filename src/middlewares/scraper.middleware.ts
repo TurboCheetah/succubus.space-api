@@ -6,10 +6,7 @@ const scraperMiddleware = async (req: Request, res: Response, next: NextFunction
     // Scrape new data
     const search = await scrapeData(req.params.query)
 
-    if (search && search.invalid) {
-      res.sendStatus(404)
-      return res.send(search)
-    }
+    if (search && search.invalid) return res.send(search)
 
     res.send(search)
 
