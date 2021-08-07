@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import hentaiModel from '@/models/hentai.model'
 import { client } from '@/databases/redis'
+import { dataBuilder } from '@/utils/util'
 
 const mongoMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -9,33 +10,7 @@ const mongoMiddleware = async (req: Request, res: Response, next: NextFunction) 
     const data = isNaN(+query) ? await hentaiModel.findOne({ name: { $regex: query } }) : await hentaiModel.findOne({ id: query })
 
     if (data && !data.invalid) {
-      await client.set(query, {
-        id: data.id,
-        name: data.name,
-        titles: data.titles,
-        slug: data.slug,
-        description: data.description,
-        views: data.views,
-        interests: data.interests,
-        posterURL: data.posterURL,
-        coverURL: data.coverURL,
-        brand: data.brand,
-        brandID: data.brandID,
-        durationInMs: data.durationInMs,
-        isCensored: data.isCensored,
-        rating: data.rating,
-        likes: data.likes,
-        dislikes: data.dislikes,
-        downloads: data.downloads,
-        monthlyRank: data.monthlyRank,
-        tags: data.tags,
-        releasedAt: data.releasedAt,
-        url: data.url,
-        streamURL: data.streamURL,
-        malURL: data.malURL,
-        malID: data.malID,
-        invalid: data.invalid
-      })
+      await client.set(query, dataBuilder(data))
       return res.send(data)
     } else if (data && data.invalid) {
       await client.set(query, { id: query, invalid: true }, { expire: 86400 })
