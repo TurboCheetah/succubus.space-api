@@ -75,7 +75,6 @@ class App {
     if (process.env.NODE_ENV === 'production' && sentry.enabled) {
       init({
         dsn: sentry.dsn,
-        release: `${app.name}@${app.version}`,
         autoSessionTracking: true,
         tracesSampleRate: 1.0
       })
