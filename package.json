@@ -6,6 +6,7 @@
   "license": "ISC",
   "scripts": {
     "start": "yarn build && cross-env NODE_ENV=production node dist/server.js",
+    "start:docker": "cross-env NODE_ENV=production node dist/server.js",
     "dev": "yarn docker:dev && cross-env NODE_ENV=development nodemon",
     "build": "tsc && tsc-alias",
     "lint": "eslint --ignore-path .gitignore --ext .ts src/",
