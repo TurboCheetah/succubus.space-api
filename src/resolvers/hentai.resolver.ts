@@ -23,7 +23,7 @@ export class HentaiResolver {
       }
 
       if (data && !data.invalid) {
-        await client.set(`${query}`, dataBuilder(data))
+        await client.set(`${query}`, dataBuilder(data), { expire: 3600 })
         return data
       } else if (data && data.invalid) {
         data = { id: query, invalid: true }

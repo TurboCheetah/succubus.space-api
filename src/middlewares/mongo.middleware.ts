@@ -10,7 +10,7 @@ const mongoMiddleware = async (req: Request, res: Response, next: NextFunction) 
     const data = isNaN(+query) ? await hentaiModel.findOne({ name: { $regex: query } }) : await hentaiModel.findOne({ id: query })
 
     if (data && !data.invalid) {
-      await client.set(query, dataBuilder(data))
+      await client.set(query, dataBuilder(data), { expire: 3600 })
       return res.send(data)
     } else if (data && data.invalid) {
       await client.set(query, { id: query, invalid: true }, { expire: 86400 })
