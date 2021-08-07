@@ -36,7 +36,7 @@ export const hanime = async (query: string | number): Promise<HAnime> => {
         results[i].released_at = getDate(results[i].released_at)
       }
     } else {
-      results = { id: query, invalid: true }
+      return { id: query, invalid: true }
     }
 
     // return results as HAnime
