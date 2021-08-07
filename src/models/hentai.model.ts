@@ -26,24 +26,24 @@ const hentaiSchema: Schema = new Schema(
     interests: {
       type: Number
     },
-    poster_url: {
+    posterURL: {
       type: String
     },
-    cover_url: {
+    coverURL: {
       type: String
     },
     brand: {
       type: String
     },
-    brand_id: {
+    brandID: {
       type: String
     },
 
-    duration_in_ms: {
+    durationInMs: {
       type: Number
     },
 
-    is_censored: {
+    isCensored: {
       type: Boolean
     },
     rating: {
@@ -56,17 +56,17 @@ const hentaiSchema: Schema = new Schema(
       type: Number
     },
 
-    monthly_rank: {
+    monthlyRank: {
       type: Number
     },
     tags: {
       type: [String]
     },
-    created_at: {
+    createdAt: {
       type: String
     },
 
-    released_at: {
+    releasedAt: {
       type: String
     },
     url: {
@@ -80,7 +80,7 @@ const hentaiSchema: Schema = new Schema(
     },
 
     malID: {
-      type: String
+      type: Number
     },
     invalid: {
       type: String

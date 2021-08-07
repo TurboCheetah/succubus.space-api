@@ -8,13 +8,19 @@ import { hentaiType } from '@resolvers/types/hentai.type'
 
 @Resolver()
 export class HentaiResolver {
-  private async getData({ id, name }: { id?: number; name?: string }): Promise<Hentai> {
-    const query = id || name
+  private async getData({ id, name, malID }: { id?: number; name?: string; malID?: number }): Promise<Hentai> {
+    const query = id || name || malID
 
     let data = await client.get(`${query}`)
 
     if (!data) {
-      data = id ? await hentaiModel.findOne({ id: id }) : await hentaiModel.findOne({ name: { $regex: name } })
+      if (id) {
+        data = await hentaiModel.findOne({ id: id })
+      } else if (name) {
+        data = await hentaiModel.findOne({ name: { $regex: name } })
+      } else if (malID) {
+        data = await hentaiModel.findOne({ malID: malID })
+      }
 
       if (data && !data.invalid) {
         await client.set(`${query}`, dataBuilder(data))
@@ -33,8 +39,8 @@ export class HentaiResolver {
   }
 
   @Query(() => hentaiType)
-  public async hentai(@Arg('id') id: number, @Arg('name') name: string): Promise<Hentai> {
-    return await this.getData({ id, name })
+  public async hentai(@Arg('id') id: number, @Arg('name') name: string, @Arg('malID') malID: number): Promise<Hentai> {
+    return await this.getData({ id, name, malID })
   }
 
   @Query(() => hentaiType)

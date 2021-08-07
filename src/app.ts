@@ -5,6 +5,7 @@ import { ioRedis } from '@databases/redis'
 import { Routes } from '@interfaces/routes.interface'
 import errorMiddleware from '@middlewares/error.middleware'
 import { HentaiResolver } from '@resolvers/hentai.resolver'
+import { BrandResolver } from '@resolvers/brand.resolver'
 import { logger, stream } from '@utils/logger'
 import { BaseRedisCache } from 'apollo-server-cache-redis'
 import { ApolloServer } from 'apollo-server-express'
@@ -66,7 +67,7 @@ class App {
 
     this.app.use(morgan(log.format, { stream }))
     const apollo = new ApolloServer({
-      schema: await buildSchema({ resolvers: [HentaiResolver], nullableByDefault: true }),
+      schema: await buildSchema({ resolvers: [HentaiResolver, BrandResolver], nullableByDefault: true }),
       cache: new BaseRedisCache({ client: ioRedis }),
       context: ({ req, res }) => ({ req, res })
     })

@@ -33,7 +33,7 @@ export const dataBuilder = (data: HAnime): Hentai => {
     url: data.url,
     streamURL: data.streamURL,
     malURL: data.malURL ? data.malURL : null,
-    malID: data.malID ? data.malID : null
+    malID: data.malID ? +data.malID : null
   }
 }
 

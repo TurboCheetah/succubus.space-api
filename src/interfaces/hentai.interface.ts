@@ -28,7 +28,7 @@ export interface Hentai {
   url?: string
   streamURL?: string
   malURL?: string
-  malID?: number | string
+  malID?: number
   updatedAt?: Date
   invalid?: boolean
 }
