@@ -9,6 +9,8 @@ export const shorten = (text: string, maxLen = 1024) => {
 }
 
 export const dataBuilder = (data: HAnime): Hentai => {
+  console.log(data.is_censored !== undefined ? data.is_censored : data.isCensored)
+
   return {
     id: data.id,
     name: data.name,
@@ -17,19 +19,19 @@ export const dataBuilder = (data: HAnime): Hentai => {
     description: data.description,
     views: data.views,
     interests: data.interests,
-    posterURL: data.poster_url || data.posterURL,
-    coverURL: data.cover_url || data.coverURL,
+    posterURL: data.poster_url ? data.poster_url : data.posterURL,
+    coverURL: data.cover_url ? data.cover_url : data.coverURL,
     brand: data.brand,
-    brandID: data.brand_id || data.brandID,
-    durationInMs: data.duration_in_ms || data.durationInMs,
-    isCensored: data.is_censored || data.isCensored,
+    brandID: data.brand_id ? data.brand_id : data.brandID,
+    durationInMs: data.duration_in_ms ? data.duration_in_ms : data.durationInMs,
+    isCensored: data.is_censored !== undefined ? data.is_censored : data.isCensored,
     rating: data.rating,
     likes: data.likes,
     dislikes: data.dislikes,
     downloads: data.downloads,
-    monthlyRank: data.monthly_rank || data.monthlyRank,
+    monthlyRank: data.monthly_rank ? data.monthly_rank : data.monthlyRank,
     tags: data.tags,
-    releasedAt: data.released_at || data.releasedAt,
+    releasedAt: data.released_at ? data.released_at : data.releasedAt,
     url: data.url,
     streamURL: data.streamURL,
     malURL: data.malURL ? data.malURL : null,
