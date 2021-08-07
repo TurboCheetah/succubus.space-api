@@ -39,27 +39,27 @@ export const hanime = async (query: string | number): Promise<HAnime> => {
       results = { id: query, invalid: true }
     }
 
-    return results as HAnime
-  } else {
-    const { hentai_video: result, videos_manifest: vManifest } = await c(`https://hw.hanime.tv/api/v8/video?id=${query}`).json()
-
-    if (!result) return { id: query, invalid: true }
-
-    const titles = []
-    result.titles.forEach((title: { title: string }) => titles.push(title.title))
-
-    const tags = []
-    result.hentai_tags.forEach((tag: { text: string }) => tags.push(tag.text))
-
-    result.description = result.description.replace(/(<([^>]+)>)/gi, '')
-    result.rating = result.rating ? result.rating : 'Unrated'
-    result.url = `https://hanime.tv/videos/hentai/${result.slug}`
-    result.released_at = result.released_at.split('T')[0]
-    result.streamURL = vManifest ? vManifest.servers[0].streams[1].url : null
-    result.titles = titles
-    result.tags = tags
-    delete result.hentai_tags
-
-    return result as HAnime
+    // return results as HAnime
+    query = results[0].id
   }
+  const { hentai_video: result, videos_manifest: vManifest } = await c(`https://hw.hanime.tv/api/v8/video?id=${query}`).json()
+
+  if (!result) return { id: query, invalid: true }
+
+  const titles = []
+  result.titles.forEach((title: { title: string }) => titles.push(title.title))
+
+  const tags = []
+  result.hentai_tags.forEach((tag: { text: string }) => tags.push(tag.text))
+
+  result.description = result.description.replace(/(<([^>]+)>)/gi, '')
+  result.rating = result.rating ? result.rating : 'Unrated'
+  result.url = `https://hanime.tv/videos/hentai/${result.slug}`
+  result.released_at = result.released_at.split('T')[0]
+  result.streamURL = vManifest ? vManifest.servers[0].streams[1].url : null
+  result.titles = titles
+  result.tags = tags
+  delete result.hentai_tags
+
+  return result as HAnime
 }

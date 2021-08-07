@@ -9,8 +9,6 @@ export const shorten = (text: string, maxLen = 1024) => {
 }
 
 export const dataBuilder = (data: HAnime): Hentai => {
-  console.log(data.is_censored !== undefined ? data.is_censored : data.isCensored)
-
   return {
     id: data.id,
     name: data.name,
@@ -49,15 +47,13 @@ export const scrapeData = async (query: string): Promise<Hentai> => {
   let hanimeTitle: string
 
   try {
-    let hanimeSearch = await hanime(query)
+    const hanimeSearch = await hanime(query)
 
     // If no results save to cache with invalid property
     if (hanimeSearch.invalid) {
       await client.set(query, { id: query, invalid: true }, { expire: 86400 })
       return { id: query, invalid: true }
     }
-
-    if (isNaN(+query)) hanimeSearch = hanimeSearch[0]
 
     if (hanimeSearch.titles.length < 1) {
       hanimeTitle = hanimeSearch.name
