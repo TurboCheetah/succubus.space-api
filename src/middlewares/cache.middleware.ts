@@ -15,7 +15,8 @@ const cacheMiddleware = async (req: Request, res: Response, next: NextFunction) 
     if (data && !data.invalid) {
       return res.send(data)
     } else if (data && data.invalid) {
-      return res.sendStatus(404)
+      res.sendStatus(404)
+      return res.send(data)
     }
 
     next()
