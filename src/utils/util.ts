@@ -71,11 +71,7 @@ export const scrapeData = async (query: string): Promise<Hentai> => {
       malSearch = await mal(hanimeSearch.name)
     }
 
-    if (!malSearch) {
-      return hanimeSearch
-    }
-
-    const malProducers = malSearch.producers
+    const malProducers = malSearch.producers || []
 
     malProducers.forEach(producer => {
       if (producer === hanimeSearch.brand) {
