@@ -21,7 +21,7 @@ queue.process(async job => {
   return await scrapeData(job.data.id.toString())
 })
 
-schedule('* * * * *', async () => {
+schedule('0 * * * *', async () => {
   try {
     // Get latest HAnime upload ID
     const $ = await c('https://hanime.tv/')
