@@ -5,7 +5,7 @@ import { scrapeData } from '@utils/util'
 import { load } from 'cheerio'
 import { schedule } from 'node-cron'
 import Queue from 'bull'
-import { logger } from './logger'
+import { logger } from '@utils/logger'
 
 const queue = new Queue('scraper', {
   redis: {
@@ -21,7 +21,7 @@ queue.process(async job => {
   return await scrapeData(job.data.id.toString())
 })
 
-schedule('0 * * * *', async () => {
+schedule('* * * * *', async () => {
   try {
     // Get latest HAnime upload ID
     const $ = await c('https://hanime.tv/')
@@ -30,7 +30,7 @@ schedule('0 * * * *', async () => {
 
     let newestID = $('.elevation-3.mb-3.hvc.item.card').first().find('a').attr('alt')
 
-    newestID = (await hanime(newestID))[0].id
+    newestID = (await hanime(newestID)).id
 
     await ioRedis.set('newestID', newestID)
 
