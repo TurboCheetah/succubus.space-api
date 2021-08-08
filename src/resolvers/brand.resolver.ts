@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 import hentaiModel from '@/models/hentai.model'
 import { Arg, Query, Resolver } from 'type-graphql'
 import { hentaiType } from '@resolvers/types/hentai.type'
