@@ -23,6 +23,8 @@ queue.process(async job => {
 
 schedule('0 * * * *', async () => {
   try {
+    const oldNewest = await ioRedis.get('newestID')
+
     // Get latest HAnime upload ID
     const $ = await c('https://hanime.tv/')
       .text()
@@ -34,7 +36,7 @@ schedule('0 * * * *', async () => {
 
     await ioRedis.set('newestID', newestID)
 
-    logger.info(`Beginning to scrape data from ${newestID} entries`)
+    logger.info(`Beginning to scrape data from ${newestID - +oldNewest} new entries`)
 
     // Begin scraping
     const ids = []
