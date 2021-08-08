@@ -22,6 +22,12 @@ export const mongo = {
   database: envParseString('MONGO_DATABASE')
 }
 
+export const myanimelist = {
+  clientID: envParseString('MYANIMELIST_CLIENT_ID'),
+  username: envParseString('MYANIMELIST_USERNAME'),
+  password: envParseString('MYANIMELIST_PASSWORD')
+}
+
 export const redis = {
   host: envParseString('REDIS_HOST'),
   port: envParseInteger('REDIS_PORT')
