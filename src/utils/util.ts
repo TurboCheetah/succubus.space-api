@@ -33,8 +33,6 @@ export const dataBuilder = (data: HAnime): Hentai => {
 }
 
 export const scrapeData = async (query: string): Promise<Hentai> => {
-  let hanimeTitle: string
-
   const hanimeSearch = await hanime(query)
 
   // If no results save to cache with invalid property
@@ -43,16 +41,10 @@ export const scrapeData = async (query: string): Promise<Hentai> => {
     return { id: query, invalid: true }
   }
 
-  if (hanimeSearch.titles.length < 1) {
-    hanimeTitle = hanimeSearch.name
-  } else {
-    hanimeTitle = hanimeSearch.titles[0]
-  }
+  let malSearch = await mal(isNaN(+query) ? query : hanimeSearch.name)
 
-  let malSearch = await mal(isNaN(+query) ? query : hanimeTitle)
-
-  if (!malSearch) {
-    malSearch = await mal(hanimeSearch.name)
+  if (!malSearch && hanimeSearch.titles.length > 1) {
+    malSearch = await mal(hanimeSearch.titles[0])
   }
 
   if (malSearch) {

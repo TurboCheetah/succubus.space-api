@@ -44,26 +44,31 @@ export const search = async (query: string): Promise<malResult[]> => {
       }
     }
   )
+  for (const h of hentai) h.titles = h.titles.map((title: string) => title.replace(/[^a-zA-Z0-9 ]/g, '').toLowerCase())
 
   return hentai
 }
 
 export const mal = async (title: string): Promise<malResult | undefined> => {
   try {
-    const query = title.replace(/\s([\d]+)/i, '')
+    const query = title
+      .replace(/\s([\d]+)/i, '')
+      .replace(/[^a-zA-Z0-9 ]/g, '')
+      .toLowerCase()
 
     const data = await search(query)
 
     if (!data) return undefined
 
-    let match: malResult
+    for (const hentai of data) {
+      const match = hentai.titles.find((title: string) => {
+        return title === query || title.includes(query) || title.replace(/special/, 'extra').includes(query)
+      })
 
-    data.forEach(hentai => {
-      if (hentai.titles.some((title: string) => title === query)) return (match = hentai)
-      if (hentai.titles.some((title: string) => title.includes(query))) return (match = hentai)
-    })
+      if (match) return hentai
+    }
 
-    return match
+    return undefined
   } catch (err) {
     logger.error(err)
   }
