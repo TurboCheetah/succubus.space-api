@@ -1,5 +1,6 @@
 import { myanimelist } from '@/config'
 import { malResult } from '@interfaces/mal.interface'
+import { logger } from '@utils/logger'
 import c from '@aero/centra'
 
 export const malAuth = async (clientID: string, username: string, password: string) => {
@@ -64,6 +65,6 @@ export const mal = async (title: string): Promise<malResult | undefined> => {
 
     return match
   } catch (err) {
-    console.log(err)
+    logger.error(err)
   }
 }
