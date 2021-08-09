@@ -58,7 +58,8 @@ export const mal = async (title: string): Promise<malResult | undefined> => {
     let match: malResult
 
     data.forEach(hentai => {
-      if (hentai.titles.some((title: string) => title.includes(query))) match = hentai
+      if (hentai.titles.some((title: string) => title === query)) return (match = hentai)
+      if (hentai.titles.some((title: string) => title.includes(query))) return (match = hentai)
     })
 
     return match
