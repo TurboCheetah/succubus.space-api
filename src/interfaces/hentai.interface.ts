@@ -24,7 +24,7 @@ export interface Hentai {
         text?: string
       }[]
     | string[]
-  releasedAt?: string
+  releasedAt?: Date
   url?: string
   streamURL?: string
   malURL?: string
@@ -32,6 +32,7 @@ export interface Hentai {
   updatedAt?: Date
   invalid?: boolean
 }
+
 export interface HAnime extends Hentai {
   poster_url?: string
   cover_url?: string
@@ -40,7 +41,7 @@ export interface HAnime extends Hentai {
   is_censored?: boolean
   monthly_rank?: number
   created_at?: string
-  released_at?: string
+  released_at?: Date
   is_visible?: boolean
   is_hard_subtitled?: boolean
   is_banned_in?: string | string[]

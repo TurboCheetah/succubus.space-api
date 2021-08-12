@@ -5461,6 +5461,13 @@ neo-async@^2.6.0:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+nhentai@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/nhentai/-/nhentai-3.0.0.tgz#709b0e26072f8266e04ed5429c1b9030545c9b3d"
+  integrity sha512-QKPg003BFlv6dn4M74nKdoQ9PfKXrOB/tW5gOeG7LtkuI0NcaHWLVRMBlyi0srj2fZY5nz++WwA2o4opoAUuuw==
+  dependencies:
+    node-fetch "^2.6.1"
+
 node-config@^0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/node-config/-/node-config-0.0.2.tgz#46b40dcfbcb0e66d46a15f81b54eac2130fb150d"

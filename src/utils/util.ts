@@ -1,10 +1,15 @@
-import { HAnime, Hentai } from '@/interfaces/hentai.interface'
-import hentaiModel from '@/models/hentai.model'
 import { client } from '@databases/redis'
+import { HAnime, Hentai } from '@interfaces/hentai.interface'
+import { Doujin } from '@interfaces/doujin.interface'
+import hentaiModel from '@models/hentai.model'
+import doujinModel from '@models/doujin.model'
 import { hanime } from '@utils/hanime'
 import { mal } from '@utils/mal'
+import { nhentai } from '@utils/nhentai'
+import { Doujin as nDoujin, SortMethods } from 'nhentai'
+import { logger } from './logger'
 
-export const dataBuilder = (data: HAnime): Hentai => {
+export const hentaiBuilder = (data: HAnime): Hentai => {
   return {
     id: data.id,
     name: data.name,
@@ -32,12 +37,26 @@ export const dataBuilder = (data: HAnime): Hentai => {
   }
 }
 
-export const scrapeData = async (query: string): Promise<Hentai> => {
+export const doujinBuilder = (data: nDoujin): Doujin => {
+  return {
+    id: data.id,
+    titles: data.titles,
+    uploadDate: data.uploadDate,
+    length: data.length,
+    favorites: data.favorites,
+    url: data.url,
+    cover: data.cover.url,
+    thumbnail: data.thumbnail.url,
+    tags: data.tags.all.map(tag => tag.name)
+  }
+}
+
+export const scrapeHentai = async (query: string): Promise<Hentai> => {
   const hanimeSearch = await hanime(query)
 
   // If no results save to cache with invalid property
   if (hanimeSearch.invalid) {
-    await client.set(query, { id: query, invalid: true }, { expire: 86400 })
+    await client.set(`hentai_${query}`, { id: query, invalid: true }, { expire: 86400 })
     return { id: query, invalid: true }
   }
 
@@ -52,9 +71,9 @@ export const scrapeData = async (query: string): Promise<Hentai> => {
     hanimeSearch.malID = malSearch.id
   }
 
-  const data: Hentai = dataBuilder(hanimeSearch)
+  const data: Hentai = hentaiBuilder(hanimeSearch)
 
-  isNaN(+query) ? await client.set(query, data, { expire: 3600 }) : await client.set(hanimeSearch.id.toString(), data, { expire: 3600 })
+  await client.set(`hentai_${data.id}`, data, { expire: 3600 })
 
   if (await hentaiModel.findOne({ id: data.id })) {
     await hentaiModel.updateOne({ id: data.id }, data)
@@ -64,4 +83,31 @@ export const scrapeData = async (query: string): Promise<Hentai> => {
   }
 
   return data
+}
+
+export const scrapeDoujin = async (query: string): Promise<Doujin> => {
+  try {
+    const search = isNaN(+query) ? (await nhentai.search(query, 1, SortMethods.POPULAR_ALL_TIME)).doujins[0] : await nhentai.fetchDoujin(query)
+
+    // If no results save to cache with invalid property
+    if (!search) {
+      await client.set(`doujin_${query}`, { id: query, invalid: true }, { expire: 86400 })
+      return { id: query, invalid: true }
+    }
+
+    const data = doujinBuilder(search)
+
+    await client.set(`doujin_${data.id}`, data, { expire: 3600 })
+
+    if (await doujinModel.findOne({ id: data.id })) {
+      await doujinModel.updateOne({ id: data.id }, data)
+      return data
+    } else {
+      await doujinModel.create(data)
+    }
+
+    return data
+  } catch (err) {
+    logger.error(err)
+  }
 }

@@ -3,13 +3,7 @@ import c from '@aero/centra'
 
 export const hanime = async (query: string | number): Promise<HAnime> => {
   const getDate = (releaseDate: number) => {
-    const date = new Date(releaseDate * 1000)
-
-    const year = date.getFullYear()
-    const month = ('0' + (date.getMonth() + 1)).slice(-2)
-    const day = ('0' + date.getDate()).slice(-2)
-
-    return `${year}-${month}-${day}`
+    return new Date(releaseDate * 1000)
   }
 
   const search = async (query: string) => {
@@ -55,7 +49,7 @@ export const hanime = async (query: string | number): Promise<HAnime> => {
   result.description = result.description.replace(/(<([^>]+)>)/gi, '')
   result.rating = result.rating ? result.rating : 'Unrated'
   result.url = `https://hanime.tv/videos/hentai/${result.slug}`
-  result.released_at = result.released_at.split('T')[0]
+  result.released_at = getDate(result.released_at_unix)
   result.streamURL = vManifest ? vManifest.servers[0].streams[1].url : null
   result.titles = titles
   result.tags = tags

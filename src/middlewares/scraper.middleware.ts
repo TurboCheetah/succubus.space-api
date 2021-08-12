@@ -1,14 +1,23 @@
 import { NextFunction, Request, Response } from 'express'
-import { scrapeData } from '@utils/util'
+import { scrapeDoujin, scrapeHentai } from '@utils/util'
 
 const scraperMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    // Scrape new data
-    const search = await scrapeData(req.params.query)
+    console.log('scraper')
 
-    res.send(search)
+    const isHentai = req.path.startsWith('/hentai')
 
-    next()
+    if (isHentai) {
+      // Scrape new data
+      const search = await scrapeHentai(req.params.query)
+
+      return res.send(search)
+    } else {
+      // Scrape new data
+      const search = await scrapeDoujin(req.params.query)
+
+      return res.send(search)
+    }
   } catch (err) {
     next(err)
   }

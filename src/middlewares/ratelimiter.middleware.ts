@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
 import { ioRedis } from '@databases/redis'
 import RateLimiter from 'rate-limiter-flexible'
+import { logger } from '@/utils/logger'
 
 const rateLimiter = new RateLimiter.RateLimiterRedis({
   storeClient: ioRedis,
@@ -23,15 +24,20 @@ const ratelimitMiddleware = (points: number) => {
         next()
       })
       .catch(limiter => {
-        res.set({
-          'Retry-After': limiter.msBeforeNext / 1000,
-          'X-RateLimit-Limit': points,
-          'X-RateLimit-Remaining': limiter.remainingPoints,
-          'X-RateLimit-Reset': new Date(Date.now() + limiter.msBeforeNext)
-        })
-        return res.status(429).send({
-          message: 'Too many requests'
-        })
+        if (limiter instanceof Error) {
+          logger.error(limiter)
+          next(limiter)
+        } else {
+          res.set({
+            'Retry-After': limiter.msBeforeNext / 1000,
+            'X-RateLimit-Limit': points,
+            'X-RateLimit-Remaining': limiter.remainingPoints,
+            'X-RateLimit-Reset': new Date(Date.now() + limiter.msBeforeNext)
+          })
+          res.status(429).send({
+            message: 'Too many requests'
+          })
+        }
       })
   }
 }

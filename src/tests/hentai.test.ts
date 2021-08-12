@@ -5,7 +5,7 @@ import HentaiRoute from '@routes/hentai.route'
 jest.setTimeout(30000)
 
 describe('Testing Hentai', () => {
-  describe('[GET] /hanime/1226', () => {
+  describe('[GET] /hentai/hanime/1226', () => {
     it('response statusCode 200', () => {
       const hentaiRoute = new HentaiRoute()
       const app = new App([hentaiRoute])
@@ -14,7 +14,7 @@ describe('Testing Hentai', () => {
     })
   })
 
-  describe('[GET] /scrape/1226', () => {
+  describe('[GET] /hentai/scrape/1226', () => {
     it('response statusCode 200', () => {
       const hentaiRoute = new HentaiRoute()
       const app = new App([hentaiRoute])
@@ -23,7 +23,7 @@ describe('Testing Hentai', () => {
     })
   })
 
-  describe('[GET] /scrape/itadaki', () => {
+  describe('[GET] /hentai/scrape/itadaki', () => {
     it('response statusCode 200', () => {
       const hentaiRoute = new HentaiRoute()
       const app = new App([hentaiRoute])
@@ -37,7 +37,7 @@ describe('Testing Hentai', () => {
       const hentaiRoute = new HentaiRoute()
       const app = new App([hentaiRoute])
 
-      return request(app.getServer()).get(`${hentaiRoute.path}hentai/1226`).expect(200)
+      return request(app.getServer()).get(`${hentaiRoute.path}1226`).expect(200)
     })
   })
 
@@ -67,7 +67,7 @@ describe('Testing Hentai', () => {
         .post('/graphql')
         .send({
           query: `query {
-        random {
+        randomHentai {
           id
           name
         }

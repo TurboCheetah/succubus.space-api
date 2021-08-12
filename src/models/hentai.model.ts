@@ -8,33 +8,43 @@ const hentaiSchema: Schema = new Schema(
       required: true,
       unique: true
     },
+
     name: {
       type: String
     },
+
     titles: {
       type: [String]
     },
+
     slug: {
       type: String
     },
+
     description: {
       type: String
     },
+
     views: {
       type: Number
     },
+
     interests: {
       type: Number
     },
+
     posterURL: {
       type: String
     },
+
     coverURL: {
       type: String
     },
+
     brand: {
       type: String
     },
+
     brandID: {
       type: String
     },
@@ -46,12 +56,15 @@ const hentaiSchema: Schema = new Schema(
     isCensored: {
       type: Boolean
     },
+
     rating: {
       type: String
     },
+
     likes: {
       type: Number
     },
+
     dislikes: {
       type: Number
     },
@@ -59,9 +72,11 @@ const hentaiSchema: Schema = new Schema(
     monthlyRank: {
       type: Number
     },
+
     tags: {
       type: [String]
     },
+
     createdAt: {
       type: String
     },
@@ -69,12 +84,15 @@ const hentaiSchema: Schema = new Schema(
     releasedAt: {
       type: String
     },
+
     url: {
       type: String
     },
+
     streamURL: {
       type: String
     },
+
     malURL: {
       type: String
     },
@@ -82,8 +100,9 @@ const hentaiSchema: Schema = new Schema(
     malID: {
       type: Number
     },
+
     invalid: {
-      type: String
+      type: Boolean
     }
   },
   { timestamps: true }
