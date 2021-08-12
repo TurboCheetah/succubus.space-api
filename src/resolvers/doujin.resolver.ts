@@ -62,22 +62,22 @@ export class DoujinResolver {
   }
 
   @Query(() => [doujinType])
-  public async tag(@Arg('tag') tag: string) {
-    return await doujinModel.find({ tags: { $regex: tag } })
+  public async doujinTag(@Arg('tag') tag: string, @Arg('order', { nullable: true }) order: 'asc' | 'desc') {
+    return await doujinModel.find({ tags: { $regex: tag } }).sort({ favorites: order || 'desc' })
   }
 
   @Query(() => [doujinType])
-  public async popular(@Arg('order', { nullable: true }) order: string) {
+  public async popular(@Arg('order', { nullable: true }) order: 'asc' | 'desc') {
     return await doujinModel.find().sort({ favorites: order || 'desc' })
   }
 
   @Query(() => [doujinType])
-  public async length(@Arg('order') order: string) {
+  public async length(@Arg('order', { nullable: true }) order: 'asc' | 'desc') {
     return await doujinModel.find().sort({ length: order || 'desc' })
   }
 
   @Query(() => [doujinType])
-  public async age(@Arg('order', { nullable: true }) order: string) {
+  public async age(@Arg('order', { nullable: true }) order: 'asc' | 'desc') {
     return await doujinModel.find().sort({ uploadDate: order || 'asc' })
   }
 }

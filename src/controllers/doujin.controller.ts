@@ -4,7 +4,9 @@ import { NextFunction, Request, Response } from 'express'
 class DoujinController {
   public tag = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const data = await doujinModel.find({ tags: { $regex: req.params.query } })
+      const order = req.query.order || 'desc'
+
+      const data = await doujinModel.find({ tags: { $regex: req.params.query } }).sort({ length: order })
 
       return res.send(data)
     } catch (error) {
