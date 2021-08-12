@@ -3,8 +3,6 @@ import { scrapeDoujin, scrapeHentai } from '@utils/util'
 
 const scraperMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    console.log('scraper')
-
     const isHentai = req.path.startsWith('/hentai')
 
     if (isHentai) {
