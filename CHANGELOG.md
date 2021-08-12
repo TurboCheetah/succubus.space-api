@@ -2,6 +2,49 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com/TurboCheetah/succubus.space-api/compare/v2.3.2...v2.4.0) (2021-08-12)
+
+
+### Features
+
+* accurately log amount of entries scraped ([bd2730d](https://github.com/TurboCheetah/succubus.space-api/commit/bd2730d018be5682dea97bf766a3318565302971))
+* add Doujin support ([2a55f7f](https://github.com/TurboCheetah/succubus.space-api/commit/2a55f7f200e0be3f63efca450ddf4734d22ceb89))
+* Brand resolver ([72c9739](https://github.com/TurboCheetah/succubus.space-api/commit/72c973956335c5d58079416de5aacabe6b8e57bc))
+* change docker-compose to use pre-built image ([2410015](https://github.com/TurboCheetah/succubus.space-api/commit/2410015ef7afb80061037a6dca1530e8c1c71d13))
+* code organization ([b922700](https://github.com/TurboCheetah/succubus.space-api/commit/b922700cf065820fa67ebb9fded63dd6df1bc2d3))
+* Monthly rank resolver ([f9a8e1f](https://github.com/TurboCheetah/succubus.space-api/commit/f9a8e1ff974b59078407b93fb63817c9868a062d))
+* only store valid data in redis for an hour ([4296eea](https://github.com/TurboCheetah/succubus.space-api/commit/4296eea31f32f05336c4733062cf2286d78643d7))
+* Remove express-status-monitor ([cc96b5b](https://github.com/TurboCheetah/succubus.space-api/commit/cc96b5bdd441b98b8a37280385656762257d12a1))
+* remove un-used middlewares ([c0adb79](https://github.com/TurboCheetah/succubus.space-api/commit/c0adb7924bb2908e795f0597bcd08cd9bb493048))
+* REST endpoint equivalents ([a2105e6](https://github.com/TurboCheetah/succubus.space-api/commit/a2105e6a9cfb58db11dc614593ee4266dadb6dd3))
+* revamped MAL scrpaer ([5c1e4f6](https://github.com/TurboCheetah/succubus.space-api/commit/5c1e4f61fd93060a3a96837946a1f754751cdc99))
+* search by producer name ([00e8fb2](https://github.com/TurboCheetah/succubus.space-api/commit/00e8fb27131e6fbdf4cbb1a6e2535017b30da72f))
+* simplifly Dockerfile ([455087c](https://github.com/TurboCheetah/succubus.space-api/commit/455087c73325935650d5d9ea8de141cdae9d9c72))
+* smaller docker image ([3086208](https://github.com/TurboCheetah/succubus.space-api/commit/30862088ff4eaa7dfca21c2c5d16c649f5bac84e))
+* sort by popularity on tags endpoint ([c206b3b](https://github.com/TurboCheetah/succubus.space-api/commit/c206b3b4f10c4fa3f7efd7ba41048d09cf65771b))
+* Tag resolver ([9cd0384](https://github.com/TurboCheetah/succubus.space-api/commit/9cd0384bd3adcffd0560cd3dfe853ca702baee3b))
+* wrap functions into single function ([8111392](https://github.com/TurboCheetah/succubus.space-api/commit/8111392f80587d0a5c00f96d57203d3ff2a86040))
+
+
+### Bug Fixes
+
+* actually return data ([d7b6896](https://github.com/TurboCheetah/succubus.space-api/commit/d7b689620540e881440fa3d296d60354356a1852))
+* always return a Hentai ([14dd56a](https://github.com/TurboCheetah/succubus.space-api/commit/14dd56a734d7d993c0c1a32648eb226168e8d01a))
+* dataBuilder not returning values ([55f0bdc](https://github.com/TurboCheetah/succubus.space-api/commit/55f0bdca9464add69276f7bcc749c14158de9d2f))
+* get all data when performing a searchByName ([f781bab](https://github.com/TurboCheetah/succubus.space-api/commit/f781babf90c17db808b5efab402085d3a59ed08d))
+* mal scraper returning wrong result ([17f7aae](https://github.com/TurboCheetah/succubus.space-api/commit/17f7aaeeea7ac54c24ccf484da22712b5aca4c86))
+* properly return ([0c111dc](https://github.com/TurboCheetah/succubus.space-api/commit/0c111dc829d4c5b7185cbf4e60ebd225da10f157))
+* remove 404 status as it does not return JSON ([c0dd50b](https://github.com/TurboCheetah/succubus.space-api/commit/c0dd50b31c2e6e1e404b4a67c3e8e7cc63e0af89))
+* remove JWT from config as it is not used ([484ed1d](https://github.com/TurboCheetah/succubus.space-api/commit/484ed1d788e5aa097f067cf13ced4ca0d06ecc40))
+* remove version ([3167e17](https://github.com/TurboCheetah/succubus.space-api/commit/3167e17dfdd809c4d829272853a90d6f6654fa44))
+* return match for exact match ([119eb31](https://github.com/TurboCheetah/succubus.space-api/commit/119eb318c49d02720f825828d215209ee346fa5e))
+* scraper now works with new HAnime module ([466f604](https://github.com/TurboCheetah/succubus.space-api/commit/466f604f889aa6af9d2f56f66fbffd15514769ea))
+* specify env file ([f047026](https://github.com/TurboCheetah/succubus.space-api/commit/f047026614a81a5f62c86c335dab364609829339))
+* use correct logger ([5e2e007](https://github.com/TurboCheetah/succubus.space-api/commit/5e2e007bac919ac5d3219526a1cc08a23d9829d9))
+* use databuilder in MongoDB middleware ([94791c7](https://github.com/TurboCheetah/succubus.space-api/commit/94791c7277d4c3f1f169a0f928dd19751f79806c))
+* use MongoDB middleware on /random endpoint ([2b1a464](https://github.com/TurboCheetah/succubus.space-api/commit/2b1a46472c5ad8a7701dfdb2c6ef6ad7024afce1))
+* vscode removed next() function ([76f1086](https://github.com/TurboCheetah/succubus.space-api/commit/76f1086c0c8cc23a3cddd0c53fbde3c12127459c))
+
 ### [2.3.2](https://github.com/TurboCheetah/succubus.space-api/compare/v2.3.1...v2.3.2) (2021-08-06)
 
 
