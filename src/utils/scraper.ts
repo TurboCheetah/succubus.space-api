@@ -45,7 +45,7 @@ schedule('0 * * * *', async () => {
   }
 })
 
-schedule('* * * * *', async () => {
+schedule('0 * * * *', async () => {
   try {
     const oldNewest = await ioRedis.get('doujin_newestID')
     const lastScraped = await ioRedis.get('doujin_lastScraped')
