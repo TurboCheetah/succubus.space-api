@@ -3,8 +3,8 @@ import { client } from '@/databases/redis'
 import { Doujin } from '@/interfaces/doujin.interface'
 import doujinModel from '@/models/doujin.model'
 import { doujinBuilder, scrapeDoujin } from '@/utils/util'
-import { Arg, Query, Resolver } from 'type-graphql'
-import { doujinType } from '@resolvers/types/doujin.type'
+import { Arg, Args, Query, Resolver } from 'type-graphql'
+import { doujinArgs, doujinType } from '@resolvers/types/doujin.type'
 import { nhentai } from '@utils/nhentai'
 
 @Resolver()
@@ -18,7 +18,13 @@ export class DoujinResolver {
       if (id) {
         data = await doujinModel.findOne({ id: id })
       } else {
-        data = await doujinModel.findOne({ 'titles.pretty': { $regex: new RegExp(name, 'i') } })
+        data = await doujinModel.findOne({
+          $or: [
+            { 'titles.english': { $regex: new RegExp(name, 'i') } },
+            { 'titles.japanese': { $regex: new RegExp(name, 'i') } },
+            { 'titles.pretty': { $regex: new RegExp(name, 'i') } }
+          ]
+        })
       }
 
       if (data && !data.invalid) {
@@ -48,22 +54,26 @@ export class DoujinResolver {
   }
 
   @Query(() => [doujinType])
-  public async doujinTag(@Arg('tag') tag: string, @Arg('order', { nullable: true }) order: 'asc' | 'desc') {
-    return await doujinModel.find({ tags: { $regex: tag } }).sort({ favorites: order || 'desc' })
+  public async doujinTag(@Args() { tags, language, order }: doujinArgs) {
+    const data = await doujinModel
+      .find({ $and: [{ tags: { $all: tags } }, { tags: { $regex: language || '' } }] })
+      .sort({ favorites: order || 'desc' })
+
+    return data
   }
 
   @Query(() => [doujinType])
-  public async popular(@Arg('order', { nullable: true }) order: 'asc' | 'desc') {
-    return await doujinModel.find().sort({ favorites: order || 'desc' })
+  public async popular(@Args() { language, order }: doujinArgs) {
+    return await doujinModel.find({ tags: { $regex: language || '' } }).sort({ favorites: order || 'desc' })
   }
 
   @Query(() => [doujinType])
-  public async length(@Arg('order', { nullable: true }) order: 'asc' | 'desc') {
-    return await doujinModel.find().sort({ length: order || 'desc' })
+  public async length(@Args() { language, order }: doujinArgs) {
+    return await doujinModel.find({ tags: { $regex: language || '' } }).sort({ length: order || 'desc' })
   }
 
   @Query(() => [doujinType])
-  public async age(@Arg('order', { nullable: true }) order: 'asc' | 'desc') {
-    return await doujinModel.find().sort({ uploadDate: order || 'asc' })
+  public async age(@Args() { language, order }: doujinArgs) {
+    return await doujinModel.find({ tags: { $regex: language || '' } }).sort({ uploadDate: order || 'asc' })
   }
 }

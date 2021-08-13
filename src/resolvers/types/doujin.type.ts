@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from 'type-graphql'
+import { ArgsType, Field, ID, ObjectType } from 'type-graphql'
 
 @ObjectType()
 export class doujinTitles {
@@ -43,4 +43,16 @@ export class doujinType {
 
   @Field()
   invalid: boolean
+}
+
+@ArgsType()
+export class doujinArgs {
+  @Field(() => [String])
+  tags: string[]
+
+  @Field()
+  order: 'asc' | 'desc'
+
+  @Field()
+  language: 'english' | 'japanese' | 'chinese'
 }
