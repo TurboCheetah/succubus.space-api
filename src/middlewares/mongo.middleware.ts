@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 import hentaiModel from '@/models/hentai.model'
 import doujinModel from '@/models/doujin.model'
 import { client } from '@/databases/redis'
-import { hentaiBuilder } from '@/utils/util'
+import { doujinBuilder, hentaiBuilder } from '@utils/util'
 
 const mongoMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -26,21 +26,7 @@ const mongoMiddleware = async (req: Request, res: Response, next: NextFunction) 
         : await doujinModel.findOne({ id: query })
 
       if (data && !data.invalid) {
-        await client.set(
-          `doujin_${query}`,
-          {
-            id: data.id,
-            titles: data.titles,
-            uploadDate: data.uploadDate,
-            length: data.length,
-            favorites: data.favorites,
-            url: data.url,
-            cover: data.cover,
-            thumbnail: data.thumbnail,
-            tags: data.tags
-          },
-          { expire: 3600 }
-        )
+        await client.set(`doujin_${query}`, doujinBuilder(data), { expire: 3600 })
         return res.send(data)
       } else if (data && data.invalid) {
         await client.set(`doujin_${query}`, { id: query, invalid: true }, { expire: 86400 })

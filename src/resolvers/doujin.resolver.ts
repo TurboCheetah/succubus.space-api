@@ -2,7 +2,7 @@
 import { client } from '@/databases/redis'
 import { Doujin } from '@/interfaces/doujin.interface'
 import doujinModel from '@/models/doujin.model'
-import { scrapeDoujin } from '@/utils/util'
+import { doujinBuilder, scrapeDoujin } from '@/utils/util'
 import { Arg, Query, Resolver } from 'type-graphql'
 import { doujinType } from '@resolvers/types/doujin.type'
 import { nhentai } from '@utils/nhentai'
@@ -22,21 +22,7 @@ export class DoujinResolver {
       }
 
       if (data && !data.invalid) {
-        await client.set(
-          `doujin_${query}`,
-          {
-            id: data.id,
-            titles: data.titles,
-            uploadDate: data.uploadDate,
-            length: data.length,
-            favorites: data.favorites,
-            url: data.url,
-            cover: data.cover,
-            thumbnail: data.thumbnail,
-            tags: data.tags
-          },
-          { expire: 3600 }
-        )
+        await client.set(`doujin_${query}`, doujinBuilder(data), { expire: 3600 })
         return data
       } else if (data && data.invalid) {
         data = { id: query, invalid: true }
