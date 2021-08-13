@@ -6,7 +6,7 @@ import doujinModel from '@models/doujin.model'
 import { hanime } from '@utils/hanime'
 import { mal } from '@utils/mal'
 import { nhentai } from '@utils/nhentai'
-import { Doujin as nDoujin, SortMethods } from 'nhentai'
+import { Doujin as nDoujin, SortMethods, Tag } from 'nhentai'
 import { logger } from './logger'
 
 export const hentaiBuilder = (data: HAnime): Hentai => {
@@ -37,7 +37,7 @@ export const hentaiBuilder = (data: HAnime): Hentai => {
   }
 }
 
-export const doujinBuilder = (data: nDoujin): Doujin => {
+export const doujinBuilder = (data: nDoujin | Doujin): Doujin => {
   return {
     id: data.id,
     titles: data.titles,
@@ -45,9 +45,9 @@ export const doujinBuilder = (data: nDoujin): Doujin => {
     length: data.length,
     favorites: data.favorites,
     url: data.url,
-    cover: data.cover.url,
-    thumbnail: data.thumbnail.url,
-    tags: data.tags.all.map(tag => tag.name)
+    cover: (data.cover as any).url ? (data.cover as any).url : data.cover,
+    thumbnail: (data.thumbnail as any).url ? (data.thumbnail as any).url : data.thumbnail,
+    tags: (data.tags as any).all ? (data.tags as any).all.map((tag: Tag) => tag.name) : data.tags
   }
 }
 
