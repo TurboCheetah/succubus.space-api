@@ -1,8 +1,8 @@
-import { Field, ID, ObjectType } from 'type-graphql'
+import { Field, Int, ObjectType } from 'type-graphql'
 
 @ObjectType()
 export class hentaiType {
-  @Field(() => ID)
+  @Field(() => Int)
   id?: number
 
   @Field()
@@ -68,7 +68,7 @@ export class hentaiType {
   @Field()
   malURL: string
 
-  @Field(() => ID)
+  @Field(() => Int)
   malID: number
 
   @Field(() => String)

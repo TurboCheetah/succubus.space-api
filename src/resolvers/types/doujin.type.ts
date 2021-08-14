@@ -1,4 +1,4 @@
-import { ArgsType, Field, ID, ObjectType } from 'type-graphql'
+import { ArgsType, Field, Int, ObjectType } from 'type-graphql'
 
 @ObjectType()
 export class doujinTitles {
@@ -14,7 +14,7 @@ export class doujinTitles {
 
 @ObjectType()
 export class doujinType {
-  @Field(() => ID)
+  @Field(() => Int)
   id?: number
 
   @Field(() => doujinTitles)
