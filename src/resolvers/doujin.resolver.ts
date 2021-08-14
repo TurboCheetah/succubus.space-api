@@ -3,8 +3,8 @@ import { client } from '@/databases/redis'
 import { Doujin } from '@/interfaces/doujin.interface'
 import doujinModel from '@/models/doujin.model'
 import { doujinBuilder, scrapeDoujin } from '@/utils/util'
-import { Arg, Args, Query, Resolver } from 'type-graphql'
-import { doujinArgs, doujinType } from '@resolvers/types/doujin.type'
+import { Args, Query, Resolver } from 'type-graphql'
+import { doujinBaseArgs, doujinTagArgs, doujinType } from '@resolvers/types/doujin.type'
 import { nhentai } from '@utils/nhentai'
 
 @Resolver()
@@ -44,7 +44,7 @@ export class DoujinResolver {
   }
 
   @Query(() => doujinType)
-  public async doujin(@Arg('id') id: number, @Arg('name') name: string): Promise<Doujin> {
+  public async doujin(@Args() { id, name }: doujinBaseArgs): Promise<Doujin> {
     return await this.getData({ id, name })
   }
 
@@ -54,7 +54,7 @@ export class DoujinResolver {
   }
 
   @Query(() => [doujinType])
-  public async doujinTag(@Args() { tags, language, order }: doujinArgs) {
+  public async doujinTag(@Args() { tags, language, order }: doujinTagArgs) {
     const data = await doujinModel
       .find({ $and: [{ tags: { $all: tags } }, { tags: { $regex: language || '' } }] })
       .sort({ favorites: order || 'desc' })
@@ -63,17 +63,17 @@ export class DoujinResolver {
   }
 
   @Query(() => [doujinType])
-  public async popular(@Args() { language, order }: doujinArgs) {
+  public async popular(@Args() { language, order }: doujinTagArgs) {
     return await doujinModel.find({ tags: { $regex: language || '' } }).sort({ favorites: order || 'desc' })
   }
 
   @Query(() => [doujinType])
-  public async length(@Args() { language, order }: doujinArgs) {
+  public async length(@Args() { language, order }: doujinTagArgs) {
     return await doujinModel.find({ tags: { $regex: language || '' } }).sort({ length: order || 'desc' })
   }
 
   @Query(() => [doujinType])
-  public async age(@Args() { language, order }: doujinArgs) {
+  public async age(@Args() { language, order }: doujinTagArgs) {
     return await doujinModel.find({ tags: { $regex: language || '' } }).sort({ uploadDate: order || 'asc' })
   }
 }

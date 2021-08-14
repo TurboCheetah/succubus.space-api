@@ -46,7 +46,16 @@ export class doujinType {
 }
 
 @ArgsType()
-export class doujinArgs {
+export class doujinBaseArgs {
+  @Field(() => Int)
+  id?: number
+
+  @Field()
+  name?: string
+}
+
+@ArgsType()
+export class doujinTagArgs {
   @Field(() => [String])
   tags: string[]
 
