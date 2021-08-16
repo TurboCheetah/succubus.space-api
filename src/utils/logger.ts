@@ -7,10 +7,6 @@ import WinstonDaily from 'winston-daily-rotate-file'
 // logs dir
 const logDir: string = path.join(process.cwd(), log.dir)
 
-if (!fs.existsSync(logDir)) {
-  fs.mkdirSync(logDir)
-}
-
 // Define log format
 const logFormat = winston.format.printf(({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`)
 
@@ -26,6 +22,18 @@ const logger = winston.createLogger({
     logFormat
   ),
   transports: [
+    new winston.transports.Console({
+      format: winston.format.combine(winston.format.splat(), winston.format.colorize())
+    })
+  ]
+})
+
+if (!process.env.READONLY) {
+  if (!fs.existsSync(logDir)) {
+    fs.mkdirSync(logDir)
+  }
+
+  logger.add(
     // debug log setting
     new WinstonDaily({
       level: 'debug',
@@ -35,7 +43,10 @@ const logger = winston.createLogger({
       maxFiles: 30, // 30 Days saved
       json: false,
       zippedArchive: true
-    }),
+    })
+  )
+
+  logger.add(
     // error log setting
     new WinstonDaily({
       level: 'error',
@@ -47,14 +58,8 @@ const logger = winston.createLogger({
       json: false,
       zippedArchive: true
     })
-  ]
-})
-
-logger.add(
-  new winston.transports.Console({
-    format: winston.format.combine(winston.format.splat(), winston.format.colorize())
-  })
-)
+  )
+}
 
 const stream = {
   write: (message: string) => {

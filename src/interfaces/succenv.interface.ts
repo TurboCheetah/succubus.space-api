@@ -26,6 +26,8 @@ export interface SuccEnv {
 
   SENTRY_ENABLED: BooleanString
   SENTRY_DSN: string
+
+  READONLY: BooleanString
 }
 
 export type SuccEnvAny = keyof SuccEnv
