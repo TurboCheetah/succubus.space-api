@@ -2,9 +2,6 @@ import { scrapeHentai } from '@utils/util'
 import Queue from 'bull'
 
 export const hentaiQueue = new Queue('scraper', {
-  redis: {
-    host: process.env.REDIS_HOST
-  },
   limiter: {
     max: 1,
     duration: 10000

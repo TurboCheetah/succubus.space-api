@@ -19,7 +19,9 @@ export const log = {
 export const mongo = {
   host: envParseString('MONGO_HOST'),
   port: envParseInteger('MONGO_PORT'),
-  database: envParseString('MONGO_DATABASE')
+  database: envParseString('MONGO_DATABASE'),
+  user: envParseString('MONGO_USER'),
+  password: envParseString('MONGO_PASSWORD')
 }
 
 export const myanimelist = {

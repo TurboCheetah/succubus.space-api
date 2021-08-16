@@ -13,6 +13,8 @@ export interface SuccEnv {
   MONGO_HOST: string
   MONGO_PORT: IntegerString
   MONGO_DATABASE: string
+  MONGO_USER: string
+  MONGO_PASSWORD: string
 
   MYANIMELIST_CLIENT_ID: string
   MYANIMELIST_USERNAME: string

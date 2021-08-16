@@ -2,9 +2,6 @@ import { scrapeDoujin } from '@utils/util'
 import Queue from 'bull'
 
 export const doujinQueue = new Queue('scraper', {
-  redis: {
-    host: process.env.REDIS_HOST
-  },
   limiter: {
     max: 1,
     duration: 10000
