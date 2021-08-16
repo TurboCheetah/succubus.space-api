@@ -40,5 +40,3 @@ export const sentry = {
   enabled: envParseBoolean('SENTRY_ENABLED'),
   dsn: envParseString('SENTRY_DSN')
 }
-
-export const readonly = envParseBoolean('READONLY')
