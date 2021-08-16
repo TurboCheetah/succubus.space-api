@@ -20,6 +20,7 @@ export interface SuccEnv {
 
   REDIS_HOST: string
   REDIS_PORT: IntegerString
+  REDIS_PASSWORD: string
 
   SENTRY_ENABLED: BooleanString
   SENTRY_DSN: string

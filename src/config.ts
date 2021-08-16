@@ -30,7 +30,8 @@ export const myanimelist = {
 
 export const redis = {
   host: envParseString('REDIS_HOST'),
-  port: envParseInteger('REDIS_PORT')
+  port: envParseInteger('REDIS_PORT'),
+  password: envParseString('REDIS_PASSWORD')
 }
 
 export const sentry = {
