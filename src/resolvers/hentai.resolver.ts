@@ -3,16 +3,18 @@ import { client, ioRedis } from '@/databases/redis'
 import { Hentai } from '@/interfaces/hentai.interface'
 import hentaiModel from '@/models/hentai.model'
 import { hentaiBuilder, scrapeHentai } from '@/utils/util'
-import { Arg, Query, Resolver } from 'type-graphql'
-import { hentaiType } from '@resolvers/types/hentai.type'
+import { Args, Query, Resolver } from 'type-graphql'
+import { hentaiArgs, hentaiType } from '@resolvers/types/hentai.type'
 
 @Resolver()
 export class HentaiResolver {
   private async getData({ id, name, malID }: { id?: number; name?: string; malID?: number }): Promise<Hentai> {
     const query = id || name || malID
 
+    // Redis
     let data = await client.get(`hentai_${query}`)
 
+    // If no data in Redis check Mongo
     if (!data) {
       if (id) {
         data = await hentaiModel.findOne({ id: id })
@@ -22,6 +24,7 @@ export class HentaiResolver {
         data = await hentaiModel.findOne({ malID: malID })
       }
 
+      // If no data in Mongo go to scraper
       if (data && !data.invalid) {
         await client.set(`hentai_${query}`, hentaiBuilder(data), { expire: 3600 })
         return data
@@ -39,7 +42,7 @@ export class HentaiResolver {
   }
 
   @Query(() => hentaiType)
-  public async hentai(@Arg('id') id: number, @Arg('name') name: string, @Arg('malID') malID: number): Promise<Hentai> {
+  public async hentai(@Args() { id, name, malID }: hentaiArgs): Promise<Hentai> {
     return await this.getData({ id, name, malID })
   }
 
@@ -49,23 +52,22 @@ export class HentaiResolver {
   }
 
   @Query(() => [hentaiType])
-  public async brand(@Arg('brand') producer: string) {
-    const data = await hentaiModel.find({ brand: { $regex: producer } })
-
-    return data
-  }
-
-  @Query(() => hentaiType)
-  public async monthlyRank(@Arg('rank') rank: number) {
-    const data = await hentaiModel.findOne({ monthlyRank: rank })
-
-    return data
+  public async allHentai(@Args() { sortBy, order }: hentaiArgs) {
+    return await hentaiModel.find().sort({ [sortBy]: order || 'desc' })
   }
 
   @Query(() => [hentaiType])
-  public async tag(@Arg('tag') tag: string) {
-    const data = await hentaiModel.find({ tags: { $regex: tag } })
+  public async brand(@Args() { brand, sortBy, order }: hentaiArgs) {
+    return await hentaiModel.find({ brand: { $regex: brand } }).sort({ [sortBy]: order || 'desc' })
+  }
 
-    return data
+  @Query(() => hentaiType)
+  public async monthlyRank(@Args() { monthlyRank }: hentaiArgs) {
+    return await hentaiModel.findOne({ monthlyRank })
+  }
+
+  @Query(() => [hentaiType])
+  public async tags(@Args() { tags, sortBy, order }: hentaiArgs) {
+    return await hentaiModel.find({ tags: { $all: tags } }).sort({ [sortBy]: order || 'desc' })
   }
 }

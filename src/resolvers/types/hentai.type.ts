@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from 'type-graphql'
+import { ArgsType, Field, Int, ObjectType } from 'type-graphql'
 
 @ObjectType()
 export class hentaiType {
@@ -76,4 +76,31 @@ export class hentaiType {
 
   @Field()
   invalid: boolean
+}
+
+@ArgsType()
+export class hentaiArgs {
+  @Field(() => Int)
+  id: number
+
+  @Field()
+  name: string
+
+  @Field()
+  brand: string
+
+  @Field()
+  monthlyRank: number
+
+  @Field(() => [String])
+  tags: string[]
+
+  @Field(() => Int)
+  malID: number
+
+  @Field()
+  sortBy: 'views' | 'interests' | 'likes' | 'dislikes' | 'downloads' | 'monthlyRank'
+
+  @Field()
+  order: 'asc' | 'desc'
 }
