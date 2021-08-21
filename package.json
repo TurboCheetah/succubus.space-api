@@ -31,7 +31,7 @@
     "@sentry/node": "^6.11.0",
     "apollo-server-cache-redis": "^3.0.3",
     "apollo-server-express": "^3.1.2",
-    "bull": "^3.28.1",
+    "bull": "^3.29.0",
     "cheerio": "^1.0.0-rc.10",
     "class-validator": "^0.13.1",
     "compression": "^1.7.4",
