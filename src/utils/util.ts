@@ -18,22 +18,22 @@ export const hentaiBuilder = (data: HAnime): Hentai => {
     description: data.description,
     views: data.views,
     interests: data.interests,
-    posterURL: data.poster_url ? data.poster_url : data.posterURL,
-    coverURL: data.cover_url ? data.cover_url : data.coverURL,
+    posterURL: data.poster_url || data.posterURL,
+    coverURL: data.cover_url || data.coverURL,
     brand: data.brand,
-    brandID: data.brand_id ? data.brand_id : data.brandID,
-    durationInMs: data.duration_in_ms ? data.duration_in_ms : data.durationInMs,
-    isCensored: data.is_censored !== undefined ? data.is_censored : data.isCensored,
+    brandID: data.brand_id || data.brandID,
+    durationInMs: data.duration_in_ms || data.durationInMs,
+    isCensored: data.is_censored || data.isCensored,
     rating: data.rating,
     likes: data.likes,
     dislikes: data.dislikes,
     downloads: data.downloads,
-    monthlyRank: data.monthly_rank ? data.monthly_rank : data.monthlyRank,
+    monthlyRank: data.monthly_rank || data.monthlyRank,
     tags: data.tags,
-    releasedAt: data.released_at ? data.released_at : data.releasedAt,
+    releasedAt: data.released_at || data.releasedAt,
     url: data.url,
     streamURL: data.streamURL,
-    malID: data.malID ? data.malID : null
+    malID: data.malID || null
   }
 }
 
@@ -45,8 +45,8 @@ export const doujinBuilder = (data: nDoujin | Doujin): Doujin => {
     length: data.length,
     favorites: data.favorites,
     url: data.url,
-    cover: (data.cover as any).url ? (data.cover as any).url : data.cover,
-    thumbnail: (data.thumbnail as any).url ? (data.thumbnail as any).url : data.thumbnail,
+    cover: (data.cover as any).url || data.cover,
+    thumbnail: (data.thumbnail as any).url || data.thumbnail,
     tags: (data.tags as any).all ? (data.tags as any).all.map((tag: Tag) => tag.name) : data.tags
   }
 }
