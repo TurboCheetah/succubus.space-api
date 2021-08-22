@@ -23,7 +23,7 @@ export const hentaiBuilder = (data: HAnime): Hentai => {
     brand: data.brand,
     brandID: data.brand_id || data.brandID,
     durationInMs: data.duration_in_ms || data.durationInMs,
-    isCensored: data.is_censored || data.isCensored,
+    isCensored: data.is_censored !== undefined ? data.is_censored : data.isCensored,
     rating: data.rating,
     likes: data.likes,
     dislikes: data.dislikes,
@@ -33,7 +33,7 @@ export const hentaiBuilder = (data: HAnime): Hentai => {
     releasedAt: data.released_at || data.releasedAt,
     url: data.url,
     streamURL: data.streamURL,
-    malID: data.malID || null
+    malID: data.malID
   }
 }
 
