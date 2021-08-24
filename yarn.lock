@@ -5563,10 +5563,10 @@ node-fetch@^2.6.1:
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==
 
-node-gyp@^8.1.0:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/node-gyp/-/node-gyp-8.1.0.tgz#81f43283e922d285c886fb0e0f520a7fd431d8c2"
-  integrity sha512-o2elh1qt7YUp3lkMwY3/l4KF3j/A3fI/Qt4NH+CQQgPJdqGE9y7qnP84cjIWN27Q0jJkrSAhCVDg+wBVNBYdBg==
+node-gyp@^8.2.0:
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/node-gyp/-/node-gyp-8.2.0.tgz#ef509ccdf5cef3b4d93df0690b90aa55ff8c7977"
+  integrity sha512-KG8SdcoAnw2d6augGwl1kOayALUrXW/P2uOAm2J2+nmW/HjZo7y+8TDg7LejxbekOOSv3kzhq+NSUYkIDAX8eA==
   dependencies:
     env-paths "^2.2.0"
     glob "^7.1.4"
@@ -5576,7 +5576,7 @@ node-gyp@^8.1.0:
     npmlog "^4.1.2"
     rimraf "^3.0.2"
     semver "^7.3.5"
-    tar "^6.1.0"
+    tar "^6.1.2"
     which "^2.0.2"
 
 node-int64@^0.4.0:
@@ -7017,10 +7017,22 @@ table@^6.0.9:
     string-width "^4.2.0"
     strip-ansi "^6.0.0"
 
-tar@^6.0.2, tar@^6.1.0:
+tar@^6.0.2:
   version "6.1.6"
   resolved "https://registry.yarnpkg.com/tar/-/tar-6.1.6.tgz#c23d797b0a1efe5d479b1490805c5443f3560c5d"
   integrity sha512-oaWyu5dQbHaYcyZCTfyPpC+VmI62/OM2RTUYavTk1MDr1cwW5Boi3baeYQKiZbY2uSQJGr+iMOzb/JFxLrft+g==
+  dependencies:
+    chownr "^2.0.0"
+    fs-minipass "^2.0.0"
+    minipass "^3.0.0"
+    minizlib "^2.1.1"
+    mkdirp "^1.0.3"
+    yallist "^4.0.0"
+
+tar@^6.1.2:
+  version "6.1.10"
+  resolved "https://registry.yarnpkg.com/tar/-/tar-6.1.10.tgz#8a320a74475fba54398fa136cd9883aa8ad11175"
+  integrity sha512-kvvfiVvjGMxeUNB6MyYv5z7vhfFRwbwCXJAeL0/lnbrttBVqcMOnpHUf0X42LrPMR8mMpgapkJMchFH4FSHzNA==
   dependencies:
     chownr "^2.0.0"
     fs-minipass "^2.0.0"
