@@ -7,6 +7,7 @@ import errorMiddleware from '@middlewares/error.middleware'
 import { DoujinResolver } from '@resolvers/doujin.resolver'
 import { HentaiResolver } from '@resolvers/hentai.resolver'
 import { logger, stream } from '@utils/logger'
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core'
 import { BaseRedisCache } from 'apollo-server-cache-redis'
 import { ApolloServer } from 'apollo-server-express'
 import compression from 'compression'
@@ -69,6 +70,8 @@ class App {
     const apollo = new ApolloServer({
       schema: await buildSchema({ resolvers: [HentaiResolver, DoujinResolver], nullableByDefault: true }),
       cache: new BaseRedisCache({ client: ioRedis }),
+      introspection: true,
+      plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
       context: ({ req, res }) => ({ req, res })
     })
     await apollo.start()
