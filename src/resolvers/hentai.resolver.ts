@@ -47,6 +47,11 @@ export class HentaiResolver {
   }
 
   @Query(() => hentaiType)
+  public async latest(): Promise<Hentai> {
+    return await this.getData({ id: +(await ioRedis.get('hentai_newestID')) })
+  }
+
+  @Query(() => hentaiType)
   public async randomHentai(): Promise<Hentai> {
     return await this.getData({ id: Math.floor(Math.random() * +(await ioRedis.get('hentai_newestID'))) + 1 })
   }
