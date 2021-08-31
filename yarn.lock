@@ -1495,22 +1495,15 @@ apollo-reporting-protobuf@^3.0.0:
   dependencies:
     "@apollo/protobufjs" "1.2.2"
 
-apollo-server-cache-redis@^3.0.3:
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/apollo-server-cache-redis/-/apollo-server-cache-redis-3.0.3.tgz#303734c559d70acc9ab6069402ec2b9d1e6559b3"
-  integrity sha512-GWfrHkyYPocSEPSgCAs/spVdMhemt5YQnklRyPctOJKK68AdH04aKEg9WWZvdfvIbtd+3XXxrdO7weNk1hiSSA==
+apollo-server-cache-redis@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/apollo-server-cache-redis/-/apollo-server-cache-redis-3.1.0.tgz#f5b434d6c8387182391eaa63337abafcd610a4af"
+  integrity sha512-7PyvUWKrhenxF1hqwcd3VMP+tAs2b/O/AzQZOpQOdX1m6Yxv7flbO1gZPC49tqUAgNsAOifOdhQqUxXKcs3E+A==
   dependencies:
-    apollo-server-caching "^3.0.1"
+    apollo-server-caching "^3.1.0"
     apollo-server-env "^4.0.3"
     dataloader "^2.0.0"
     ioredis "^4.17.3"
-
-apollo-server-caching@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/apollo-server-caching/-/apollo-server-caching-3.0.1.tgz#bb6e51442266cb3ff05611c24c4e2f2fe8d6949e"
-  integrity sha512-Cd0imFQlU6IKrkm+RNY0MQvKTMBTME+518EuwCaw3TKNUYDpir1vOuIdc4bALXDANilOR73k/UQs/oPxayXfrg==
-  dependencies:
-    lru-cache "^6.0.0"
 
 apollo-server-caching@^3.1.0:
   version "3.1.0"
