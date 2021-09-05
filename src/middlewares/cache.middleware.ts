@@ -8,12 +8,9 @@ const cacheMiddleware = ({ random, latest }: { random?: boolean; latest?: boolea
     try {
       const isHentai = req.path.startsWith('/hentai')
       if (isHentai) {
-        console.log('isHentai', random, latest)
-
         // Fetch data from cache
         if (latest) req.params.query = await ioRedis.get('hentai_newestID')
         if (random) req.params.query = (Math.floor(Math.random() * +(await ioRedis.get('hentai_newestID'))) + 1).toString()
-        console.log('redis', await ioRedis.get('hentai_newestID'))
 
         const data = await client.get(`hentai_${req.params.query}`).catch(err => {
           logger.error(err)
