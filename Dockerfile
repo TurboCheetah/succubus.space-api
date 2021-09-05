@@ -10,18 +10,25 @@ COPY . .
 
 RUN yarn build
 
-FROM node:16-alpine as runner
+
+FROM node:16-alpine AS production-dependencies
 
 WORKDIR /app
 
 COPY --from=builder ./app/package.json ./app/yarn.lock ./
 
-RUN yarn --prod && yarn cache clean
+RUN yarn --prod
 
-EXPOSE 4445
+FROM gcr.io/distroless/nodejs:14 as runner
 
-ENV NODE_ENV production
+WORKDIR /app
+
+COPY --from=production-dependencies ./app/node_modules ./
+
+USER 1000
 
 COPY --from=builder ./app/dist ./dist
+
+EXPOSE 4445
 
 CMD ["yarn", "start:docker"]
