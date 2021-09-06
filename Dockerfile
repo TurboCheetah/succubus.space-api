@@ -33,4 +33,4 @@ ENV NODE_ENV production
 
 EXPOSE 4445
 
-CMD ["node", "dist/server.js"]
+CMD ["dist/server.js"]
