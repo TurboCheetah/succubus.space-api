@@ -1,6 +1,6 @@
 {
   "name": "succubus.space",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "a fast API for fetching hentai data built with Redis and MongoDB",
   "author": "Turbo",
   "license": "ISC",

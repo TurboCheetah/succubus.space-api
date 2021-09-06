@@ -2,6 +2,32 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/TurboCheetah/succubus.space-api/compare/v2.4.0...v2.5.0) (2021-09-06)
+
+
+### Features
+
+* add latest route & resolver ([a1dc150](https://github.com/TurboCheetah/succubus.space-api/commit/a1dc1503ce1eabf61fcb0141b55d4e6b2526285a))
+* add sorting for endpoints that return arrays ([5b3717f](https://github.com/TurboCheetah/succubus.space-api/commit/5b3717fb19ddb5cd1ffbbb9818dcd6597ad7ad40))
+* add vercel config ([39c0416](https://github.com/TurboCheetah/succubus.space-api/commit/39c0416c84a1e155f7e5e2e477a979cdf579d444))
+* change dev script ([f4f03d7](https://github.com/TurboCheetah/succubus.space-api/commit/f4f03d7c019ae77336565947744cbd62f1479447))
+* enable playground and introspection ([dfc39e1](https://github.com/TurboCheetah/succubus.space-api/commit/dfc39e15c74048dcdac3f9cf2ebd44f0ea152cf6))
+* readonly filesystem support ([ec85160](https://github.com/TurboCheetah/succubus.space-api/commit/ec8516041a2967456d99e04407ee1647ceb1a48f))
+* redis password support ([b3b647f](https://github.com/TurboCheetah/succubus.space-api/commit/b3b647fc040d427e7f4bf76873940e03f8f4c1ed))
+* remove log files ([42483b6](https://github.com/TurboCheetah/succubus.space-api/commit/42483b6615dbae7d59b95317c68bfa61ae7c17b3))
+* super slim image ([30eb0e9](https://github.com/TurboCheetah/succubus.space-api/commit/30eb0e90375efa69eec9bd8cac01f2cd07f8f75a))
+* support mongo authentication ([c9f8a16](https://github.com/TurboCheetah/succubus.space-api/commit/c9f8a1632d5a7e484a32ee532d2fc7eb2a725a56))
+* support multiple tags ([ec91296](https://github.com/TurboCheetah/succubus.space-api/commit/ec912968bf52a67369987974638e9aae34d37635))
+* use ArgsType ([c5f9c56](https://github.com/TurboCheetah/succubus.space-api/commit/c5f9c56c18fdb93cab945b0c836768200b87d2fa))
+* use Int instead of ID ([8b50357](https://github.com/TurboCheetah/succubus.space-api/commit/8b503578e33e04975bae707f654f7e62e72e5f0f))
+
+
+### Bug Fixes
+
+* is_censored=false causing null value ([17a86a0](https://github.com/TurboCheetah/succubus.space-api/commit/17a86a04225d61df3f1bdf543c293761010c6d1c))
+* name runner ([cf380b7](https://github.com/TurboCheetah/succubus.space-api/commit/cf380b78127fd5b2f31943f557f3d062611566c3))
+* use new cache middleware ([d275956](https://github.com/TurboCheetah/succubus.space-api/commit/d2759564223eb7db13a668646c93016c85a88ea2))
+
 ## [2.4.0](https://github.com/TurboCheetah/succubus.space-api/compare/v2.3.2...v2.4.0) (2021-08-12)
 
 
