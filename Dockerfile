@@ -10,7 +10,6 @@ COPY . .
 
 RUN yarn build
 
-
 FROM node:16-alpine AS production-dependencies
 
 WORKDIR /app
