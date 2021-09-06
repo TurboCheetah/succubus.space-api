@@ -12,8 +12,7 @@ export const app = {
 }
 
 export const log = {
-  format: envParseString('LOG_FORMAT'),
-  dir: envParseString('LOG_DIR')
+  format: envParseString('LOG_FORMAT')
 }
 
 export const mongo = {
