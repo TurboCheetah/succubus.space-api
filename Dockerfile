@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package.json yarn.lock ./
 
-RUN yarn install && yarn cache clean
+RUN yarn install
 
 COPY . .
 
@@ -29,6 +29,8 @@ USER 1000
 
 COPY --from=builder ./app/dist ./dist
 
+ENV NODE_ENV production
+
 EXPOSE 4445
 
-CMD ["yarn", "start:docker"]
+CMD ["node", "dist/server.js"]
