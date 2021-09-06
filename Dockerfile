@@ -23,9 +23,9 @@ FROM gcr.io/distroless/nodejs:14 as runner
 
 WORKDIR /app
 
-COPY --from=production-dependencies ./app/node_modules ./
-
 USER 1000
+
+COPY --from=production-dependencies ./app ./
 
 COPY --from=builder ./app/dist ./dist
 
