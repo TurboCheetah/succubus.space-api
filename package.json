@@ -39,7 +39,7 @@
     "cross-env": "^7.0.3",
     "dotenv-cra": "^3.0.2",
     "express": "^4.17.1",
-    "graphql": "^15.5.3",
+    "graphql": "^15.6.0",
     "helmet": "^4.6.0",
     "hpp": "^0.2.3",
     "ioredis": "^4.27.9",
