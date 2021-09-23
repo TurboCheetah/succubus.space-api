@@ -3,11 +3,10 @@ import { ioRedis, client } from '@databases/redis'
 import { logger } from '@utils/logger'
 import { nhentai } from '@utils/nhentai'
 
-const cacheMiddleware = ({ random, latest }: { random?: boolean; latest?: boolean } = {}) => {
+const cacheMiddleware = ({ type, random, latest }: { type: 'hentai' | 'doujin'; random?: boolean; latest?: boolean } = { type: 'hentai' }) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const isHentai = req.path.startsWith('/hentai')
-      if (isHentai) {
+      if (type === 'hentai') {
         // Fetch data from cache
         if (latest) req.params.query = await ioRedis.get('hentai_newestID')
         if (random) req.params.query = (Math.floor(Math.random() * +(await ioRedis.get('hentai_newestID'))) + 1).toString()
@@ -20,7 +19,7 @@ const cacheMiddleware = ({ random, latest }: { random?: boolean; latest?: boolea
         if (data) return res.send(data)
       } else {
         // Fetch data from cache
-        if (req.path === '/doujin/random') req.params.query = `${await nhentai.randomDoujinID()}`
+        if (random) req.params.query = `${await nhentai.randomDoujinID()}`
 
         const data = await client.get(`doujin_${req.params.query}`).catch(err => {
           logger.error(err)

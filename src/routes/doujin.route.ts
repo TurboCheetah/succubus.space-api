@@ -20,8 +20,14 @@ class DoujinRoute implements Routes {
     this.router.get(`${this.path}popular`, ratelimitMiddleware(1), this.doujinController.popular)
     this.router.get(`${this.path}length`, ratelimitMiddleware(1), this.doujinController.length)
     this.router.get(`${this.path}age`, ratelimitMiddleware(1), this.doujinController.age)
-    this.router.get(`${this.path}:query`, ratelimitMiddleware(1), cacheMiddleware(), mongoMiddleware, scraperMiddleware)
-    this.router.get(`${this.path}random`, ratelimitMiddleware(1), cacheMiddleware(), mongoMiddleware, scraperMiddleware)
+    this.router.get(`${this.path}:query`, ratelimitMiddleware(1), cacheMiddleware({ type: 'doujin' }), mongoMiddleware, scraperMiddleware)
+    this.router.get(
+      `${this.path}random`,
+      ratelimitMiddleware(1),
+      cacheMiddleware({ type: 'doujin', random: true }),
+      mongoMiddleware,
+      scraperMiddleware
+    )
   }
 }
 
