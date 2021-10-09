@@ -6300,10 +6300,10 @@ redis-errors@^1.0.0, redis-errors@^1.2.0:
   resolved "https://registry.yarnpkg.com/redis-errors/-/redis-errors-1.2.0.tgz#eb62d2adb15e4eaf4610c04afe1529384250abad"
   integrity sha1-62LSrbFeTq9GEMBK/hUpOEJQq60=
 
-redis-json@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/redis-json/-/redis-json-6.0.1.tgz#88f1280d4da7a69bced9098e3d85c7c07b0a9a66"
-  integrity sha512-WWK1SYkfoAq2kqX7OVyzPcfR0dcRtKHXf2w9DbkexwhDzpX09D8QDKN4TMuhZOJgDY8rPw/YKhhMeZq6BCvW+Q==
+redis-json@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/redis-json/-/redis-json-6.0.2.tgz#b8e2dd16f5b902c1d99edac449111126244bcaea"
+  integrity sha512-EXbxNr6dXKFkUW+d6+eV8QI2EztfhPGBKe7i9ZW+NBY15nCDTlGdurrR3HcdhHTuL8HZKBZDM8sGayLIRtb7RA==
 
 redis-parser@^3.0.0:
   version "3.0.0"
