@@ -49,7 +49,7 @@
     "nhentai": "^3.0.0",
     "node-cron": "^3.0.0",
     "rate-limiter-flexible": "^2.3.1",
-    "redis-json": "^6.0.1",
+    "redis-json": "^6.0.2",
     "reflect-metadata": "^0.1.13",
     "ts-jest": "^27.0.5",
     "ts-node": "^10.2.1",
