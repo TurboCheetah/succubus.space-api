@@ -51,7 +51,7 @@
     "rate-limiter-flexible": "^2.3.1",
     "redis-json": "^6.0.2",
     "reflect-metadata": "^0.1.13",
-    "ts-jest": "^27.0.5",
+    "ts-jest": "^27.0.6",
     "ts-node": "^10.3.0",
     "type-graphql": "^1.1.1",
     "typescript": "^4.4.4",
