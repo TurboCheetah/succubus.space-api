@@ -30,6 +30,7 @@ class App {
     this.port = app.port
     this.env = process.env.NODE_ENV
 
+    this.app.set('trust proxy', true)
     this.connectToDatabase()
     this.initializeMiddlewares()
     this.initializeRoutes(routes)
