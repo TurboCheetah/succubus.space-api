@@ -11,7 +11,7 @@ const mongoMiddleware = ({ type }: { type: 'hentai' | 'doujin' } = { type: 'hent
 
       if (type === 'hentai') {
         const data = isNaN(+query)
-          ? await hentaiModel.findOne({ name: { $regex: new RegExp(query, 'i') } })
+          ? await hentaiModel.findOne({ name: { $regex: new RegExp(query.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
           : await hentaiModel.findOne({ id: query })
 
         if (data && !data.invalid) {
@@ -24,7 +24,7 @@ const mongoMiddleware = ({ type }: { type: 'hentai' | 'doujin' } = { type: 'hent
       } else {
         // TODO search by titles in  Mongo
         const data = isNaN(+query)
-          ? await doujinModel.findOne({ 'titles.pretty': { $regex: new RegExp(query, 'i') } })
+          ? await doujinModel.findOne({ 'titles.pretty': { $regex: new RegExp(query.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
           : await doujinModel.findOne({ id: query })
 
         if (data && !data.invalid) {
