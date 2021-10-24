@@ -42,6 +42,7 @@ export const hanime = async (query: string | number): Promise<HAnime> => {
 
   const titles = []
   result.titles.forEach((title: { title: string }) => titles.push(title.title))
+  if (!titles.length) titles.push(result.name)
 
   const tags = []
   result.hentai_tags.forEach((tag: { text: string }) => tags.push(tag.text))
