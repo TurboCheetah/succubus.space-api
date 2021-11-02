@@ -23,7 +23,7 @@ export const malAuth = async (clientID: string, username: string, password: stri
 export const search = async (query: string): Promise<malResult[]> => {
   const auth = await malAuth(myanimelist.clientID, myanimelist.username, myanimelist.password)
 
-  const { data } = await c('https://api.myanimelist.net/v2/anime')
+  const { data } = await c('https://api.myanimelist.net/v2/anime', 'GET')
     .query({
       nsfw: true,
       q: query,

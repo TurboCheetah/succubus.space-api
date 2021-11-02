@@ -36,7 +36,7 @@ export const hanime = async (query: string | number): Promise<HAnime> => {
     // return results as HAnime
     query = results[0].id
   }
-  const { hentai_video: result, videos_manifest: vManifest } = await c(`https://hw.hanime.tv/api/v8/video?id=${query}`).json()
+  const { hentai_video: result, videos_manifest: vManifest } = await c(`https://hw.hanime.tv/api/v8/video?id=${query}`, 'GET').json()
 
   if (!result) return { id: query, invalid: true }
 

@@ -16,13 +16,13 @@ schedule('0 * * * *', async () => {
     const oldNewest = await ioRedis.get('hentai_newestID')
 
     // Get latest HAnime upload ID
-    const $ = await c('https://hanime.tv/')
+    const $ = await c('https://hanime.tv/', 'GET')
       .text()
       .then(html => load(html))
 
-    let newestID = $('.elevation-3.mb-3.hvc.item.card').first().find('a').attr('alt')
+    let newestID = +$('.elevation-3.mb-3.hvc.item.card').first().find('a').attr('alt')
 
-    newestID = (await hanime(newestID)).id
+    newestID = +(await hanime(newestID)).id
 
     await ioRedis.set('hentai_newestID', newestID)
 
