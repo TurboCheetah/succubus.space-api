@@ -48,7 +48,7 @@
     "morgan": "^1.10.0",
     "nhentai": "^3.0.0",
     "node-cron": "^3.0.0",
-    "rate-limiter-flexible": "^2.3.2",
+    "rate-limiter-flexible": "^2.3.3",
     "redis-json": "^6.0.2",
     "reflect-metadata": "^0.1.13",
     "ts-jest": "^27.0.7",
