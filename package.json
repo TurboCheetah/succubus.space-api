@@ -87,7 +87,7 @@
     "lint-staged": "^11.2.6",
     "node-config": "^0.0.2",
     "node-gyp": "^8.4.0",
-    "nodemon": "^2.0.14",
+    "nodemon": "^2.0.15",
     "prettier": "^2.4.1",
     "standard-version": "^9.3.2",
     "supertest": "^6.1.6",
