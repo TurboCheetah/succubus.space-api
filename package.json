@@ -91,7 +91,7 @@
     "prettier": "^2.4.1",
     "standard-version": "^9.3.2",
     "supertest": "^6.1.6",
-    "tsc-alias": "^1.4.0",
+    "tsc-alias": "^1.4.1",
     "tsconfig-paths": "^3.11.0"
   },
   "lint-staged": {
