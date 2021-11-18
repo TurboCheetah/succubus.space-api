@@ -1,4 +1,5 @@
 import { mongo } from '@/config'
+import { ConnectOptions } from 'mongoose'
 
 export const dbConnection = {
   url:
@@ -10,5 +11,5 @@ export const dbConnection = {
     useUnifiedTopology: true,
     useFindAndModify: false,
     useCreateIndex: true
-  }
+  } as ConnectOptions
 }
