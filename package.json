@@ -29,8 +29,8 @@
   "dependencies": {
     "@aero/centra": "1.0.8",
     "@sentry/node": "6.15.0",
-    "apollo-server-cache-redis": "^3.1.0",
-    "apollo-server-express": "^3.5.0",
+    "apollo-server-cache-redis": "3.1.0",
+    "apollo-server-express": "3.5.0",
     "bull": "3.29.3",
     "cheerio": "1.0.0-rc.10",
     "class-validator": "0.13.1",
