@@ -1498,7 +1498,7 @@ apollo-reporting-protobuf@^3.2.0:
   dependencies:
     "@apollo/protobufjs" "1.2.2"
 
-apollo-server-cache-redis@^3.1.0:
+apollo-server-cache-redis@3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/apollo-server-cache-redis/-/apollo-server-cache-redis-3.1.0.tgz#f5b434d6c8387182391eaa63337abafcd610a4af"
   integrity sha512-7PyvUWKrhenxF1hqwcd3VMP+tAs2b/O/AzQZOpQOdX1m6Yxv7flbO1gZPC49tqUAgNsAOifOdhQqUxXKcs3E+A==
@@ -1568,7 +1568,7 @@ apollo-server-errors@^3.3.0:
   resolved "https://registry.yarnpkg.com/apollo-server-errors/-/apollo-server-errors-3.3.0.tgz#ac8ceb1400064312f983d8d70195693fbcf2be3c"
   integrity sha512-9/MNlPZBbEjcCdJcUSbKbVEBT9xZS8GSpX7T/TyzcxHSbsXJszSDSipQNGC+PRKTKAUnv61IONScVyLKEZ5XEQ==
 
-apollo-server-express@^3.5.0:
+apollo-server-express@3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/apollo-server-express/-/apollo-server-express-3.5.0.tgz#4675ba0e84dfd14bdbb47b5d0360928d701ee6b3"
   integrity sha512-eFyBC4ate/g5GrvxM+HrtiElxCEbvG+CiJ0/R1i62L+wzXDhgD6MU0SW17ceS1mpBJgDxURu/VS5hUSNyWMa3Q==
