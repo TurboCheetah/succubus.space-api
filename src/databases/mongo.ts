@@ -8,8 +8,6 @@ export const dbConnection = {
       : `mongodb://${mongo.host}:${mongo.port}/${mongo.database}`,
   options: {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true
+    useUnifiedTopology: true
   } as ConnectOptions
 }
