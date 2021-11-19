@@ -1450,10 +1450,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:16.11.8":
-  version: 16.11.8
-  resolution: "@types/node@npm:16.11.8"
-  checksum: c60418498f0affd0fb69351fd04ec0d8c684d1892d6d548d95fc2288b157c4e2e3e0bd3b6da6802ba128cb34ea2144c08e8683469e08cf58c61d5fb6ab9db4b5
+"@types/node@npm:16.11.9":
+  version: 16.11.9
+  resolution: "@types/node@npm:16.11.9"
+  checksum: baec2e6471ee58fd1e9874e6f47ab95a918a0f46b42424392e4c13e3e07f078f8b72b6b48073b0b14f710ed66c5f1b2e497df43f28151000f11f5f299382cfe2
   languageName: node
   linkType: hard
 
@@ -4965,10 +4965,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql@npm:15.3.0":
-  version: 15.3.0
-  resolution: "graphql@npm:15.3.0"
-  checksum: df18079e3a1ecb875821a71531b74eb1e6099ec1fb8d6e79faff4b43561cb23acbb80c9e05845292e08b6321d507e55dc7d5a60d72cdd093720a6f0f00983d1e
+"graphql@npm:15.7.2":
+  version: 15.7.2
+  resolution: "graphql@npm:15.7.2"
+  checksum: eacb746e2981d0c346ef7365601873963af5356f64ce4d890ab89d213c67bf5bc1ae957b93c3902198798774c842b55dff219f38bad858691765e4debc265750
   languageName: node
   linkType: hard
 
@@ -9153,7 +9153,7 @@ __metadata:
     "@types/jest": 27.0.3
     "@types/mongoose": 5.11.97
     "@types/morgan": 1.9.3
-    "@types/node": 16.11.8
+    "@types/node": 16.11.9
     "@types/node-cron": 3.0.0
     "@types/supertest": 2.0.11
     "@types/winston": 2.4.4
@@ -9176,7 +9176,7 @@ __metadata:
     eslint-plugin-prettier: 4.0.0
     eslint-plugin-promise: 5.1.1
     express: 4.17.1
-    graphql: 15.3.0
+    graphql: 15.7.2
     helmet: 4.6.0
     hpp: 0.2.3
     husky: 7.0.4
