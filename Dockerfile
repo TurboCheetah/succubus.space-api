@@ -1,15 +1,17 @@
 FROM node:16-alpine AS builder
 WORKDIR /app
-COPY package.json yarn.lock ./
-RUN yarn install
+COPY package.json yarn.lock .yarnrc.yml ./
+COPY .yarn/ .yarn/
+RUN yarn install --immutable
 COPY . .
 RUN yarn build
 
 FROM node:16-alpine AS production-dependencies
 
 WORKDIR /app
-COPY --from=builder /app/package.json /app/yarn.lock ./
-RUN yarn --prod
+COPY --from=builder /app/package.json /app/yarn.lock /app/.yarnrc.yml ./
+COPY --from=builder /app/.yarn /app/.yarn/
+RUN yarn workspaces focus --all --production
 
 FROM gcr.io/distroless/nodejs:16 as runner
 WORKDIR /app
