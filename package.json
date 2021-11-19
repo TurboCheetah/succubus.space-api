@@ -99,5 +99,6 @@
       "yarn lint:fix",
       "yarn test --bail --watchAll=false --findRelatedTests"
     ]
-  }
+  },
+  "packageManager": "yarn@3.1.0"
 }
