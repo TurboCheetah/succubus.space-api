@@ -1255,7 +1255,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/eslint@npm:^7":
+"@types/eslint@npm:7.29.0":
   version: 7.29.0
   resolution: "@types/eslint@npm:7.29.0"
   dependencies:
@@ -4195,7 +4195,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^7.12.1":
+"eslint@npm:7.32.0":
   version: 7.32.0
   resolution: "eslint@npm:7.32.0"
   dependencies:
@@ -9185,7 +9185,7 @@ __metadata:
     "@types/cheerio": 0.22.30
     "@types/compression": 1.7.2
     "@types/cors": 2.8.12
-    "@types/eslint": ^7
+    "@types/eslint": 7.29.0
     "@types/express": 4.17.13
     "@types/graphql": 14.5.0
     "@types/helmet": 4.0.0
@@ -9209,7 +9209,7 @@ __metadata:
     cors: 2.8.5
     cross-env: 7.0.3
     dotenv-cra: 3.0.2
-    eslint: ^7.12.1
+    eslint: 7.32.0
     eslint-config-prettier: 8.3.0
     eslint-config-standard: 16.0.3
     eslint-plugin-import: 2.25.3
