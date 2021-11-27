@@ -8171,10 +8171,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"rate-limiter-flexible@npm:2.3.4":
-  version: 2.3.4
-  resolution: "rate-limiter-flexible@npm:2.3.4"
-  checksum: 27402f9171daf3eb20a32b1167bab72267d02dbccb1c584b552c98e302a1037df3a9b2567c4dce104959e99ce82321aacced5401a5f517a75bd9cfcb4dd793c8
+"rate-limiter-flexible@npm:2.3.5":
+  version: 2.3.5
+  resolution: "rate-limiter-flexible@npm:2.3.5"
+  checksum: 8cde838f533254adb997ee4ff482ccfa50e7b8e85831007097f4f9d66088d5b0755b515cb77a7d20ae9a64eae0ae386fd55a7715d68d6a7c29facf4eb7b9d490
   languageName: node
   linkType: hard
 
@@ -9224,7 +9224,7 @@ __metadata:
     node-gyp: 8.4.0
     nodemon: 2.0.15
     prettier: 2.4.1
-    rate-limiter-flexible: 2.3.4
+    rate-limiter-flexible: 2.3.5
     redis-json: 6.0.2
     reflect-metadata: 0.1.13
     standard-version: 9.3.2
