@@ -15,7 +15,7 @@ class HentaiController {
 
   public brand = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const data = await hentaiModel.find({ brand: { $regex: req.params.query } })
+      const data = await hentaiModel.find({ brand: { $regex: new RegExp(req.params.query.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
 
       return res.send(data)
     } catch (error) {
@@ -25,7 +25,7 @@ class HentaiController {
 
   public tag = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const data = await hentaiModel.find({ tags: { $regex: req.params.query } })
+      const data = await hentaiModel.find({ tags: { $regex: new RegExp(req.params.query.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
 
       return res.send(data)
     } catch (error) {

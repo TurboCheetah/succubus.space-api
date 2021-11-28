@@ -19,7 +19,7 @@ export class HentaiResolver {
       if (id) {
         data = await hentaiModel.findOne({ id: id })
       } else if (name) {
-        data = await hentaiModel.findOne({ name: { $regex: name } })
+        data = await hentaiModel.findOne({ name: { $regex: new RegExp(name.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
       } else if (malID) {
         data = await hentaiModel.findOne({ malID: malID })
       }
@@ -63,7 +63,9 @@ export class HentaiResolver {
 
   @Query(() => [hentaiType])
   public async brand(@Args() { brand, sortBy, order }: hentaiArgs) {
-    return await hentaiModel.find({ brand: { $regex: brand } }).sort({ [sortBy]: order || 'desc' })
+    return await hentaiModel
+      .find({ brand: { $regex: new RegExp(brand.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
+      .sort({ [sortBy]: order || 'desc' })
   }
 
   @Query(() => hentaiType)

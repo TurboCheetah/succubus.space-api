@@ -6,7 +6,9 @@ class DoujinController {
     try {
       const order = req.query.order || 'desc'
 
-      const data = await doujinModel.find({ tags: { $regex: req.params.query } }).sort({ length: order })
+      const data = await doujinModel
+        .find({ tags: { $regex: new RegExp(req.params.query.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
+        .sort({ length: order })
 
       return res.send(data)
     } catch (error) {
