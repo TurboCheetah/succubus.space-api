@@ -42,7 +42,7 @@
     "graphql": "15.7.2",
     "helmet": "4.6.0",
     "hpp": "0.2.3",
-    "ioredis": "4.28.0",
+    "ioredis": "4.28.1",
     "jest": "27.3.1",
     "mongoose": "6.0.13",
     "morgan": "1.10.0",
@@ -58,7 +58,7 @@
     "winston": "3.3.3"
   },
   "devDependencies": {
-    "@types/bull": "3.15.5",
+    "@types/bull": "3.15.6",
     "@types/cheerio": "0.22.30",
     "@types/compression": "1.7.2",
     "@types/cors": "2.8.12",
@@ -71,7 +71,7 @@
     "@types/jest": "27.0.3",
     "@types/mongoose": "5.11.97",
     "@types/morgan": "1.9.3",
-    "@types/node": "16.11.9",
+    "@types/node": "16.11.10",
     "@types/node-cron": "3.0.0",
     "@types/supertest": "2.0.11",
     "@types/winston": "2.4.4",
@@ -85,11 +85,11 @@
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-promise": "5.1.1",
     "husky": "7.0.4",
-    "lint-staged": "12.0.3",
+    "lint-staged": "12.1.2",
     "node-config": "0.0.2",
-    "node-gyp": "8.4.0",
+    "node-gyp": "8.4.1",
     "nodemon": "2.0.15",
-    "prettier": "2.4.1",
+    "prettier": "2.5.0",
     "standard-version": "9.3.2",
     "supertest": "6.1.6",
     "tsc-alias": "1.4.1",
@@ -101,5 +101,5 @@
       "yarn test --bail --watchAll=false --findRelatedTests"
     ]
   },
-  "packageManager": "yarn@3.1.0"
+  "packageManager": "yarn@3.1.1"
 }
