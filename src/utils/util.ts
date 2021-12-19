@@ -8,6 +8,8 @@ import { mal } from '@utils/mal'
 import { nhentai } from '@utils/nhentai'
 import { Doujin as nDoujin, SortMethods, Tag } from 'nhentai'
 import { logger } from './logger'
+import { sentry } from '@/config'
+import { captureException } from '@sentry/node'
 
 export const hentaiBuilder = (data: HAnime): Hentai => {
   return {
@@ -109,5 +111,6 @@ export const scrapeDoujin = async (query: string): Promise<Doujin> => {
     return data
   } catch (err) {
     logger.error(err)
+    if (process.env.NODE_ENV === 'production' && sentry.enabled) captureException(err)
   }
 }

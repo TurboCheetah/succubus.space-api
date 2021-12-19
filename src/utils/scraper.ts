@@ -7,6 +7,8 @@ import { logger } from '@utils/logger'
 import { nhentai } from '@utils/nhentai'
 import { hentaiQueue, processQueue as processHentai } from '@queues/hentai.queue'
 import { doujinQueue, processQueue as processDoujin } from '@queues/doujin.queue'
+import { sentry } from '@/config'
+import { captureException } from '@sentry/node'
 
 processHentai()
 processDoujin()
@@ -42,6 +44,7 @@ schedule('0 * * * *', async () => {
     })
   } catch (err) {
     logger.error(err)
+    if (process.env.NODE_ENV === 'production' && sentry.enabled) captureException(err)
   }
 })
 
@@ -77,5 +80,6 @@ schedule('0 * * * *', async () => {
     })
   } catch (err) {
     logger.error(err)
+    if (process.env.NODE_ENV === 'production' && sentry.enabled) captureException(err)
   }
 })

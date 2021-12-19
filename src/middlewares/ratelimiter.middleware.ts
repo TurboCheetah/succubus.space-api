@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from 'express'
 import { ioRedis } from '@databases/redis'
 import RateLimiter from 'rate-limiter-flexible'
 import { logger } from '@/utils/logger'
+import { sentry } from '@/config'
+import { captureException } from '@sentry/node'
 
 const rateLimiter = new RateLimiter.RateLimiterRedis({
   storeClient: ioRedis,
@@ -26,6 +28,7 @@ const ratelimitMiddleware = (points: number) => {
       .catch(limiter => {
         if (limiter instanceof Error) {
           logger.error(limiter)
+          if (process.env.NODE_ENV === 'production' && sentry.enabled) captureException(limiter)
           next(limiter)
         } else {
           res.set({

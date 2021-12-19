@@ -1,7 +1,8 @@
-import { myanimelist } from '@/config'
+import { myanimelist, sentry } from '@/config'
 import { malResult } from '@interfaces/mal.interface'
 import { logger } from '@utils/logger'
 import c from '@aero/centra'
+import { captureException } from '@sentry/node'
 
 export const malAuth = async (clientID: string, username: string, password: string) => {
   // eslint-disable-next-line camelcase
@@ -71,5 +72,6 @@ export const mal = async (title: string): Promise<malResult | undefined> => {
     return undefined
   } catch (err) {
     logger.error(err)
+    if (process.env.NODE_ENV === 'production' && sentry.enabled) captureException(err)
   }
 }

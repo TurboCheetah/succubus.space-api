@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from 'express'
 import { ioRedis, client } from '@databases/redis'
 import { logger } from '@utils/logger'
 import { nhentai } from '@utils/nhentai'
+import { sentry } from '@/config'
+import { captureException } from '@sentry/node'
 
 const cacheMiddleware = ({ type, random, latest }: { type: 'hentai' | 'doujin'; random?: boolean; latest?: boolean } = { type: 'hentai' }) => {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -13,6 +15,7 @@ const cacheMiddleware = ({ type, random, latest }: { type: 'hentai' | 'doujin'; 
 
         const data = await client.get(`hentai_${req.params.query}`).catch(err => {
           logger.error(err)
+          if (process.env.NODE_ENV === 'production' && sentry.enabled) captureException(err)
           next()
         })
 
@@ -23,6 +26,7 @@ const cacheMiddleware = ({ type, random, latest }: { type: 'hentai' | 'doujin'; 
 
         const data = await client.get(`doujin_${req.params.query}`).catch(err => {
           logger.error(err)
+          if (process.env.NODE_ENV === 'production' && sentry.enabled) captureException(err)
           next()
         })
 
