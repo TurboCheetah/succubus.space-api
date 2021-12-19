@@ -1,5 +1,5 @@
 import c from '@aero/centra'
-import { hanime } from '@utils/hanime'
+import { scrapeHentai } from '@utils/util'
 import { ioRedis, client } from '@databases/redis'
 import { load } from 'cheerio'
 import { schedule } from 'node-cron'
@@ -20,9 +20,9 @@ schedule('0 * * * *', async () => {
       .text()
       .then(html => load(html))
 
-    let newestID = +$('.elevation-3.mb-3.hvc.item.card').first().find('a').attr('alt')
+    const newestQuery = $('.elevation-3.mb-3.hvc.item.card').first().find('a').attr('alt')
 
-    newestID = +(await hanime(newestID)).id
+    const newestID = +(await scrapeHentai(newestQuery)).id
 
     await ioRedis.set('hentai_newestID', newestID)
 
