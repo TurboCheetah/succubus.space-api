@@ -24,6 +24,17 @@ export interface Hentai {
         text?: string
       }[]
     | string[]
+  franchise?: {
+    id?: number
+    name?: string
+    slug?: string
+    title?: string
+  }
+  franchiseVideos?: {
+    id?: number
+    name?: string
+    slug?: string
+  }[]
   releasedAt?: Date
   url?: string
   streamURL?: string

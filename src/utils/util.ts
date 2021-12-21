@@ -32,6 +32,19 @@ export const hentaiBuilder = (data: HAnime): Hentai => {
     downloads: data.downloads,
     monthlyRank: data.monthly_rank || data.monthlyRank,
     tags: data.tags,
+    franchise: {
+      id: data.franchise.id,
+      name: data.franchise.name,
+      slug: data.franchise.slug,
+      title: data.franchise.title
+    },
+    franchiseVideos: data.franchiseVideos.map(franchiseVideo => {
+      return {
+        id: franchiseVideo.id,
+        name: franchiseVideo.name,
+        slug: franchiseVideo.slug
+      }
+    }),
     releasedAt: data.released_at || data.releasedAt,
     url: data.url,
     streamURL: data.streamURL,

@@ -1,6 +1,18 @@
 import { model, Schema, Document } from 'mongoose'
 import { Hentai } from '@interfaces/hentai.interface'
 
+const franchiseSchema: Schema = new Schema({
+  id: Number,
+  name: String,
+  slug: String
+})
+
+const franchiseVideoSchema: Schema = new Schema({
+  id: Number,
+  name: String,
+  slug: String
+})
+
 const hentaiSchema: Schema = new Schema(
   {
     id: {
@@ -9,101 +21,55 @@ const hentaiSchema: Schema = new Schema(
       unique: true
     },
 
-    name: {
-      type: String
-    },
+    name: String,
 
-    titles: {
-      type: [String]
-    },
+    titles: [String],
 
-    slug: {
-      type: String
-    },
+    slug: String,
 
-    description: {
-      type: String
-    },
+    description: String,
 
-    views: {
-      type: Number
-    },
+    views: Number,
 
-    interests: {
-      type: Number
-    },
+    interests: Number,
 
-    posterURL: {
-      type: String
-    },
+    posterURL: String,
 
-    coverURL: {
-      type: String
-    },
+    coverURL: String,
 
-    brand: {
-      type: String
-    },
+    brand: String,
 
-    brandID: {
-      type: String
-    },
+    brandID: String,
 
-    durationInMs: {
-      type: Number
-    },
+    durationInMs: Number,
 
-    isCensored: {
-      type: Boolean
-    },
+    isCensored: Boolean,
 
-    rating: {
-      type: String
-    },
+    rating: String,
 
-    likes: {
-      type: Number
-    },
+    likes: Number,
 
-    dislikes: {
-      type: Number
-    },
+    dislikes: Number,
 
-    monthlyRank: {
-      type: Number
-    },
+    monthlyRank: Number,
 
-    tags: {
-      type: [String]
-    },
+    tags: [String],
 
-    createdAt: {
-      type: String
-    },
+    franchise: franchiseSchema,
 
-    releasedAt: {
-      type: String
-    },
+    franchiseVideos: [franchiseVideoSchema],
 
-    url: {
-      type: String
-    },
+    createdAt: String,
 
-    streamURL: {
-      type: String
-    },
+    releasedAt: String,
+    url: String,
+    streamURL: String,
 
-    malURL: {
-      type: String
-    },
+    malURL: String,
 
-    malID: {
-      type: Number
-    },
+    malID: Number,
 
-    invalid: {
-      type: Boolean
-    }
+    invalid: Boolean
   },
   { timestamps: true }
 )
