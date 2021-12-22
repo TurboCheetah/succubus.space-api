@@ -3,7 +3,7 @@ import { client, ioRedis } from '@/databases/redis'
 import { Hentai } from '@/interfaces/hentai.interface'
 import hentaiModel from '@/models/hentai.model'
 import { hentaiBuilder, scrapeHentai } from '@/utils/util'
-import { Args, Query, Resolver } from 'type-graphql'
+import { Arg, Args, Query, Resolver } from 'type-graphql'
 import { hentaiArgs, hentaiType } from '@resolvers/types/hentai.type'
 
 @Resolver()
@@ -49,6 +49,12 @@ export class HentaiResolver {
   @Query(() => hentaiType)
   public async latest(): Promise<Hentai> {
     return await this.getData({ id: +(await ioRedis.get('hentai_newestID')) })
+  }
+
+  @Query(() => [hentaiType])
+  public async recent(@Arg('amount') amount: number): Promise<Hentai[]> {
+    const data = await hentaiModel.find().sort({ _id: -1 }).limit(amount)
+    return data.reverse()
   }
 
   @Query(() => hentaiType)
