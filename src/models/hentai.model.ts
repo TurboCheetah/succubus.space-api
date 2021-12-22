@@ -4,7 +4,8 @@ import { Hentai } from '@interfaces/hentai.interface'
 const franchiseSchema: Schema = new Schema({
   id: Number,
   name: String,
-  slug: String
+  slug: String,
+  title: String
 })
 
 const franchiseVideoSchema: Schema = new Schema({
