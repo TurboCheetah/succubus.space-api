@@ -56,7 +56,7 @@ export const hanime = async (query: string | number): Promise<HAnime> => {
   franchiseVideos.forEach((video: { id: number; name: string; slug: string }) => fVideos.push({ id: video.id, name: video.name, slug: video.slug }))
 
   const servers = {}
-  vManifest.servers[0].streams.forEach((server: { height: string; url: string }) => (servers[`${server.height}p`] = server.url))
+  vManifest.servers[0].streams.forEach((server: { height: string; url: string }) => (servers[`_${server.height}p`] = server.url))
 
   result.description = result.description.replace(/(<([^>]+)>)/gi, '')
   result.rating = result.rating ? result.rating : 'Unrated'

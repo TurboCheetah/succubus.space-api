@@ -3,16 +3,16 @@ import { ArgsType, Field, Int, ObjectType } from 'type-graphql'
 @ObjectType()
 export class streamURL {
   @Field()
-  '360p': string
+  _360p: string
 
   @Field()
-  '480p': string
+  _480p: string
 
   @Field()
-  '720p': string
+  _720p: string
 
   @Field()
-  '1080p': string
+  _1080p: string
 }
 
 @ObjectType()

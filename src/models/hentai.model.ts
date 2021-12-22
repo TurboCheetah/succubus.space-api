@@ -2,10 +2,10 @@ import { model, Schema, Document } from 'mongoose'
 import { Hentai } from '@interfaces/hentai.interface'
 
 const streamSchema: Schema = new Schema({
-  '360p': String,
-  '480p': String,
-  '720p': String,
-  '1080p': String
+  _360p: String,
+  _480p: String,
+  _720p: String,
+  _1080p: String
 })
 
 const franchiseSchema: Schema = new Schema({
