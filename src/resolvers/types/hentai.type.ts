@@ -120,6 +120,9 @@ export class hentaiArgs {
   name: string
 
   @Field()
+  slug: string
+
+  @Field()
   brand: string
 
   @Field()
