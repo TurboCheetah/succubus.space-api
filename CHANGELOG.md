@@ -2,6 +2,54 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.6.0](https://github.com/TurboCheetah/succubus.space-api/compare/v2.5.0...v2.6.0) (2021-12-22)
+
+
+### Features
+
+* add franchise information to entries ([9cb76da](https://github.com/TurboCheetah/succubus.space-api/commit/9cb76dae4bb3f2547cd59503e888d2a87455e24e))
+* add franchise resolver ([487b71e](https://github.com/TurboCheetah/succubus.space-api/commit/487b71eb054dae83946c027834b6e959f4050756))
+* add graphql franchise queries ([04a595a](https://github.com/TurboCheetah/succubus.space-api/commit/04a595a031a080812e9069a935ce5ad52d7853cf))
+* add popularHentai resolver ([f299271](https://github.com/TurboCheetah/succubus.space-api/commit/f299271ff5a116cbf94a6ac3213be39c239661a9))
+* add recent resolver ([a6e6f10](https://github.com/TurboCheetah/succubus.space-api/commit/a6e6f1091ad3cf68baf6416f3d080e3e1251febf))
+* add sentry logging ([dcc2001](https://github.com/TurboCheetah/succubus.space-api/commit/dcc20015db99c8841c64996e673374e8ed43451f))
+* add type option to middlewares ([21c7665](https://github.com/TurboCheetah/succubus.space-api/commit/21c76658dfa8d14aaeaf267f73034893ccaccf09))
+* add type option to middlewares ([347d40d](https://github.com/TurboCheetah/succubus.space-api/commit/347d40d3fd425eb6ce8295a1bbfece958b088d78))
+* streamURL is now an object with each quality ([371c2c2](https://github.com/TurboCheetah/succubus.space-api/commit/371c2c2bec6d274d8969fceae2d1e1b0aea035b9))
+* streamURL is now an object with each quality ([aa842bf](https://github.com/TurboCheetah/succubus.space-api/commit/aa842bff145f5fc9bd644abcd1d2567a357d29d2))
+* trust reverse proxies ([7780a25](https://github.com/TurboCheetah/succubus.space-api/commit/7780a25522e6a4a39d4e3bf623853e2ab8919124))
+* use node v16 ([87e37a2](https://github.com/TurboCheetah/succubus.space-api/commit/87e37a2ebecf962e8391f4b6dbdd8195a1e485a9))
+* use yarn v2 ([bd93e46](https://github.com/TurboCheetah/succubus.space-api/commit/bd93e46685ad7ad8b6146eb6f7b90a90703d88c2))
+
+
+### Bug Fixes
+
+* `hw.hanime.tv` not resolving ([44b6a2e](https://github.com/TurboCheetah/succubus.space-api/commit/44b6a2e63464730cd6c20c92fd63aa5277ebdc10))
+* add class-validator package ([0df92f1](https://github.com/TurboCheetah/succubus.space-api/commit/0df92f19fb712da0a453d4a5f483be1ef644d355))
+* cleanup dependencies ([298d720](https://github.com/TurboCheetah/succubus.space-api/commit/298d720eb697781ab78028878c3bda953b5e9fdd))
+* **deps:** pin dependencies ([f9334cf](https://github.com/TurboCheetah/succubus.space-api/commit/f9334cf327e43c8551e42c58256292ed7e90fbe3))
+* **deps:** pin dependencies ([e4e2fbc](https://github.com/TurboCheetah/succubus.space-api/commit/e4e2fbcda13c0a0e94f92ae523d072b75c7b8be1))
+* **deps:** pin dependency class-validator to 0.13.2 ([16cf618](https://github.com/TurboCheetah/succubus.space-api/commit/16cf618f47b265f2686ddc55cb19d4f0cc175d94))
+* **deps:** update all non-major dependencies ([dc772d9](https://github.com/TurboCheetah/succubus.space-api/commit/dc772d9d38bbc6519f4d8d4fcadba96b2231e4f9))
+* **deps:** update all non-major dependencies ([3f712c5](https://github.com/TurboCheetah/succubus.space-api/commit/3f712c53de2ab9ad6232ff110dfea5759da697bf))
+* **deps:** update all non-major dependencies ([ad3667a](https://github.com/TurboCheetah/succubus.space-api/commit/ad3667a0e59686bc473b0db38cf5cd060fd9a3e9))
+* **deps:** update dependency bull to v4 ([c9ca4ce](https://github.com/TurboCheetah/succubus.space-api/commit/c9ca4cef12de05c134463faffa4de36eea656120))
+* **deps:** update dependency graphql to v15.7.2 ([89e9b9f](https://github.com/TurboCheetah/succubus.space-api/commit/89e9b9fa8f930a8b559c554a8f0ae788a011fc1b))
+* **deps:** update dependency graphql to v16 ([249cf07](https://github.com/TurboCheetah/succubus.space-api/commit/249cf0718eb0765ab2c158fd2f46433e68506ebb))
+* **deps:** update dependency mongoose to v6 ([7ab9f95](https://github.com/TurboCheetah/succubus.space-api/commit/7ab9f95b08530ed5936c205e161650d8a902ec57))
+* **deps:** update dependency rate-limiter-flexible to v2.3.5 ([20697be](https://github.com/TurboCheetah/succubus.space-api/commit/20697beb1a7e6325550afa0c5779a1a7b185e8ef))
+* downgrade deps to required versions ([3354b9e](https://github.com/TurboCheetah/succubus.space-api/commit/3354b9e7e8f1484d97d75548ee54d2413d8d51f9))
+* empy titles array ([56ae7d7](https://github.com/TurboCheetah/succubus.space-api/commit/56ae7d714c97a00b167bcdee283e6472e47ab4b0))
+* franchise slug regex ([ee63064](https://github.com/TurboCheetah/succubus.space-api/commit/ee63064cc178ca4aae1be2638a20e94544a12d4a))
+* include franchise title ([2f44426](https://github.com/TurboCheetah/succubus.space-api/commit/2f444268bfdcdb48c103883d89770b2e4cee3c8d))
+* remove deprecated mongoose options ([9f0d2ad](https://github.com/TurboCheetah/succubus.space-api/commit/9f0d2adc0f432d93ee8f51d9ebdc95ad1d52cdc8))
+* revert graphql version ([4cc6b53](https://github.com/TurboCheetah/succubus.space-api/commit/4cc6b539dc653d0351857e4c120a0358f8391f91))
+* sanitize regex ([2147c7d](https://github.com/TurboCheetah/succubus.space-api/commit/2147c7d71019a9483457b51100893e857dc15bbb))
+* scraping function ([f419d6a](https://github.com/TurboCheetah/succubus.space-api/commit/f419d6a8526167b9595b9a52597d589b49db5aae))
+* specify options `ConnectionOptions` type ([d301eab](https://github.com/TurboCheetah/succubus.space-api/commit/d301eab507511d101cb04c8aabf245750d6504f3))
+* typings ([ee6174c](https://github.com/TurboCheetah/succubus.space-api/commit/ee6174c8a6a2b2fca6977117b6b73fb9b6864f1d))
+* update Dockerfile to support Yarn v2 ([8274f28](https://github.com/TurboCheetah/succubus.space-api/commit/8274f28c366b89c904e7e33c90a99f8fa15d37da))
+
 ## [2.5.0](https://github.com/TurboCheetah/succubus.space-api/compare/v2.4.0...v2.5.0) (2021-09-06)
 
 
