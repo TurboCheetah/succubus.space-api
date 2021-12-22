@@ -80,6 +80,12 @@ export class HentaiResolver {
   }
 
   @Query(() => [hentaiType])
+  public async popularHentai(@Arg('amount') amount: number) {
+    const data = await hentaiModel.find().sort({ monthlyRank: 1 }).limit(amount)
+    return data.reverse()
+  }
+
+  @Query(() => [hentaiType])
   public async tags(@Args() { tags, sortBy, order }: hentaiArgs) {
     return await hentaiModel.find({ tags: { $all: tags } }).sort({ [sortBy]: order || 'desc' })
   }
