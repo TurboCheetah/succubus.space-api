@@ -81,9 +81,8 @@ export class HentaiResolver {
   @Query(() => [hentaiType])
   public async series(@Args() { id, name, slug }: hentaiArgs) {
     if (slug) {
-      console.log(slug.replace(/(?![-])[#-.]|[[-^]|[!|?|{}]/g, '').replace(' ', '-'))
       return await hentaiModel.find({
-        'franchise.slug': { $regex: new RegExp(slug.replace(/(?![-])[#-.]|[[-^]|[!|?|{}]/g, '').replace(' ', '-'), 'i') }
+        'franchise.slug': { $regex: new RegExp(slug.replace(/(?![-])[#-.]|[[-^]|[!|?|{}]/g, '').replace(/\s/g, '-'), 'i') }
       })
     } else if (name) {
       return await hentaiModel.find({ 'franchise.name': { $regex: new RegExp(name.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
