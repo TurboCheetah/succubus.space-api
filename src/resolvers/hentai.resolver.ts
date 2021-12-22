@@ -53,8 +53,7 @@ export class HentaiResolver {
 
   @Query(() => [hentaiType])
   public async recent(@Arg('amount') amount: number): Promise<Hentai[]> {
-    const data = await hentaiModel.find().sort({ _id: -1 }).limit(amount)
-    return data.reverse()
+    return await hentaiModel.find().sort({ _id: -1 }).limit(amount)
   }
 
   @Query(() => hentaiType)
@@ -81,8 +80,7 @@ export class HentaiResolver {
 
   @Query(() => [hentaiType])
   public async popularHentai(@Arg('amount') amount: number) {
-    const data = await hentaiModel.find().sort({ monthlyRank: 1 }).limit(amount)
-    return data.reverse()
+    return await hentaiModel.find().sort({ monthlyRank: 1 }).limit(amount)
   }
 
   @Query(() => [hentaiType])
