@@ -1,6 +1,21 @@
 import { ArgsType, Field, Int, ObjectType } from 'type-graphql'
 
 @ObjectType()
+export class streamURL {
+  @Field()
+  '360p': string
+
+  @Field()
+  '480p': string
+
+  @Field()
+  '720p': string
+
+  @Field()
+  '1080p': string
+}
+
+@ObjectType()
 export class hentaiFranchise {
   @Field()
   id: number
@@ -96,7 +111,7 @@ export class hentaiType {
   url: string
 
   @Field()
-  streamURL: string
+  streamURL: streamURL
 
   @Field()
   malURL: string
