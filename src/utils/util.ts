@@ -47,7 +47,12 @@ export const hentaiBuilder = (data: HAnime): Hentai => {
     }),
     releasedAt: data.released_at || data.releasedAt,
     url: data.url,
-    streamURL: data.streamURL,
+    streamURL: {
+      '360p': data.streamURL['360p'],
+      '480p': data.streamURL['480p'],
+      '720p': data.streamURL['720p'],
+      '1080p': data.streamURL['1080p']
+    },
     malID: data.malID
   }
 }

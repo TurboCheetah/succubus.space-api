@@ -55,11 +55,14 @@ export const hanime = async (query: string | number): Promise<HAnime> => {
   const fVideos = []
   franchiseVideos.forEach((video: { id: number; name: string; slug: string }) => fVideos.push({ id: video.id, name: video.name, slug: video.slug }))
 
+  const servers = {}
+  vManifest.servers[0].streams.forEach((server: { height: string; url: string }) => (servers[`${server.height}p`] = server.url))
+
   result.description = result.description.replace(/(<([^>]+)>)/gi, '')
   result.rating = result.rating ? result.rating : 'Unrated'
   result.url = `https://hanime.tv/videos/hentai/${result.slug}`
   result.released_at = getDate(result.released_at_unix)
-  result.streamURL = vManifest ? vManifest.servers[0].streams[1].url : null
+  result.streamURL = servers
   result.titles = titles
   result.tags = tags
   delete result.hentai_tags

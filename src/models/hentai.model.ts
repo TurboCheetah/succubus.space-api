@@ -1,6 +1,13 @@
 import { model, Schema, Document } from 'mongoose'
 import { Hentai } from '@interfaces/hentai.interface'
 
+const streamSchema: Schema = new Schema({
+  '360p': String,
+  '480p': String,
+  '720p': String,
+  '1080p': String
+})
+
 const franchiseSchema: Schema = new Schema({
   id: Number,
   name: String,
@@ -63,8 +70,10 @@ const hentaiSchema: Schema = new Schema(
     createdAt: String,
 
     releasedAt: String,
+
     url: String,
-    streamURL: String,
+
+    streamURL: streamSchema,
 
     malURL: String,
 

@@ -37,7 +37,12 @@ export interface Hentai {
   }[]
   releasedAt?: Date
   url?: string
-  streamURL?: string
+  streamURL?: {
+    '480p'?: string
+    '360p'?: string
+    '720p'?: string
+    '1080p'?: string
+  }
   malURL?: string
   malID?: number
   updatedAt?: Date
