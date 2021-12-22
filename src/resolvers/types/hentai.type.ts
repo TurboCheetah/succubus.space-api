@@ -1,6 +1,33 @@
 import { ArgsType, Field, Int, ObjectType } from 'type-graphql'
 
 @ObjectType()
+export class hentaiFranchise {
+  @Field()
+  id: number
+
+  @Field()
+  name: string
+
+  @Field()
+  slug: string
+
+  @Field()
+  title: string
+}
+
+@ObjectType()
+export class hentaiFranchiseVideo {
+  @Field()
+  id: number
+
+  @Field()
+  name: string
+
+  @Field()
+  slug: string
+}
+
+@ObjectType()
 export class hentaiType {
   @Field(() => Int)
   id?: number
@@ -55,6 +82,12 @@ export class hentaiType {
 
   @Field(() => [String])
   tags?: string[]
+
+  @Field(() => hentaiFranchise)
+  franchise: hentaiFranchise
+
+  @Field(() => [hentaiFranchiseVideo])
+  franchiseVideos: hentaiFranchiseVideo[]
 
   @Field()
   releasedAt?: string
