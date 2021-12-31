@@ -1,6 +1,8 @@
 import doujinModel from '@models/doujin.model'
 import { NextFunction, Request, Response } from 'express'
+import { autoInjectable } from 'tsyringe'
 
+@autoInjectable()
 class DoujinController {
   public tag = async (req: Request, res: Response, next: NextFunction) => {
     try {

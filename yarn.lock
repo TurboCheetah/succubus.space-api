@@ -9415,6 +9415,7 @@ __metadata:
     ts-node: 10.4.0
     tsc-alias: 1.5.0
     tsconfig-paths: 3.12.0
+    tsyringe: ^4.6.0
     type-graphql: 1.1.1
     typescript: 4.5.4
     winston: 3.3.3
@@ -9847,6 +9848,15 @@ __metadata:
   peerDependencies:
     typescript: ">=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta"
   checksum: 1843f4c1b2e0f975e08c4c21caa4af4f7f65a12ac1b81b3b8489366826259323feb3fc7a243123453d2d1a02314205a7634e048d4a8009921da19f99755cdc48
+  languageName: node
+  linkType: hard
+
+"tsyringe@npm:^4.6.0":
+  version: 4.6.0
+  resolution: "tsyringe@npm:4.6.0"
+  dependencies:
+    tslib: ^1.9.3
+  checksum: e7c68e032dc07d6271a3709847063486aaa6186306698cbbb62d990320b21328a0b19b34f4c381c71c94aab6e0693a1a60cf2baafd20124a07f4a3d607c29e15
   languageName: node
   linkType: hard
 

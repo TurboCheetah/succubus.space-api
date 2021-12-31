@@ -1,7 +1,9 @@
 import hentaiModel from '@/models/hentai.model'
 import { hanime } from '@utils/hanime'
 import { NextFunction, Request, Response } from 'express'
+import { autoInjectable } from 'tsyringe'
 
+@autoInjectable()
 class HentaiController {
   public hanime = async (req: Request, res: Response, next: NextFunction) => {
     try {
