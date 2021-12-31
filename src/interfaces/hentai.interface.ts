@@ -38,8 +38,8 @@ export interface Hentai {
   releasedAt?: Date
   url?: string
   streamURL?: {
-    _480p?: string
     _360p?: string
+    _480p?: string
     _720p?: string
     _1080p?: string
   }
