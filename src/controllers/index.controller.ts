@@ -10,14 +10,6 @@ class IndexController {
       next(error)
     }
   }
-
-  public testInjectable = (req: Request, res: Response, next: NextFunction) => {
-    try {
-      res.send({ message: 'injectable path' })
-    } catch (error) {
-      next(error)
-    }
-  }
 }
 
 export default IndexController
