@@ -9415,7 +9415,7 @@ __metadata:
     ts-node: 10.4.0
     tsc-alias: 1.5.0
     tsconfig-paths: 3.12.0
-    tsyringe: ^4.6.0
+    tsyringe: 4.6.0
     type-graphql: 1.1.1
     typescript: 4.5.4
     winston: 3.3.3
@@ -9851,7 +9851,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsyringe@npm:^4.6.0":
+"tsyringe@npm:4.6.0":
   version: 4.6.0
   resolution: "tsyringe@npm:4.6.0"
   dependencies:
