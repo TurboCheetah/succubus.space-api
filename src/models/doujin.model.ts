@@ -2,7 +2,7 @@ import { model, Schema, Document } from 'mongoose'
 import { Doujin } from 'nhentai'
 
 const doujinImageSchema: Schema = new Schema({
-  extention: { type: String },
+  extension: { type: String },
   height: { type: Number },
   width: { type: Number },
   url: { type: String },

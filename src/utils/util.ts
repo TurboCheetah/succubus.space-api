@@ -101,7 +101,7 @@ export const scrapeDoujin = async (query: string): Promise<Doujin> => {
       return data
     }
 
-    await client.set(`doujin_${data.id}`, data, { expire: 3600 })
+    // await client.set(`doujin_${data.id}`, data, { expire: 3600 })
 
     if (await doujinModel.findOne({ id: data.id })) {
       await doujinModel.updateOne({ id: data.id }, data)

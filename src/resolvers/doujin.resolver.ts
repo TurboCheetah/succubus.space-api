@@ -28,20 +28,14 @@ export class DoujinResolver {
         })
       }
 
-      if (data !== null && !data.invalid) {
-        await client.set(`doujin_${query}`, data, { expire: 3600 })
-        return data
-      } else if (data !== null && data.invalid) {
-        data = { id: query, invalid: true }
-        await client.set(`doujin_${query}`, data, { expire: 86400 })
-        return data
-      }
+      // if there is data in MongoDB save it to Redis
+      if (data) await client.set(`doujin_${query}`, data.toJSON(), { expire: 3600 })
     }
 
-    // if no data in MongoDB scrape data from nhentai
+    // if there isn't data in MongoDB scrape it from nhentai
     if (!data) data = await scrapeDoujin(`${query}`)
 
-    // if no data from nHentai return null
+    // if Redis returns invalid = true, return null
     if (data !== null && data.invalid) data = null
 
     return data
