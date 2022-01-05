@@ -6,7 +6,7 @@ import doujinModel from '@models/doujin.model'
 import { hanime } from '@utils/hanime'
 import { mal } from '@utils/mal'
 import { nhentai } from '@utils/nhentai'
-import { Doujin as nDoujin, SortMethods, Tag } from 'nhentai'
+import { SortMethods } from 'nhentai'
 import { logger } from './logger'
 import { sentry } from '@/config'
 import { captureException } from '@sentry/node'
@@ -57,20 +57,6 @@ export const hentaiBuilder = (data: HAnime): Hentai => {
   }
 }
 
-export const doujinBuilder = (data: nDoujin | Doujin): Doujin => {
-  return {
-    id: data.id,
-    titles: data.titles,
-    uploadDate: data.uploadDate,
-    length: data.length,
-    favorites: data.favorites,
-    url: data.url,
-    cover: (data.cover as any).url || data.cover,
-    thumbnail: (data.thumbnail as any).url || data.thumbnail,
-    tags: (data.tags as any).all ? (data.tags as any).all.map((tag: Tag) => tag.name) : data.tags
-  }
-}
-
 export const scrapeHentai = async (query: string): Promise<Hentai> => {
   const hanimeSearch = await hanime(query)
 
@@ -107,15 +93,13 @@ export const scrapeHentai = async (query: string): Promise<Hentai> => {
 
 export const scrapeDoujin = async (query: string): Promise<Doujin> => {
   try {
-    const search = isNaN(+query) ? (await nhentai.search(query, 1, SortMethods.POPULAR_ALL_TIME)).doujins[0] : await nhentai.fetchDoujin(query)
+    const data = isNaN(+query) ? (await nhentai.search(query, 1, SortMethods.POPULAR_ALL_TIME)).doujins[0] : await nhentai.fetchDoujin(query)
 
-    // If no results save to cache with invalid property
-    if (!search) {
-      await client.set(`doujin_${query}`, { id: query, invalid: true }, { expire: 86400 })
-      return { id: query, invalid: true }
+    // If no results save to cache with invalid property to prevent having to look up invalid data for the next 24 hours
+    if (!data) {
+      await client.set(`doujin_${query}`, { query, invalid: true }, { expire: 86400 })
+      return data
     }
-
-    const data = doujinBuilder(search)
 
     await client.set(`doujin_${data.id}`, data, { expire: 3600 })
 

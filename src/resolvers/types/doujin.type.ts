@@ -1,52 +1,97 @@
-import { ArgsType, Field, Int, ObjectType } from 'type-graphql'
+import { ArgsType, Field, ID, Int, ObjectType } from 'type-graphql'
 
 @ObjectType()
-export class doujinTitles {
-  @Field()
-  english: string
+export class DoujinImageType {
+  @Field(() => String)
+  public extension: 'png' | 'gif' | 'jpg'
 
-  @Field()
-  japanese: string
+  @Field(() => Int)
+  public height: number
 
-  @Field()
-  pretty: string
+  @Field(() => Int)
+  public width: number
+
+  @Field(() => String)
+  public url: string
+
+  @Field(() => Int)
+  public pageNumber: number
 }
 
 @ObjectType()
-export class doujinType {
-  @Field(() => Int)
-  id?: number
-
-  @Field(() => doujinTitles)
-  titles: doujinTitles
+export class DoujinTagType {
+  @Field(() => ID)
+  public id: number
 
   @Field(() => String)
-  uploadDate?: Date
+  public type: string
 
-  @Field()
-  length?: number
+  @Field(() => String)
+  public name: string
 
-  @Field()
-  favorites?: number
+  @Field(() => String)
+  public url: string
 
-  @Field()
-  url?: string
+  @Field(() => Int)
+  public count: number
+}
 
-  @Field()
-  cover?: string
+@ObjectType()
+export class DoujinTitlesType {
+  @Field(() => String)
+  public english: string
 
-  @Field()
-  thumbnail?: string
+  @Field(() => String)
+  public japanese: string
 
-  @Field(() => [String])
-  tags?: string[]
+  @Field(() => String)
+  public pretty: string
+}
 
-  @Field()
-  invalid: boolean
+@ObjectType()
+export class DoujinType {
+  @Field(() => ID)
+  public id: number
+
+  @Field(() => Int)
+  public mediaId: number
+
+  @Field(() => DoujinTitlesType)
+  public titles: DoujinTitlesType
+
+  @Field(() => [DoujinImageType])
+  public pages: DoujinImageType[]
+
+  @Field(() => DoujinImageType)
+  public cover: DoujinImageType
+
+  @Field(() => DoujinImageType)
+  public thumbnail: DoujinImageType
+
+  @Field(() => String)
+  public url: string
+
+  @Field(() => String)
+  public scanlator: string
+
+  @Field(() => String)
+  uploadDate: Date
+
+  @Field(() => Int)
+  uploadTimestamp: number
+
+  @Field(() => Int)
+  length: number
+
+  @Field(() => Int)
+  favorites: number
+
+  @Field(() => [DoujinTagType])
+  tags: DoujinTagType[]
 }
 
 @ArgsType()
-export class doujinBaseArgs {
+export class DoujinBaseArgs {
   @Field(() => Int)
   id?: number
 
@@ -55,7 +100,7 @@ export class doujinBaseArgs {
 }
 
 @ArgsType()
-export class doujinTagArgs {
+export class DoujinTagArgs {
   @Field(() => [String])
   tags: string[]
 
