@@ -22,12 +22,9 @@ const mongoMiddleware = ({ type }: { type: 'hentai' | 'doujin' } = { type: 'hent
           return res.send(data)
         }
       } else {
-        // TODO search by titles in  Mongo
         const data = isNaN(+query)
           ? await doujinModel.findOne({ 'titles.pretty': { $regex: new RegExp(query.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
           : await doujinModel.findOne({ id: query })
-
-        console.log(data, 'mongo middleware')
 
         if (data) {
           await client.set(`doujin_${query}`, data.toJSON(), { expire: 3600 })
