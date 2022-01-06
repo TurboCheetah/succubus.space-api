@@ -14,7 +14,6 @@ import { captureException } from '@sentry/node'
 
 export const scrapeHentai = async (query: string): Promise<Hentai | HentaiInvalid> => {
   const rawData = await hanime(query)
-  // console.log(rawData, 'rawData')
 
   // If no results save to cache with invalid property
   if (!rawData) {
@@ -23,13 +22,10 @@ export const scrapeHentai = async (query: string): Promise<Hentai | HentaiInvali
   }
 
   let malSearch = await mal(isNaN(+query) ? query : rawData.hentai_video.name)
-  // console.log(malSearch, 'malSearch')
 
   if (!malSearch && rawData.hentai_video.titles.length > 0) malSearch = await mal(rawData.hentai_video.titles[0].title)
-  // console.log(malSearch, 'malSearch')
 
   const data = new Hentai(rawData, malSearch)
-  // console.log(data, 'data')
 
   await client.set(`hentai_${data.id}`, data, { expire: 3600 })
 
