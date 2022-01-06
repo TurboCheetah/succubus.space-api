@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.7.0](https://github.com/TurboCheetah/succubus.space-api/compare/v2.6.0...v2.7.0) (2022-01-06)
+
+
+### Features
+
+* cache all of nHentai ([e3966d9](https://github.com/TurboCheetah/succubus.space-api/commit/e3966d917c293834d6c34cee0e0c1a509f7cd042))
+* cache all of nHentai ([824e04a](https://github.com/TurboCheetah/succubus.space-api/commit/824e04a8b7c96158d4da40063589dcdc9155e46a))
+* improve HAnime data ([a754b4d](https://github.com/TurboCheetah/succubus.space-api/commit/a754b4d876689587c477c0bc91e19c49fcf91d72))
+* remove `hentaiArgs` ([5dd1e16](https://github.com/TurboCheetah/succubus.space-api/commit/5dd1e16f5cd8a9058aab8333d7879e45e4b21c9c))
+* use DI ([be7a1f4](https://github.com/TurboCheetah/succubus.space-api/commit/be7a1f4ef1d9c4c37d7a8cdc6d1f6a5ff1e00b25))
+* use DI in tests ([e0d3065](https://github.com/TurboCheetah/succubus.space-api/commit/e0d30657ab0eb0200d5775982b4499155da9e911))
+
+
+### Bug Fixes
+
+* **deps:** pin dependency tsyringe to 4.6.0 ([10bae56](https://github.com/TurboCheetah/succubus.space-api/commit/10bae56f3b97c6e2c19f7bebded20f5011adcea4))
+* error when MAL object not passed ([cebcfd9](https://github.com/TurboCheetah/succubus.space-api/commit/cebcfd962468afbdff56ef98e41c4af95e484ea0))
+* follow graphql spec ([f1cbdbc](https://github.com/TurboCheetah/succubus.space-api/commit/f1cbdbc866b74bc10572dc3168e42c49dfc17792))
+* remove HTML from `hentai_video.description` ([02eda43](https://github.com/TurboCheetah/succubus.space-api/commit/02eda43b8c5acca2b6419ca3c5fdfe7e94fc8af5))
+* remove weird invalid interfaces ([98ebe1c](https://github.com/TurboCheetah/succubus.space-api/commit/98ebe1c2c248ba9b7e486288a2008543c8f8b188))
+* use correct tsconfig paths ([5f30f4c](https://github.com/TurboCheetah/succubus.space-api/commit/5f30f4c4e45461a6284e4c71d51223bf4466e96b))
+* use Doujin type from `nhentai` ([c0d59ec](https://github.com/TurboCheetah/succubus.space-api/commit/c0d59ec13a0f69c0aa06a25cf623791aa63ca236))
+
 ## [2.6.0](https://github.com/TurboCheetah/succubus.space-api/compare/v2.5.0...v2.6.0) (2021-12-22)
 
 
