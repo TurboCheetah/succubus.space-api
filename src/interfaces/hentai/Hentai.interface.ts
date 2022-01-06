@@ -111,7 +111,7 @@ export class Hentai implements Hentai {
       _720p: raw.videos_manifest.servers[0].streams.find(stream => stream.height === '720')?.url || null,
       _1080p: raw.videos_manifest.servers[0].streams.find(stream => stream.height === '1080')?.url || null
     }
-    this.malID = mal.id
-    this.malDescription = mal.synopsis
+    this.malID = mal?.id
+    this.malDescription = mal?.synopsis
   }
 }
