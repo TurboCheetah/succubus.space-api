@@ -1,5 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn tsc && yarn tsc-alias
+yarn build
 yarn lint-staged
