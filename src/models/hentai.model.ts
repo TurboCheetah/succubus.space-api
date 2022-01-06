@@ -1,24 +1,66 @@
 import { model, Schema, Document } from 'mongoose'
-import { Hentai } from '@interfaces/hentai.interface'
+import { Hentai } from '@interfaces/hentai/Hentai.interface'
 
-const streamSchema: Schema = new Schema({
-  _360p: String,
-  _480p: String,
-  _720p: String,
-  _1080p: String
+const hentaiTitleSchema: Schema = new Schema({
+  lang: String,
+  kind: String,
+  title: String
 })
 
-const franchiseSchema: Schema = new Schema({
+const hentaiBrandSchema: Schema = new Schema({
+  id: Number,
+  title: String,
+  slug: String,
+  websiteURL: String,
+  logoURL: String,
+  email: String,
+  count: Number
+})
+
+const hentaiTagSchema: Schema = new Schema({
+  id: Number,
+  text: String
+})
+
+const hentaiFranchiseSchema: Schema = new Schema({
   id: Number,
   name: String,
   slug: String,
   title: String
 })
 
-const franchiseVideoSchema: Schema = new Schema({
+const hentaiFranchiseVideoInfoSchema: Schema = new Schema({
   id: Number,
   name: String,
-  slug: String
+  slug: String,
+  createdAt: String,
+  releasedAt: String,
+  views: Number,
+  interests: Number,
+  posterURL: String,
+  coverURL: String,
+  isHardSubtitled: Boolean,
+  brand: String,
+  durationInMs: Number,
+  isCensored: Boolean,
+  rating: Number,
+  likes: Number,
+  dislikes: Number,
+  downloads: Number,
+  monthlyRank: Number,
+  brandID: String,
+  isBannedIn: String,
+  previewURL: String,
+  primaryColor: String,
+  createdAtUnix: Number,
+  releasedAtUnix: Number
+})
+
+const streamSchema: Schema = new Schema({
+  _360p: String,
+  _480p: String,
+  _720p: String,
+  _1080p: String
 })
 
 const hentaiSchema: Schema = new Schema(
@@ -31,7 +73,7 @@ const hentaiSchema: Schema = new Schema(
 
     name: String,
 
-    titles: [String],
+    titles: [hentaiTitleSchema],
 
     slug: String,
 
@@ -45,9 +87,7 @@ const hentaiSchema: Schema = new Schema(
 
     coverURL: String,
 
-    brand: String,
-
-    brandID: String,
+    brand: [hentaiBrandSchema],
 
     durationInMs: Number,
 
@@ -61,13 +101,15 @@ const hentaiSchema: Schema = new Schema(
 
     monthlyRank: Number,
 
-    tags: [String],
+    bannedIn: String,
 
-    franchise: franchiseSchema,
+    hardSubtitled: Boolean,
 
-    franchiseVideos: [franchiseVideoSchema],
+    tags: [hentaiTagSchema],
 
-    createdAt: String,
+    franchise: hentaiFranchiseSchema,
+
+    franchiseVideos: [hentaiFranchiseVideoInfoSchema],
 
     releasedAt: String,
 
@@ -75,11 +117,9 @@ const hentaiSchema: Schema = new Schema(
 
     streamURL: streamSchema,
 
-    malURL: String,
-
     malID: Number,
 
-    invalid: Boolean
+    malDescription: String
   },
   { timestamps: true }
 )

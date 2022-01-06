@@ -9,6 +9,7 @@ import { hentaiQueue, processQueue as processHentai } from '@queues/hentai.queue
 import { doujinQueue, processQueue as processDoujin } from '@queues/doujin.queue'
 import { sentry } from '@/config'
 import { captureException } from '@sentry/node'
+import { Hentai } from '@interfaces/hentai/Hentai.interface'
 
 processHentai()
 processDoujin()
@@ -24,7 +25,7 @@ schedule('0 * * * *', async () => {
 
     const newestQuery = $('.elevation-3.mb-3.hvc.item.card').first().find('a').attr('alt')
 
-    const newestID = +(await scrapeHentai(newestQuery)).id
+    const newestID = +((await scrapeHentai(newestQuery)) as Hentai).id
 
     await ioRedis.set('hentai_newestID', newestID)
 

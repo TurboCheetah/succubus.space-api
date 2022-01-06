@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from 'express'
 import hentaiModel from '@/models/hentai.model'
 import doujinModel from '@/models/doujin.model'
 import { client } from '@/databases/redis'
-import { hentaiBuilder } from '@utils/util'
 
 const mongoMiddleware = ({ type }: { type: 'hentai' | 'doujin' } = { type: 'hentai' }) => {
   return async (req: Request, res: Response, next: NextFunction) => {
@@ -14,11 +13,8 @@ const mongoMiddleware = ({ type }: { type: 'hentai' | 'doujin' } = { type: 'hent
           ? await hentaiModel.findOne({ name: { $regex: new RegExp(query.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
           : await hentaiModel.findOne({ id: query })
 
-        if (data && !data.invalid) {
-          await client.set(`hentai_${query}`, hentaiBuilder(data), { expire: 3600 })
-          return res.send(data)
-        } else if (data && data.invalid) {
-          await client.set(`hentai_${query}`, { id: query, invalid: true }, { expire: 86400 })
+        if (data) {
+          await client.set(`hentai_${query}`, data.toJSON(), { expire: 3600 })
           return res.send(data)
         }
       } else {

@@ -1,10 +1,10 @@
 /* eslint-disable camelcase */
 import { client, ioRedis } from '@/databases/redis'
-import { Hentai } from '@/interfaces/hentai.interface'
+import { Hentai } from '@interfaces/hentai/Hentai.interface'
 import hentaiModel from '@/models/hentai.model'
-import { hentaiBuilder, scrapeHentai } from '@/utils/util'
-import { Arg, Args, Query, Resolver } from 'type-graphql'
-import { hentaiArgs, hentaiType } from '@resolvers/types/hentai.type'
+import { scrapeHentai } from '@/utils/util'
+import { Arg, Query, Resolver } from 'type-graphql'
+import { hentaiType } from '@resolvers/types/hentai.type'
 
 @Resolver()
 export class HentaiResolver {
@@ -24,25 +24,21 @@ export class HentaiResolver {
         data = await hentaiModel.findOne({ malID: malID })
       }
 
-      // If no data in Mongo go to scraper
-      if (data && !data.invalid) {
-        await client.set(`hentai_${query}`, hentaiBuilder(data), { expire: 3600 })
-        return data
-      } else if (data && data.invalid) {
-        data = { id: query, invalid: true }
-        await client.set(`hentai_${query}`, data, { expire: 86400 })
-        return data
-      }
+      // if there is data in MongoDB save it to Redis
+      if (data) await client.set(`hentai_${query}`, data.toJSON(), { expire: 3600 })
     }
 
+    // if there isn't data in MongoDB scrape it from HAnime.tv
     if (!data) data = await scrapeHentai(`${query}`)
-    if (data.invalid) data.id = null
+
+    // if Redis returns invalid = true, return null
+    if (data !== null && data.invalid) data = null
 
     return data
   }
 
   @Query(() => hentaiType)
-  public async hentai(@Args() { id, name, malID }: hentaiArgs): Promise<Hentai> {
+  public async hentai(@Arg('id') id: number, @Arg('name') name: string, @Arg('malID') malID: number): Promise<Hentai> {
     return await this.getData({ id, name, malID })
   }
 
@@ -62,20 +58,30 @@ export class HentaiResolver {
   }
 
   @Query(() => [hentaiType])
-  public async allHentai(@Args() { sortBy, order }: hentaiArgs) {
+  public async allHentai(
+    @Arg('sortBy') sortBy: 'views' | 'interests' | 'likes' | 'dislikes' | 'downloads' | 'monthlyRank',
+    @Arg('order') order: 'asc' | 'desc'
+  ) {
     return await hentaiModel.find().sort({ [sortBy]: order || 'desc' })
   }
 
   @Query(() => [hentaiType])
-  public async brand(@Args() { brand, sortBy, order }: hentaiArgs) {
+  public async brand(
+    @Arg('brandTitle') brandTitle: string,
+    @Arg('brandID') brandID: number,
+    @Arg('sortBy') sortBy: 'views' | 'interests' | 'likes' | 'dislikes' | 'downloads' | 'monthlyRank',
+    @Arg('order') order: 'asc' | 'desc'
+  ) {
+    if (brandID) return await hentaiModel.find({ 'brand.id': brandID }).sort({ [sortBy]: order || 'desc' })
+
     return await hentaiModel
-      .find({ brand: { $regex: new RegExp(brand.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
+      .find({ brand: { $regex: new RegExp(brandTitle.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
       .sort({ [sortBy]: order || 'desc' })
   }
 
   @Query(() => hentaiType)
-  public async monthlyRank(@Args() { monthlyRank }: hentaiArgs) {
-    return await hentaiModel.findOne({ monthlyRank })
+  public async monthlyRank(@Arg('rank') rank: number) {
+    return await hentaiModel.findOne({ rank })
   }
 
   @Query(() => [hentaiType])
@@ -84,12 +90,18 @@ export class HentaiResolver {
   }
 
   @Query(() => [hentaiType])
-  public async tags(@Args() { tags, sortBy, order }: hentaiArgs) {
-    return await hentaiModel.find({ tags: { $all: tags } }).sort({ [sortBy]: order || 'desc' })
+  public async tags(
+    @Arg('tags') tags: string,
+    @Arg('tagID') tagID: number,
+    @Arg('sortBy') sortBy: 'views' | 'interests' | 'likes' | 'dislikes' | 'downloads' | 'monthlyRank',
+    @Arg('order') order: 'asc' | 'desc'
+  ) {
+    if (tagID) return await hentaiModel.find({ 'tags.id': { $all: tagID } }).sort({ [sortBy]: order || 'desc' })
+    return await hentaiModel.find({ 'tags.text': { $all: tags } }).sort({ [sortBy]: order || 'desc' })
   }
 
   @Query(() => [hentaiType])
-  public async series(@Args() { id, name, slug }: hentaiArgs) {
+  public async series(@Arg('id') id: number, @Arg('name') name: string, @Arg('slug') slug: string) {
     if (slug) {
       return await hentaiModel.find({
         'franchise.slug': { $regex: new RegExp(slug.replace(/(?![-])[#-.]|[[-^]|[!|?|{}]/g, '').replace(/\s/g, '-'), 'i') }

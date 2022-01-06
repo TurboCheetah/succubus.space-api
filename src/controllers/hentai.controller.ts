@@ -17,7 +17,7 @@ class HentaiController {
 
   public brand = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const data = await hentaiModel.find({ brand: { $regex: new RegExp(req.params.query.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
+      const data = await hentaiModel.find({ 'brand.title': { $regex: new RegExp(req.params.query.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
 
       return res.send(data)
     } catch (error) {
@@ -27,7 +27,10 @@ class HentaiController {
 
   public tag = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const data = await hentaiModel.find({ tags: { $regex: new RegExp(req.params.query.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
+      // if req.params.query is a number search tags.id
+      const data = isNaN(+req.params.query)
+        ? await hentaiModel.find({ 'tags.text': { $regex: new RegExp(req.params.query.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
+        : await hentaiModel.find({ 'tags.id': req.params.query })
 
       return res.send(data)
     } catch (error) {

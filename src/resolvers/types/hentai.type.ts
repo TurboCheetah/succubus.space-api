@@ -1,23 +1,54 @@
-import { ArgsType, Field, Int, ObjectType } from 'type-graphql'
+import { APITags } from '@interfaces/hanime/APITags.interface'
+import { ArgsType, Field, ID, Int, ObjectType } from 'type-graphql'
 
 @ObjectType()
-export class streamURL {
+export class hentaiTitles {
   @Field()
-  _360p: string
+  lang: string
 
   @Field()
-  _480p: string
+  kind: string
 
   @Field()
-  _720p: string
+  title: string
+}
+
+@ObjectType()
+export class hentaiBrand {
+  @Field(() => ID)
+  id: number
 
   @Field()
-  _1080p: string
+  title: string
+
+  @Field()
+  slug: string
+
+  @Field()
+  websiteURL: string
+
+  @Field()
+  logoURL: string
+
+  @Field()
+  email: string
+
+  @Field()
+  count: number
+}
+
+@ObjectType()
+export class hentaiTags {
+  @Field(() => ID)
+  id: number
+
+  @Field()
+  text: string
 }
 
 @ObjectType()
 export class hentaiFranchise {
-  @Field()
+  @Field(() => ID)
   id: number
 
   @Field()
@@ -32,7 +63,7 @@ export class hentaiFranchise {
 
 @ObjectType()
 export class hentaiFranchiseVideo {
-  @Field()
+  @Field(() => ID)
   id: number
 
   @Field()
@@ -40,63 +71,147 @@ export class hentaiFranchiseVideo {
 
   @Field()
   slug: string
+
+  @Field()
+  createdAt: string
+
+  @Field()
+  releasedAt: string
+
+  @Field()
+  views: number
+
+  @Field()
+  interests: number
+
+  @Field()
+  posterURL: string
+
+  @Field()
+  coverURL: string
+
+  @Field()
+  isHardSubtitled: boolean
+
+  @Field()
+  brand: string
+
+  @Field()
+  durationInMs: number
+
+  @Field()
+  isCensored: boolean
+
+  @Field()
+  rating: number
+
+  @Field()
+  likes: number
+
+  @Field()
+  dislikes: number
+
+  @Field()
+  downloads: number
+
+  @Field()
+  monthlyRank: number
+
+  @Field()
+  brandID: string
+
+  @Field()
+  isBannedIn: string
+
+  @Field()
+  previewURL: string
+
+  @Field()
+  primaryColor: string
+
+  @Field()
+  createdAtUnix: number
+
+  @Field()
+  releasedAtUnix: number
+}
+
+@ObjectType()
+export class hentaiStreams {
+  @Field()
+  _360p: string
+
+  @Field()
+  _480p: string
+
+  @Field()
+  _720p: string
+
+  @Field()
+  _1080p: string
 }
 
 @ObjectType()
 export class hentaiType {
   @Field(() => Int)
-  id?: number
+  id: number
 
   @Field()
-  name?: string
+  name: string
 
-  @Field(() => [String])
-  titles: string[]
-
-  @Field()
-  slug?: string
+  @Field(() => [hentaiTitles])
+  titles: hentaiTitles[]
 
   @Field()
-  description?: string
+  slug: string
 
   @Field()
-  views?: number
+  description: string
 
   @Field()
-  interests?: number
+  views: number
 
   @Field()
-  posterURL?: string
+  interests: number
 
   @Field()
-  coverURL?: string
+  posterURL: string
 
   @Field()
-  brand?: string
+  coverURL: string
+
+  @Field(() => hentaiBrand)
+  brand: hentaiBrand
 
   @Field()
-  durationInMs?: number
+  durationInMs: number
 
   @Field()
-  isCensored?: boolean
+  isCensored: boolean
 
   @Field()
-  rating?: string
+  rating: string
 
   @Field()
-  likes?: number
+  likes: number
 
   @Field()
-  dislikes?: number
+  dislikes: number
 
   @Field()
-  downloads?: number
+  downloads: number
 
   @Field()
-  monthlyRank?: number
+  monthlyRank: number
 
-  @Field(() => [String])
-  tags?: string[]
+  @Field()
+  bannedIn: string
+
+  @Field()
+  hardSubtitled: boolean
+
+  @Field(() => [hentaiTags])
+  tags: hentaiTags[]
 
   @Field(() => hentaiFranchise)
   franchise: hentaiFranchise
@@ -105,30 +220,27 @@ export class hentaiType {
   franchiseVideos: hentaiFranchiseVideo[]
 
   @Field()
-  releasedAt?: string
+  releasedAt: string
 
   @Field()
   url: string
 
   @Field()
-  streamURL: streamURL
+  streams: hentaiStreams
+
+  @Field(() => ID)
+  malID: number
 
   @Field()
-  malURL: string
-
-  @Field(() => Int)
-  malID: number
+  malDescription: string
 
   @Field(() => String)
   updatedAt: Date
-
-  @Field()
-  invalid: boolean
 }
 
 @ArgsType()
 export class hentaiArgs {
-  @Field(() => Int)
+  @Field(() => ID)
   id: number
 
   @Field()
@@ -138,15 +250,21 @@ export class hentaiArgs {
   slug: string
 
   @Field()
-  brand: string
+  brandTitle: string
+
+  @Field()
+  brandID: number
 
   @Field()
   monthlyRank: number
 
   @Field(() => [String])
-  tags: string[]
+  tags: APITags[]
 
-  @Field(() => Int)
+  @Field(() => [Int])
+  tagID: number[]
+
+  @Field(() => ID)
   malID: number
 
   @Field()
