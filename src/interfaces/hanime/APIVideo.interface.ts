@@ -19,6 +19,7 @@ export interface APIVideo {
 export class APIVideo implements APIVideo {
   constructor(raw: APIRaw) {
     this.hentai_video = raw.hentai_video
+    this.hentai_video.description = this.hentai_video.description.replace(/<[^>]*>?/gm, '')
     this.hentai_franchise = raw.hentai_franchise
     this.hentai_franchise_hentai_videos = raw.hentai_franchise_hentai_videos
     this.hentai_video_storyboards = raw.hentai_video_storyboards
