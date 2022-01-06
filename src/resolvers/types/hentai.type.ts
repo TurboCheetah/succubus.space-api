@@ -1,5 +1,4 @@
-import { APITags } from '@interfaces/hanime/APITags.interface'
-import { ArgsType, Field, ID, Int, ObjectType } from 'type-graphql'
+import { Field, ID, Int, ObjectType } from 'type-graphql'
 
 @ObjectType()
 export class hentaiTitles {
@@ -236,40 +235,4 @@ export class hentaiType {
 
   @Field(() => String)
   updatedAt: Date
-}
-
-@ArgsType()
-export class hentaiArgs {
-  @Field(() => ID)
-  id: number
-
-  @Field()
-  name: string
-
-  @Field()
-  slug: string
-
-  @Field()
-  brandTitle: string
-
-  @Field()
-  brandID: number
-
-  @Field()
-  monthlyRank: number
-
-  @Field(() => [String])
-  tags: APITags[]
-
-  @Field(() => [Int])
-  tagID: number[]
-
-  @Field(() => ID)
-  malID: number
-
-  @Field()
-  sortBy: 'views' | 'interests' | 'likes' | 'dislikes' | 'downloads' | 'monthlyRank'
-
-  @Field()
-  order: 'asc' | 'desc'
 }

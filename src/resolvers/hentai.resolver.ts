@@ -5,6 +5,7 @@ import hentaiModel from '@models/hentai.model'
 import { scrapeHentai } from '@utils/util'
 import { Arg, Query, Resolver } from 'type-graphql'
 import { hentaiType } from '@resolvers/types/hentai.type'
+import { APITags } from '@interfaces/hanime/APITags.interface'
 
 @Resolver()
 export class HentaiResolver {
@@ -91,8 +92,8 @@ export class HentaiResolver {
 
   @Query(() => [hentaiType])
   public async tags(
-    @Arg('tags') tags: string,
-    @Arg('tagID') tagID: number,
+    @Arg('tags', () => [String]) tags: APITags[],
+    @Arg('tagID', () => [Number]) tagID: number[],
     @Arg('sortBy') sortBy: 'views' | 'interests' | 'likes' | 'dislikes' | 'downloads' | 'monthlyRank',
     @Arg('order') order: 'asc' | 'desc'
   ) {
