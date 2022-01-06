@@ -1,5 +1,6 @@
 import { APIVideo } from '@interfaces/hanime/APIVideo.interface'
 import { APIRaw } from '@interfaces/hanime/APIRaw.interface'
+import { SEARCH_URL, VIDEO_API_URL, VIDEO_URL } from '@interfaces/constants'
 import c from '@aero/centra'
 
 export const hanime = async (query: string | number): Promise<APIVideo> => {
@@ -18,7 +19,7 @@ export const hanime = async (query: string | number): Promise<APIVideo> => {
       ordering: 'desc'
     }
 
-    return await c('https://search.htv-services.com/', 'POST').header('Content-Type', 'application/json').body(JSON.stringify(config)).json()
+    return await c(SEARCH_URL, 'POST').header('Content-Type', 'application/json').body(JSON.stringify(config)).json()
   }
 
   if (isNaN(+query)) {
@@ -27,7 +28,7 @@ export const hanime = async (query: string | number): Promise<APIVideo> => {
     if (results.nbHits > 0) {
       results = JSON.parse(results.hits)
       for (let i = 0; i < results.length; i++) {
-        results[i].url = `https://hanime.tv/videos/hentai/${results[i].slug}`
+        results[i].url = `${VIDEO_URL}/${results[i].slug}`
         results[i].released_at = getDate(results[i].released_at)
       }
     } else {
@@ -37,7 +38,7 @@ export const hanime = async (query: string | number): Promise<APIVideo> => {
     // return results as HAnime
     query = results[0].id
   }
-  const data: APIRaw = await c(`https://hanime.tv/api/v8/video?id=${query}`, 'GET').json()
+  const data: APIRaw = await c(`${VIDEO_API_URL}?id=${query}`, 'GET').json()
 
   if (!data.hentai_video) return null
 

@@ -5,6 +5,7 @@ import { APIVideo } from '@interfaces/hanime/APIVideo.interface'
 import { HentaiBrand } from '@interfaces/hentai/HentaiBrand.interface'
 import { HentaiFranchiseVideoInfo } from '@interfaces/hentai/HentaiFranchiseVideoInfo.interface'
 import { MALResult } from '@interfaces/MyAnimeList.interface'
+import { VIDEO_URL } from '@interfaces/constants'
 
 export interface Hentai {
   id: number
@@ -104,7 +105,7 @@ export class Hentai implements Hentai {
       }
     })
     this.releasedAt = raw.hentai_video.released_at
-    this.url = `https://hanime.tv/videos/hentai/${this.slug}`
+    this.url = `${VIDEO_URL}/${this.slug}`
     this.streams = {
       _360p: raw.videos_manifest.servers[0].streams.find(stream => stream.height === '360')?.url || null,
       _480p: raw.videos_manifest.servers[0].streams.find(stream => stream.height === '480')?.url || null,

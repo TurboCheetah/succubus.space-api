@@ -6,6 +6,7 @@ import { nhentai } from '@utils/nhentai'
 import { hentaiQueue, processQueue as processHentai } from '@queues/hentai.queue'
 import { doujinQueue, processQueue as processDoujin } from '@queues/doujin.queue'
 import { sentry } from '@/config'
+import { LANDING_URL } from '@interfaces/constants'
 import { captureException } from '@sentry/node'
 
 processHentai()
@@ -22,7 +23,7 @@ schedule('0 * * * *', async () => {
           hentai_video_ids: [newestID]
         }
       ]
-    } = await c('https://hanime.tv/api/v8/landing', 'GET').json()
+    } = await c(LANDING_URL, 'GET').json()
 
     await ioRedis.set('hentai_newestID', newestID)
 
