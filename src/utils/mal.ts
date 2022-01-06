@@ -1,5 +1,5 @@
 import { myanimelist, sentry } from '@/config'
-import { MALResult } from '@interfaces/MAL.interface'
+import { MALResult } from '@interfaces/MyAnimeList.interface'
 import { logger } from '@utils/logger'
 import c from '@aero/centra'
 import { captureException } from '@sentry/node'

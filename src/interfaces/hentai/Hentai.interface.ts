@@ -4,7 +4,7 @@ import { APIFranchise } from '@interfaces/hanime/APIFranchise.interface'
 import { APIVideo } from '@interfaces/hanime/APIVideo.interface'
 import { HentaiBrand } from '@interfaces/hentai/HentaiBrand.interface'
 import { HentaiFranchiseVideoInfo } from '@interfaces/hentai/HentaiFranchiseVideoInfo.interface'
-import { MALResult } from '@interfaces/MAL.interface'
+import { MALResult } from '@interfaces/MyAnimeList.interface'
 
 export interface Hentai {
   id: number
