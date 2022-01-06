@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
-import { client } from '@/databases/redis'
-import doujinModel from '@/models/doujin.model'
-import { scrapeDoujin } from '@/utils/util'
+import { client } from '@databases/redis'
+import doujinModel from '@models/doujin.model'
+import { scrapeDoujin } from '@utils/util'
 import { Args, Query, Resolver } from 'type-graphql'
 import { DoujinBaseArgs, DoujinTagArgs, DoujinType } from '@resolvers/types/doujin.type'
 import { nhentai } from '@utils/nhentai'

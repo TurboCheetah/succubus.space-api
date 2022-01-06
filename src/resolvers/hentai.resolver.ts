@@ -1,8 +1,8 @@
 /* eslint-disable camelcase */
-import { client, ioRedis } from '@/databases/redis'
+import { client, ioRedis } from '@databases/redis'
 import { Hentai } from '@interfaces/hentai/Hentai.interface'
-import hentaiModel from '@/models/hentai.model'
-import { scrapeHentai } from '@/utils/util'
+import hentaiModel from '@models/hentai.model'
+import { scrapeHentai } from '@utils/util'
 import { Arg, Query, Resolver } from 'type-graphql'
 import { hentaiType } from '@resolvers/types/hentai.type'
 
