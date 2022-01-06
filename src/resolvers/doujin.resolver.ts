@@ -1,11 +1,11 @@
 /* eslint-disable camelcase */
 import { client } from '@/databases/redis'
-import { Doujin } from '@/interfaces/doujin.interface'
 import doujinModel from '@/models/doujin.model'
 import { scrapeDoujin } from '@/utils/util'
 import { Args, Query, Resolver } from 'type-graphql'
 import { DoujinBaseArgs, DoujinTagArgs, DoujinType } from '@resolvers/types/doujin.type'
 import { nhentai } from '@utils/nhentai'
+import { Doujin } from 'nhentai'
 
 @Resolver()
 export class DoujinResolver {
