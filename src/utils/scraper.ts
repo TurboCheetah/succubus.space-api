@@ -1,7 +1,5 @@
 import c from '@aero/centra'
-import { scrapeHentai } from '@utils/util'
 import { ioRedis, client } from '@databases/redis'
-import { load } from 'cheerio'
 import { schedule } from 'node-cron'
 import { logger } from '@utils/logger'
 import { nhentai } from '@utils/nhentai'
@@ -9,7 +7,6 @@ import { hentaiQueue, processQueue as processHentai } from '@queues/hentai.queue
 import { doujinQueue, processQueue as processDoujin } from '@queues/doujin.queue'
 import { sentry } from '@/config'
 import { captureException } from '@sentry/node'
-import { Hentai } from '@interfaces/hentai/Hentai.interface'
 
 processHentai()
 processDoujin()
@@ -19,13 +16,13 @@ schedule('0 * * * *', async () => {
     const oldNewest = await ioRedis.get('hentai_newestID')
 
     // Get latest HAnime upload ID
-    const $ = await c('https://hanime.tv/', 'GET')
-      .text()
-      .then(html => load(html))
-
-    const newestQuery = $('.elevation-3.mb-3.hvc.item.card').first().find('a').attr('alt')
-
-    const newestID = +((await scrapeHentai(newestQuery)) as Hentai).id
+    const {
+      sections: [
+        {
+          hentai_video_ids: [newestID]
+        }
+      ]
+    } = await c('https://hanime.tv/api/v8/landing', 'GET').json()
 
     await ioRedis.set('hentai_newestID', newestID)
 
