@@ -3,7 +3,7 @@
   "version": "2.6.0",
   "description": "a fast API for fetching hentai data built with Redis and MongoDB",
   "author": "Turbo",
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "start": "yarn build && cross-env NODE_ENV=production node dist/server.js",
     "start:docker": "cross-env NODE_ENV=production node dist/server.js",
