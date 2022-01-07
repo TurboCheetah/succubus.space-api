@@ -1,5 +1,6 @@
-import { scrapeDoujin } from '@utils/util'
+import { Utils } from '@utils/util'
 import Queue from 'bull'
+import { container } from 'tsyringe'
 
 export const doujinQueue = new Queue('scraper', {
   redis: {
@@ -13,6 +14,6 @@ export const doujinQueue = new Queue('scraper', {
 
 export const processQueue = () => {
   doujinQueue.process(async job => {
-    return await scrapeDoujin(job.data.id.toString())
+    return await container.resolve(Utils).scrapeDoujin(job.data.id.toString())
   })
 }

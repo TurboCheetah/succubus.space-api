@@ -4,7 +4,7 @@ import { APIFranchise } from '@interfaces/hanime/APIFranchise.interface'
 import { APIVideo } from '@interfaces/hanime/APIVideo.interface'
 import { HentaiBrand } from '@interfaces/hentai/HentaiBrand.interface'
 import { HentaiFranchiseVideoInfo } from '@interfaces/hentai/HentaiFranchiseVideoInfo.interface'
-import { MALResult } from '@interfaces/MyAnimeList.interface'
+import { MyAnimeListResult } from '@interfaces/MyAnimeList/MyAnimeListResult.interface'
 import { VIDEO_URL } from '@interfaces/constants'
 
 export interface Hentai {
@@ -46,7 +46,7 @@ export interface Hentai {
 }
 
 export class Hentai implements Hentai {
-  constructor(raw: APIVideo, mal?: MALResult) {
+  constructor(raw: APIVideo, mal?: MyAnimeListResult) {
     this.id = raw.hentai_video.id
     this.name = raw.hentai_video.name
     this.titles = raw.hentai_video.titles

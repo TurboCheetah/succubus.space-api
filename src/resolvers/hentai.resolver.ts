@@ -2,10 +2,11 @@
 import { client, ioRedis } from '@databases/redis'
 import { Hentai } from '@interfaces/hentai/Hentai.interface'
 import hentaiModel from '@models/hentai.model'
-import { scrapeHentai } from '@utils/util'
+import { Utils } from '@utils/util'
 import { Arg, Query, Resolver } from 'type-graphql'
 import { hentaiType } from '@resolvers/types/hentai.type'
 import { APITags } from '@interfaces/hanime/APITags.interface'
+import { container } from 'tsyringe'
 
 @Resolver()
 export class HentaiResolver {
@@ -30,7 +31,7 @@ export class HentaiResolver {
     }
 
     // if there isn't data in MongoDB scrape it from HAnime.tv
-    if (!data) data = await scrapeHentai(`${query}`)
+    if (!data) data = await container.resolve(Utils).scrapeHentai(`${query}`)
 
     // if Redis returns invalid = true, return null
     if (data !== null && data.invalid) data = null

@@ -1,5 +1,6 @@
-import { scrapeHentai } from '@utils/util'
+import { Utils } from '@utils/util'
 import Queue from 'bull'
+import { container } from 'tsyringe'
 
 export const hentaiQueue = new Queue('scraper', {
   redis: {
@@ -13,6 +14,6 @@ export const hentaiQueue = new Queue('scraper', {
 
 export const processQueue = () => {
   hentaiQueue.process(async job => {
-    return await scrapeHentai(job.data.id.toString())
+    return await container.resolve(Utils).scrapeHentai(job.data.id.toString())
   })
 }

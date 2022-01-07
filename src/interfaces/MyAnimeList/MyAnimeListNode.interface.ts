@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-export interface MALAPINode {
+export interface MyAnimeListNode {
   id: number
   title: string
   main_picture: {
@@ -11,17 +11,5 @@ export interface MALAPINode {
     en: string
     ja: string
   }
-  synopsis: string
-}
-
-export interface MALAPIResult {
-  data: {
-    node: MALAPINode
-  }[]
-}
-
-export interface MALResult {
-  id: number
-  titles: string[]
   synopsis: string
 }

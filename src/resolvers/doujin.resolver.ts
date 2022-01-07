@@ -1,11 +1,12 @@
 /* eslint-disable camelcase */
 import { client } from '@databases/redis'
 import doujinModel from '@models/doujin.model'
-import { scrapeDoujin } from '@utils/util'
+import { Utils } from '@utils/util'
 import { Args, Query, Resolver } from 'type-graphql'
 import { DoujinBaseArgs, DoujinTagArgs, DoujinType } from '@resolvers/types/doujin.type'
 import { nhentai } from '@utils/nhentai'
 import { Doujin } from 'nhentai'
+import { container } from 'tsyringe'
 
 @Resolver()
 export class DoujinResolver {
@@ -33,7 +34,7 @@ export class DoujinResolver {
     }
 
     // if there isn't data in MongoDB scrape it from nhentai
-    if (!data) data = await scrapeDoujin(`${query}`)
+    if (!data) data = await container.resolve(Utils).scrapeDoujin(`${query}`)
 
     // if Redis returns invalid = true, return null
     if (data !== null && data.invalid) data = null
