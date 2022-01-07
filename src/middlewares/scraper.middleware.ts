@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { Utils } from '@utils/util'
+import { Utils } from '@utils/Utils'
 import { container } from 'tsyringe'
 
 const scraperMiddleware = ({ type }: { type: 'hentai' | 'doujin' } = { type: 'hentai' }) => {

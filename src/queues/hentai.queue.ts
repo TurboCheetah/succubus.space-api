@@ -1,4 +1,4 @@
-import { Utils } from '@utils/util'
+import { Utils } from '@utils/Utils'
 import Queue from 'bull'
 import { container } from 'tsyringe'
 
