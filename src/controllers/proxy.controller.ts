@@ -6,10 +6,11 @@ import { autoInjectable } from 'tsyringe'
 class ProxyController {
   public proxy = async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const url = decodeURIComponent(req.params.query)
+      const url = `${req.query.url}`
 
       // check if url is valid nHentai url
-      if (!url.match(/https:\/\/i\.nhentai\.net\/galleries\/\d+\/\d+\.jpg/)) {
+      // check if the url has the nHentai domain and any subdomains on it
+      if (!url || !url.match(/^https:\/\/(?:.+)\.?nhentai\.net\/galleries\/\d+\/.+\..+/)) {
         return res.status(400).json({
           error: 'Invalid URL'
         })
