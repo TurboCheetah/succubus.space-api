@@ -1,4 +1,3 @@
-import c from '@aero/centra'
 import { ioRedis, client } from '@databases/redis'
 import { schedule } from 'node-cron'
 import { logger } from '@utils/logger'
@@ -7,6 +6,7 @@ import { hentaiQueue, processQueue as processHentai } from '@queues/hentai.queue
 import { doujinQueue, processQueue as processDoujin } from '@queues/doujin.queue'
 import { sentry } from '@/config'
 import { LANDING_URL } from '@interfaces/constants'
+import p from 'phin'
 import { captureException } from '@sentry/node'
 
 processHentai()
@@ -18,12 +18,21 @@ schedule('0 * * * *', async () => {
 
     // Get latest HAnime upload ID
     const {
+      body: {
+        sections: [
+          {
+            hentai_video_ids: [newestID]
+          }
+        ]
+      }
+    } = await p<{
       sections: [
         {
-          hentai_video_ids: [newestID]
+          // eslint-disable-next-line camelcase
+          hentai_video_ids: number[]
         }
       ]
-    } = await c(LANDING_URL, 'GET').json()
+    }>({ url: LANDING_URL, parse: 'json' })
 
     await ioRedis.set('hentai_newestID', newestID)
 

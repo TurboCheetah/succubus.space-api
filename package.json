@@ -27,7 +27,6 @@
   },
   "homepage": "https://github.com/TurboCheetah/succubus.space-api#readme",
   "dependencies": {
-    "@aero/centra": "1.0.8",
     "@sentry/node": "6.16.1",
     "apollo-server-cache-redis": "3.3.0",
     "apollo-server-express": "3.6.1",
@@ -46,6 +45,7 @@
     "morgan": "1.10.0",
     "nhentai": "3.0.0",
     "node-cron": "3.0.0",
+    "phin": "^3.6.1",
     "rate-limiter-flexible": "2.3.6",
     "redis-json": "6.0.2",
     "reflect-metadata": "0.1.13",

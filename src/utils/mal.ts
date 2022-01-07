@@ -1,22 +1,24 @@
+/* eslint-disable camelcase */
 import { myanimelist, sentry } from '@/config'
-import { MALResult } from '@interfaces/MyAnimeList.interface'
+import { MALAPIResult, MALResult } from '@interfaces/MyAnimeList.interface'
 import { logger } from '@utils/logger'
-import c from '@aero/centra'
+import p from 'phin'
 import { captureException } from '@sentry/node'
 
 export const malAuth = async (clientID: string, username: string, password: string) => {
-  // eslint-disable-next-line camelcase
-  const { access_token, refresh_token } = await c('https://api.myanimelist.net/v2/auth/token', 'POST')
-    .body(
-      {
-        client_id: clientID,
-        username,
-        password,
-        grant_type: 'password'
-      },
-      'form'
-    )
-    .json()
+  const {
+    body: { access_token, refresh_token }
+  } = await p<{ access_token: string; refresh_token: string }>({
+    url: 'https://api.myanimelist.net/v2/auth/token',
+    method: 'POST',
+    form: {
+      client_id: clientID,
+      username,
+      password,
+      grant_type: 'password'
+    },
+    parse: 'json'
+  })
 
   return { access_token, refresh_token }
 }
@@ -24,27 +26,23 @@ export const malAuth = async (clientID: string, username: string, password: stri
 export const search = async (query: string): Promise<MALResult[]> => {
   const auth = await malAuth(myanimelist.clientID, myanimelist.username, myanimelist.password)
 
-  const { data } = await c('https://api.myanimelist.net/v2/anime', 'GET')
-    .query({
-      nsfw: true,
-      q: query,
-      fields: 'alternative_titles, synopsis'
-    })
-    .header('authorization', `Bearer ${auth.access_token}`)
-    .json()
+  const {
+    body: { data }
+  } = await p<MALAPIResult>({
+    url: `https://api.myanimelist.net/v2/anime?nsfw=true&q=${query}&fields=alternative_titles, synopsis`,
+    headers: { Authorization: `Bearer ${auth.access_token}` },
+    parse: 'json'
+  })
 
-  if (!data) return undefined
+  if (!data) return null
 
-  const hentai = data.map(
-    // eslint-disable-next-line camelcase
-    (data: { node: { id: number; title: string; alternative_titles: { en: string; ja: string; synonyms: string[] }; synopsis: string } }) => {
-      return {
-        id: data.node.id,
-        titles: [data.node.title, data.node.alternative_titles.en, data.node.alternative_titles.ja, ...data.node.alternative_titles.synonyms],
-        synopsis: data.node.synopsis
-      }
+  const hentai = data.map(data => {
+    return {
+      id: data.node.id,
+      titles: [data.node.title, data.node.alternative_titles.en, data.node.alternative_titles.ja, ...data.node.alternative_titles.synonyms],
+      synopsis: data.node.synopsis
     }
-  )
+  })
   for (const h of hentai) h.titles = h.titles.map((title: string) => title.replace(/[^a-zA-Z0-9 ]/g, '').toLowerCase())
 
   return hentai

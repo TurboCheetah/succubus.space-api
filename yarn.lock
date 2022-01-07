@@ -5,13 +5,6 @@ __metadata:
   version: 5
   cacheKey: 8
 
-"@aero/centra@npm:1.0.8":
-  version: 1.0.8
-  resolution: "@aero/centra@npm:1.0.8"
-  checksum: cc20f97e5e245dc774f9c8d72149c6ff04e9be17ef402bd926236ae78a61406dc5b35ab006141b9c77994f986b4ae1615ef0f8940ae0bfb7c843d8ba5062889f
-  languageName: node
-  linkType: hard
-
 "@apollo/protobufjs@npm:1.2.2":
   version: 1.2.2
   resolution: "@apollo/protobufjs@npm:1.2.2"
@@ -2666,6 +2659,13 @@ __metadata:
   version: 1.0.30001249
   resolution: "caniuse-lite@npm:1.0.30001249"
   checksum: d6a7b78e21258b27e238e997a70c3257aa02121a2e05f7636399a967503816af02fb0b11029f2f6e2e363d5267cf4366ca60f6fb33e206dfa6020836e4452a86
+  languageName: node
+  linkType: hard
+
+"centra@npm:^2.4.2":
+  version: 2.5.0
+  resolution: "centra@npm:2.5.0"
+  checksum: f3c66d372a886cd2311bc6b25a4ba4e354170928161bba0bc0995d9697e65b93bc7de115f85c4b8202f8d556f629434531ef2326ce36f222a4e6dde86e36fc75
   languageName: node
   linkType: hard
 
@@ -7861,6 +7861,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"phin@npm:^3.6.1":
+  version: 3.6.1
+  resolution: "phin@npm:3.6.1"
+  dependencies:
+    centra: ^2.4.2
+  checksum: 17fbddfec9d6f1359460fa6f7f33db9e4d5380bda1bd2745e75810b92e53fd3c5713086c951683a8c8b6526aaa172b031b2858b1c66c3a120a06963ffe26136e
+  languageName: node
+  linkType: hard
+
 "picomatch@npm:^2.0.4, picomatch@npm:^2.2.1, picomatch@npm:^2.2.3":
   version: 2.3.0
   resolution: "picomatch@npm:2.3.0"
@@ -9140,7 +9149,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "succubus.space@workspace:."
   dependencies:
-    "@aero/centra": 1.0.8
     "@sentry/node": 6.16.1
     "@types/bull": 3.15.7
     "@types/compression": 1.7.2
@@ -9188,6 +9196,7 @@ __metadata:
     nhentai: 3.0.0
     node-cron: 3.0.0
     nodemon: 2.0.15
+    phin: ^3.6.1
     prettier: 2.5.1
     rate-limiter-flexible: 2.3.6
     redis-json: 6.0.2

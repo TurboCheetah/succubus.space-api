@@ -1,13 +1,11 @@
-import { APIVideo } from '@interfaces/hanime/APIVideo.interface'
 import { APIRaw } from '@interfaces/hanime/APIRaw.interface'
-import { SEARCH_URL, VIDEO_API_URL, VIDEO_URL } from '@interfaces/constants'
-import c from '@aero/centra'
+import { APISearch } from '@interfaces/hanime/APISearch.interface'
+import { APIVideo } from '@interfaces/hanime/APIVideo.interface'
+import { SEARCH_URL, VIDEO_API_URL } from '@interfaces/constants'
+import p from 'phin'
+import { APIVideoInfo } from '@/interfaces/hanime/APIVideoInfo.interface'
 
 export const hanime = async (query: string | number): Promise<APIVideo> => {
-  const getDate = (releaseDate: number) => {
-    return new Date(releaseDate * 1000)
-  }
-
   const search = async (query: string) => {
     const config = {
       search_text: query,
@@ -19,26 +17,28 @@ export const hanime = async (query: string | number): Promise<APIVideo> => {
       ordering: 'desc'
     }
 
-    return await c(SEARCH_URL, 'POST').header('Content-Type', 'application/json').body(JSON.stringify(config)).json()
+    const { body: results } = await p<APISearch>({
+      url: SEARCH_URL,
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      data: JSON.stringify(config),
+      parse: 'json'
+    })
+
+    return results
   }
 
   if (isNaN(+query)) {
-    let results = await search(query as string)
+    const results = await search(query as string)
 
     if (results.nbHits > 0) {
-      results = JSON.parse(results.hits)
-      for (let i = 0; i < results.length; i++) {
-        results[i].url = `${VIDEO_URL}/${results[i].slug}`
-        results[i].released_at = getDate(results[i].released_at)
-      }
+      const parsedResults: APIVideoInfo[] = JSON.parse(results.hits)
+      query = parsedResults[0].id
     } else {
       return null
     }
-
-    // return results as HAnime
-    query = results[0].id
   }
-  const data: APIRaw = await c(`${VIDEO_API_URL}?id=${query}`, 'GET').json()
+  const { body: data } = await p<APIRaw>({ url: `${VIDEO_API_URL}?id=${query}`, parse: 'json' })
 
   if (!data.hentai_video) return null
 
