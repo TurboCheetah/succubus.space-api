@@ -37,6 +37,12 @@ export class DoujinTagType {
 }
 
 @ObjectType()
+export class DoujinTagManagerType {
+  @Field(() => [DoujinTagType])
+  public all: DoujinTagType[]
+}
+
+@ObjectType()
 export class DoujinTitlesType {
   @Field(() => String)
   public english: string
@@ -86,8 +92,8 @@ export class DoujinType {
   @Field(() => Int)
   favorites: number
 
-  @Field(() => [DoujinTagType])
-  tags: DoujinTagType[]
+  @Field(() => DoujinTagManagerType)
+  tags: DoujinTagManagerType
 }
 
 @ArgsType()
