@@ -9,7 +9,7 @@ import { autoInjectable } from 'tsyringe'
 
 @autoInjectable()
 class DoujinRoute implements Routes {
-  public path = '/doujin/'
+  public path = '/doujin'
   public router = Router()
 
   constructor(private controller: DoujinController) {
@@ -18,19 +18,19 @@ class DoujinRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}tag/:query`, ratelimitMiddleware(1), this.controller.tag)
-    this.router.get(`${this.path}popular`, ratelimitMiddleware(1), this.controller.popular)
-    this.router.get(`${this.path}length`, ratelimitMiddleware(1), this.controller.length)
-    this.router.get(`${this.path}age`, ratelimitMiddleware(1), this.controller.age)
+    this.router.get(`${this.path}/tag/:query`, ratelimitMiddleware(1), this.controller.tag)
+    this.router.get(`${this.path}/popular`, ratelimitMiddleware(1), this.controller.popular)
+    this.router.get(`${this.path}/length`, ratelimitMiddleware(1), this.controller.length)
+    this.router.get(`${this.path}/age`, ratelimitMiddleware(1), this.controller.age)
     this.router.get(
-      `${this.path}:query`,
+      `${this.path}/:query`,
       ratelimitMiddleware(1),
       cacheMiddleware({ type: 'doujin' }),
       mongoMiddleware({ type: 'doujin' }),
       scraperMiddleware({ type: 'doujin' })
     )
     this.router.get(
-      `${this.path}random`,
+      `${this.path}/random`,
       ratelimitMiddleware(1),
       cacheMiddleware({ type: 'doujin', random: true }),
       mongoMiddleware({ type: 'doujin' }),
