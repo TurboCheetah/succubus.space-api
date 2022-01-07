@@ -98,7 +98,7 @@ export class DoujinType {
 
 @ArgsType()
 export class DoujinBaseArgs {
-  @Field(() => Int)
+  @Field(() => ID)
   id?: number
 
   @Field()
