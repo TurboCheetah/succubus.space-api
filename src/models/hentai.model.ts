@@ -87,7 +87,7 @@ const hentaiSchema: Schema = new Schema(
 
     coverURL: String,
 
-    brand: [hentaiBrandSchema],
+    brand: hentaiBrandSchema,
 
     durationInMs: Number,
 
