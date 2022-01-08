@@ -115,7 +115,7 @@ const hentaiSchema: Schema = new Schema(
 
     url: String,
 
-    streamURL: streamSchema,
+    streams: streamSchema,
 
     malID: Number,
 
