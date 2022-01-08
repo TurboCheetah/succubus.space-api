@@ -76,8 +76,10 @@ export class HentaiResolver {
   ) {
     if (brandID) return await hentaiModel.find({ 'brand.id': brandID }).sort({ [sortBy]: order || 'desc' })
 
+    await hentaiModel.find({ name: { $regex: new RegExp(brandTitle.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
+
     return await hentaiModel
-      .find({ brand: { $regex: new RegExp(brandTitle.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
+      .find({ 'brand.title': { $regex: new RegExp(brandTitle.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
       .sort({ [sortBy]: order || 'desc' })
   }
 
