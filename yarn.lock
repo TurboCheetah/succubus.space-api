@@ -7861,7 +7861,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"phin@npm:^3.6.1":
+"phin@npm:3.6.1":
   version: 3.6.1
   resolution: "phin@npm:3.6.1"
   dependencies:
@@ -9196,7 +9196,7 @@ __metadata:
     nhentai: 3.0.0
     node-cron: 3.0.0
     nodemon: 2.0.15
-    phin: ^3.6.1
+    phin: 3.6.1
     prettier: 2.5.1
     rate-limiter-flexible: 2.3.6
     redis-json: 6.0.2
