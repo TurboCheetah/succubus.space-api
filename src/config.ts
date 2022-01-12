@@ -1,5 +1,5 @@
 import { config } from 'dotenv-cra'
-import { envParseBoolean, envParseInteger, envParseString } from '@utils/env'
+import { envParseBoolean, envParseInteger, envParseString } from '#utils/env'
 
 // Unless explicitly defined, set NODE_ENV as development:
 process.env.NODE_ENV ??= 'development'

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express'
-import hentaiModel from '@models/hentai.model'
-import doujinModel from '@models/doujin.model'
-import { client } from '@databases/redis'
+import hentaiModel from '#models/hentai.model'
+import doujinModel from '#models/doujin.model'
+import { client } from '#databases/redis'
 
 const mongoMiddleware = ({ type }: { type: 'hentai' | 'doujin' } = { type: 'hentai' }) => {
   return async (req: Request, res: Response, next: NextFunction) => {

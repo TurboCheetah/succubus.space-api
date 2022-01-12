@@ -1,4 +1,4 @@
-import { APIStream } from '@interfaces/hanime/APIStream.interface'
+import { APIStream } from '#interfaces/hanime/APIStream.interface'
 
 /* eslint-disable camelcase */
 export interface APIStreamServer {

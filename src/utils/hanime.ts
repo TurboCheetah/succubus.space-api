@@ -1,9 +1,9 @@
-import { APIRaw } from '@interfaces/hanime/APIRaw.interface'
-import { APISearch } from '@interfaces/hanime/APISearch.interface'
-import { APIVideo } from '@interfaces/hanime/APIVideo.interface'
-import { SEARCH_URL, VIDEO_API_URL } from '@interfaces/constants'
+import { APIRaw } from '#interfaces/hanime/APIRaw.interface'
+import { APISearch } from '#interfaces/hanime/APISearch.interface'
+import { APIVideo } from '#interfaces/hanime/APIVideo.interface'
+import { SEARCH_URL, VIDEO_API_URL } from '#interfaces/constants'
 import p from 'phin'
-import { APIVideoInfo } from '@/interfaces/hanime/APIVideoInfo.interface'
+import { APIVideoInfo } from '#interfaces/hanime/APIVideoInfo.interface'
 
 export const hanime = async (query: string | number): Promise<APIVideo> => {
   const search = async (query: string) => {

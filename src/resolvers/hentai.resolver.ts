@@ -1,11 +1,11 @@
 /* eslint-disable camelcase */
-import { client, ioRedis } from '@databases/redis'
-import { Hentai } from '@interfaces/hentai/Hentai.interface'
-import hentaiModel from '@models/hentai.model'
-import { Utils } from '@utils/Utils'
+import { client, ioRedis } from '#databases/redis'
+import { Hentai } from '#interfaces/hentai/Hentai.interface'
+import hentaiModel from '#models/hentai.model'
+import { Utils } from '#utils/Utils'
 import { Arg, Query, Resolver } from 'type-graphql'
-import { hentaiType } from '@resolvers/types/hentai.type'
-import { APITags } from '@interfaces/hanime/APITags.interface'
+import { hentaiType } from '#resolvers/types/hentai.type'
+import { APITags } from '#interfaces/hanime/APITags.interface'
 import { container } from 'tsyringe'
 
 @Resolver()

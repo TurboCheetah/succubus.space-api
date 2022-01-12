@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express'
-import { ioRedis, client } from '@databases/redis'
-import { logger } from '@utils/logger'
-import { nhentai } from '@utils/nhentai'
-import { sentry } from '@/config'
+import { ioRedis, client } from '#databases/redis'
+import { logger } from '#utils/logger'
+import { nhentai } from '#utils/nhentai'
+import { sentry } from '#/config'
 import { captureException } from '@sentry/node'
 
 const cacheMiddleware = ({ type, random, latest }: { type: 'hentai' | 'doujin'; random?: boolean; latest?: boolean } = { type: 'hentai' }) => {

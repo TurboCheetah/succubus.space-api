@@ -1,8 +1,8 @@
-import { HttpException } from '@exceptions/HttpException'
-import { logger } from '@utils/logger'
+import { HttpException } from '#exceptions/HttpException'
+import { logger } from '#utils/logger'
 import { NextFunction, Request, Response } from 'express'
 import { captureException } from '@sentry/node'
-import { sentry } from '@/config'
+import { sentry } from '#/config'
 
 const errorMiddleware = (error: HttpException, req: Request, res: Response, next: NextFunction) => {
   try {

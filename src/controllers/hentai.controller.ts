@@ -1,5 +1,5 @@
-import hentaiModel from '@models/hentai.model'
-import { hanime } from '@utils/hanime'
+import hentaiModel from '#models/hentai.model'
+import { hanime } from '#utils/hanime'
 import { NextFunction, Request, Response } from 'express'
 import { autoInjectable } from 'tsyringe'
 

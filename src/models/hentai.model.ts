@@ -1,5 +1,5 @@
 import { model, Schema, Document } from 'mongoose'
-import { Hentai } from '@interfaces/hentai/Hentai.interface'
+import { Hentai } from '#interfaces/hentai/Hentai.interface'
 
 const hentaiTitleSchema: Schema = new Schema({
   lang: String,

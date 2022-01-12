@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express'
-import { ioRedis } from '@databases/redis'
+import { ioRedis } from '#databases/redis'
 import RateLimiter from 'rate-limiter-flexible'
-import { logger } from '@utils/logger'
-import { sentry } from '@/config'
+import { logger } from '#utils/logger'
+import { sentry } from '#/config'
 import { captureException } from '@sentry/node'
 
 const rateLimiter = new RateLimiter.RateLimiterRedis({

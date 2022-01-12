@@ -1,11 +1,11 @@
 /* eslint-disable camelcase */
-import { APIBrand } from '@interfaces/hanime/APIBrand.interface'
-import { APIFranchise } from '@interfaces/hanime/APIFranchise.interface'
-import { APIFranchiseVideoInfo } from '@interfaces/hanime/APIFranchiseVideoInfo'
-import { APIRaw } from '@interfaces/hanime/APIRaw.interface'
-import { APIStoryboard } from '@interfaces/hanime/APIStoryboard.interface'
-import { APIVideoInfo } from '@interfaces/hanime/APIVideoInfo.interface'
-import { APIVideoManifest } from '@interfaces/hanime/APIVideoManifest.interface'
+import { APIBrand } from '#interfaces/hanime/APIBrand.interface'
+import { APIFranchise } from '#interfaces/hanime/APIFranchise.interface'
+import { APIFranchiseVideoInfo } from '#interfaces/hanime/APIFranchiseVideoInfo'
+import { APIRaw } from '#interfaces/hanime/APIRaw.interface'
+import { APIStoryboard } from '#interfaces/hanime/APIStoryboard.interface'
+import { APIVideoInfo } from '#interfaces/hanime/APIVideoInfo.interface'
+import { APIVideoManifest } from '#interfaces/hanime/APIVideoManifest.interface'
 
 export interface APIVideo {
   hentai_video: APIVideoInfo

@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import ProxyController from '@controllers/proxy.controller'
-import { Routes } from '@interfaces/routes.interface'
+import ProxyController from '#controllers/proxy.controller'
+import { Routes } from '#interfaces/routes.interface'
 import { autoInjectable } from 'tsyringe'
 
 @autoInjectable()

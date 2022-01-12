@@ -4,9 +4,9 @@ Thanks to sk-1982 for some of the types
 https://github.com/sk-1982/hanime/blob/master/src/api-types/APIVideo.ts
 */
 
-import { APIFranchiseVideoInfo } from '@interfaces/hanime/APIFranchiseVideoInfo'
-import { APITags } from '@interfaces/hanime/APITags.interface'
-import { APIVideo } from '@interfaces/hanime/APIVideo.interface'
+import { APIFranchiseVideoInfo } from '#interfaces/hanime/APIFranchiseVideoInfo'
+import { APITags } from '#interfaces/hanime/APITags.interface'
+import { APIVideo } from '#interfaces/hanime/APIVideo.interface'
 
 export interface APIRaw extends APIVideo {
   player_base_url: string

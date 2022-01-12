@@ -1,4 +1,4 @@
-import type { SuccEnv } from '@interfaces/succenv.interface'
+import type { SuccEnv } from '#interfaces/succenv.interface'
 
 declare global {
   namespace NodeJS {

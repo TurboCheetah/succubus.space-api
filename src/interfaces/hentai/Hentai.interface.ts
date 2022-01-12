@@ -1,11 +1,11 @@
-import { APITitle } from '@interfaces/hanime/APITitle.interface'
-import { APITags } from '@interfaces/hanime/APITags.interface'
-import { APIFranchise } from '@interfaces/hanime/APIFranchise.interface'
-import { APIVideo } from '@interfaces/hanime/APIVideo.interface'
-import { HentaiBrand } from '@interfaces/hentai/HentaiBrand.interface'
-import { HentaiFranchiseVideoInfo } from '@interfaces/hentai/HentaiFranchiseVideoInfo.interface'
-import { MyAnimeListResult } from '@interfaces/MyAnimeList/MyAnimeListResult.interface'
-import { VIDEO_URL } from '@interfaces/constants'
+import { APITitle } from '#interfaces/hanime/APITitle.interface'
+import { APITags } from '#interfaces/hanime/APITags.interface'
+import { APIFranchise } from '#interfaces/hanime/APIFranchise.interface'
+import { APIVideo } from '#interfaces/hanime/APIVideo.interface'
+import { HentaiBrand } from '#interfaces/hentai/HentaiBrand.interface'
+import { HentaiFranchiseVideoInfo } from '#interfaces/hentai/HentaiFranchiseVideoInfo.interface'
+import { MyAnimeListResult } from '#interfaces/MyAnimeList/MyAnimeListResult.interface'
+import { VIDEO_URL } from '#interfaces/constants'
 
 export interface Hentai {
   id: number

@@ -1,4 +1,4 @@
-import doujinModel from '@models/doujin.model'
+import doujinModel from '#models/doujin.model'
 import { NextFunction, Request, Response } from 'express'
 import { autoInjectable } from 'tsyringe'
 

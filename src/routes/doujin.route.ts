@@ -1,10 +1,10 @@
 import { Router } from 'express'
-import { Routes } from '@interfaces/routes.interface'
-import DoujinController from '@controllers/doujin.controller'
-import ratelimitMiddleware from '@middlewares/ratelimiter.middleware'
-import cacheMiddleware from '@middlewares/cache.middleware'
-import mongoMiddleware from '@middlewares/mongo.middleware'
-import scraperMiddleware from '@middlewares/scraper.middleware'
+import { Routes } from '#interfaces/routes.interface'
+import DoujinController from '#controllers/doujin.controller'
+import ratelimitMiddleware from '#middlewares/ratelimiter.middleware'
+import cacheMiddleware from '#middlewares/cache.middleware'
+import mongoMiddleware from '#middlewares/mongo.middleware'
+import scraperMiddleware from '#middlewares/scraper.middleware'
 import { autoInjectable } from 'tsyringe'
 
 @autoInjectable()

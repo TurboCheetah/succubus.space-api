@@ -1,4 +1,4 @@
-import type { SuccEnv, SuccEnvAny, SuccEnvBoolean, SuccEnvInteger, SuccEnvString } from '@interfaces/succenv.interface'
+import type { SuccEnv, SuccEnvAny, SuccEnvBoolean, SuccEnvInteger, SuccEnvString } from '#interfaces/succenv.interface'
 
 export const envParseInteger = (key: SuccEnvInteger): number => {
   const value = process.env[key]

@@ -1,4 +1,4 @@
-import { redis } from '@/config'
+import { redis } from '#/config'
 
 import Redis from 'ioredis'
 import JSONCache from 'redis-json'

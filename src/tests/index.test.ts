@@ -1,6 +1,6 @@
 import request from 'supertest'
-import App from '@/app'
-import IndexRoute from '@routes/index.route'
+import App from '#/app'
+import IndexRoute from '#routes/index.route'
 import { connection } from 'mongoose'
 import { container } from 'tsyringe'
 
