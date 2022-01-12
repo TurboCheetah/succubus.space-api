@@ -1,6 +1,6 @@
 import request from 'supertest'
-import App from '@/app'
-import DoujinRoute from '@routes/doujin.route'
+import App from '#/app'
+import DoujinRoute from '#routes/doujin.route'
 import { container } from 'tsyringe'
 
 jest.setTimeout(30000)
@@ -11,7 +11,7 @@ describe('Testing Doujin', () => {
       const doujinRoute = container.resolve(DoujinRoute)
       const app = new App([doujinRoute])
 
-      return request(app.getServer()).get(`${doujinRoute.path}177013`).expect(200)
+      return request(app.getServer()).get(`${doujinRoute.path}/177013`).expect(200)
     })
   })
 
@@ -20,7 +20,7 @@ describe('Testing Doujin', () => {
       const doujinRoute = container.resolve(DoujinRoute)
       const app = new App([doujinRoute])
 
-      return request(app.getServer()).get(`${doujinRoute.path}metamorphosis`).expect(200)
+      return request(app.getServer()).get(`${doujinRoute.path}/metamorphosis`).expect(200)
     })
   })
 

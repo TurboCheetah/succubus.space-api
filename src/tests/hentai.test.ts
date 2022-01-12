@@ -1,6 +1,6 @@
 import request from 'supertest'
-import App from '@/app'
-import HentaiRoute from '@routes/hentai.route'
+import App from '#/app'
+import HentaiRoute from '#routes/hentai.route'
 import { container } from 'tsyringe'
 
 jest.setTimeout(30000)
@@ -11,7 +11,7 @@ describe('Testing Hentai', () => {
       const hentaiRoute = container.resolve(HentaiRoute)
       const app = new App([hentaiRoute])
 
-      return request(app.getServer()).get(`${hentaiRoute.path}hanime/1226`).expect(200)
+      return request(app.getServer()).get(`${hentaiRoute.path}/hanime/1226`).expect(200)
     })
   })
 
@@ -20,7 +20,7 @@ describe('Testing Hentai', () => {
       const hentaiRoute = container.resolve(HentaiRoute)
       const app = new App([hentaiRoute])
 
-      return request(app.getServer()).get(`${hentaiRoute.path}scrape/1226`).expect(200)
+      return request(app.getServer()).get(`${hentaiRoute.path}/scrape/1226`).expect(200)
     })
   })
 
@@ -29,7 +29,7 @@ describe('Testing Hentai', () => {
       const hentaiRoute = container.resolve(HentaiRoute)
       const app = new App([hentaiRoute])
 
-      return request(app.getServer()).get(`${hentaiRoute.path}scrape/itadaki`).expect(200)
+      return request(app.getServer()).get(`${hentaiRoute.path}/scrape/itadaki`).expect(200)
     })
   })
 
@@ -38,7 +38,7 @@ describe('Testing Hentai', () => {
       const hentaiRoute = container.resolve(HentaiRoute)
       const app = new App([hentaiRoute])
 
-      return request(app.getServer()).get(`${hentaiRoute.path}1226`).expect(200)
+      return request(app.getServer()).get(`${hentaiRoute.path}/1226`).expect(200)
     })
   })
 
