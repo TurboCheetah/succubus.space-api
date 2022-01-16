@@ -16,7 +16,7 @@ export interface APIVideo {
   videos_manifest: APIVideoManifest
 }
 
-export class APIVideo implements APIVideo {
+export class APIVideo {
   constructor(raw: APIRaw) {
     this.hentai_video = raw.hentai_video
     this.hentai_video.description = this.hentai_video.description.replace(/<br>/g, '\n').replace(/<[^>]*>?/gm, '')

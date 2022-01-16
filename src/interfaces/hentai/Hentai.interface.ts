@@ -45,7 +45,7 @@ export interface Hentai {
   malDescription: string | null
 }
 
-export class Hentai implements Hentai {
+export class Hentai {
   constructor(raw: APIVideo, mal?: MyAnimeListResult) {
     this.id = raw.hentai_video.id
     this.name = raw.hentai_video.name
