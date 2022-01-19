@@ -17,8 +17,6 @@ export interface SuccEnv {
   MONGO_PASSWORD: string
 
   MYANIMELIST_CLIENT_ID: string
-  MYANIMELIST_USERNAME: string
-  MYANIMELIST_PASSWORD: string
 
   REDIS_HOST: string
   REDIS_PORT: IntegerString

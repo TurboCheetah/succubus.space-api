@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 import { myanimelist, sentry } from '#/config'
-import { MyAnimeListAuth } from '#interfaces/MyAnimeList/MyAnimeListAuth.interface'
 import { MyAnimeListRawResult } from '#interfaces/MyAnimeList/MyAnimeListRawResult.interface'
 import { MyAnimeListResult } from '#interfaces/MyAnimeList/MyAnimeListResult.interface'
 import { logger } from '#utils/logger'
@@ -11,40 +10,16 @@ import { singleton } from 'tsyringe'
 @singleton()
 export class MyAnimeList {
   private clientID: string
-  private username: string
-  private password: string
   constructor() {
     this.clientID = myanimelist.clientID
-    this.username = myanimelist.username
-    this.password = myanimelist.password
-  }
-
-  public async auth(): Promise<MyAnimeListAuth> {
-    const {
-      body: { access_token, refresh_token }
-    } = await p<MyAnimeListAuth>({
-      url: 'https://api.myanimelist.net/v2/auth/token',
-      method: 'POST',
-      form: {
-        client_id: this.clientID,
-        username: this.username,
-        password: this.password,
-        grant_type: 'password'
-      },
-      parse: 'json'
-    })
-
-    return { access_token, refresh_token }
   }
 
   public async search(query: string): Promise<MyAnimeListResult[]> {
-    const auth = await this.auth()
-
     const {
       body: { data }
     } = await p<MyAnimeListRawResult>({
       url: `https://api.myanimelist.net/v2/anime?nsfw=true&q=${query}&fields=alternative_titles, synopsis`,
-      headers: { Authorization: `Bearer ${auth.access_token}` },
+      headers: { 'X-MAL-Client-ID': this.clientID },
       parse: 'json'
     })
 

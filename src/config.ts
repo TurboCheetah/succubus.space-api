@@ -24,9 +24,7 @@ export const mongo = {
 }
 
 export const myanimelist = {
-  clientID: envParseString('MYANIMELIST_CLIENT_ID'),
-  username: envParseString('MYANIMELIST_USERNAME'),
-  password: envParseString('MYANIMELIST_PASSWORD')
+  clientID: envParseString('MYANIMELIST_CLIENT_ID')
 }
 
 export const redis = {
