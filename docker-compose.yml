@@ -17,6 +17,8 @@ services:
     image: redislabs/rejson:latest
     container_name: succubus.space-redis
     restart: 'unless-stopped'
+    volumes:
+      - redis:/data
 
   mongo:
     image: mongo
@@ -26,4 +28,5 @@ services:
       - mongo:/data/db
 
 volumes:
+  redis:
   mongo:
