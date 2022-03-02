@@ -12,7 +12,7 @@ const scraperMiddleware = ({ type }: { type: 'hentai' | 'doujin' } = { type: 'he
         return res.send(search)
       } else {
         // Scrape new data
-        const search = await await container.resolve(Utils).scrapeDoujin(req.params.query)
+        const search = await container.resolve(Utils).scrapeDoujin(req.params.query)
 
         return res.send(search)
       }
