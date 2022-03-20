@@ -1591,12 +1591,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/ioredis@npm:4.28.8":
-  version: 4.28.8
-  resolution: "@types/ioredis@npm:4.28.8"
+"@types/ioredis@npm:4.28.10":
+  version: 4.28.10
+  resolution: "@types/ioredis@npm:4.28.10"
   dependencies:
     "@types/node": "*"
-  checksum: 6082208a2a05767bef8dcbeeb33db713f2aef00eddd7466463246bc48ad6960cc110a82704e4e36cf11be50fcac905c1371322f177fc50b68896541c444ac3e5
+  checksum: 0f2788cf25f490d3b345db8c5f8b8ce3f6c92cc99abcf744c8f974f02b9b3875233b3d22098614c462a0d6c41c523bd655509418ea88eb6249db6652290ce7cf
   languageName: node
   linkType: hard
 
@@ -2812,9 +2812,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bull@npm:4.7.0":
-  version: 4.7.0
-  resolution: "bull@npm:4.7.0"
+"bull@npm:4.8.0":
+  version: 4.8.0
+  resolution: "bull@npm:4.8.0"
   dependencies:
     cron-parser: ^4.2.1
     debuglog: ^1.0.0
@@ -2825,7 +2825,7 @@ __metadata:
     p-timeout: ^3.2.0
     semver: ^7.3.2
     uuid: ^8.3.0
-  checksum: 1b01a26b96380078b0f00e63978c72a47d08771492b9bb2ec4c8de71f9b366c7257eeb423e2593b8ffdd287f57ed4353e5be15f0772c85da9d6eb6cdb43fb825
+  checksum: ed9f2a67ca532c05e451ab91986917237075039fc39c492236886dcfb8a1fada6e150fcf7ba1c2c1e8d133b79c08896cca2a71d8a726474ee0be21dc26795281
   languageName: node
   linkType: hard
 
@@ -6781,9 +6781,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:12.3.6":
-  version: 12.3.6
-  resolution: "lint-staged@npm:12.3.6"
+"lint-staged@npm:12.3.7":
+  version: 12.3.7
+  resolution: "lint-staged@npm:12.3.7"
   dependencies:
     cli-truncate: ^3.1.0
     colorette: ^2.0.16
@@ -6801,7 +6801,7 @@ __metadata:
     yaml: ^1.10.2
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: b5075addb79cefd3a01eb3e4b511cdbe255c86e80ac4f27c4ce90bbd5a6ef3765ec0c70ddc33e37d13aef54218b6026f52fcd0ed0ac9bf3a205a533b994ed387
+  checksum: b595097556880eb2ab7ce2cf105047f6f22525ccfd608fbdc63ab243259aa36a26949576fadff673748fb885e7cb37ad3f4471d964ad54c1205d57a58999ba24
   languageName: node
   linkType: hard
 
@@ -9540,7 +9540,7 @@ __metadata:
     "@types/graphql": 14.5.0
     "@types/helmet": 4.0.0
     "@types/hpp": 0.2.2
-    "@types/ioredis": 4.28.8
+    "@types/ioredis": 4.28.10
     "@types/jest": 27.4.1
     "@types/mongoose": 5.11.97
     "@types/morgan": 1.9.3
@@ -9552,7 +9552,7 @@ __metadata:
     "@typescript-eslint/parser": 5.15.0
     apollo-server-cache-redis: 3.3.1
     apollo-server-express: 3.6.4
-    bull: 4.7.0
+    bull: 4.8.0
     class-validator: 0.13.2
     compression: 1.7.4
     cors: 2.8.5
@@ -9572,7 +9572,7 @@ __metadata:
     husky: 7.0.4
     ioredis: 4.28.5
     jest: 27.5.1
-    lint-staged: 12.3.6
+    lint-staged: 12.3.7
     mongoose: 6.2.7
     morgan: 1.10.0
     nhentai: 3.0.0
