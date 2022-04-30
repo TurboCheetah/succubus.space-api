@@ -19,11 +19,11 @@ export class HentaiResolver {
     // If no data in Redis check Mongo
     if (!data) {
       if (id) {
-        data = await hentaiModel.findOne({ id: id })
+        data = await hentaiModel.findOne({ id })
       } else if (name) {
         data = await hentaiModel.findOne({ name: { $regex: new RegExp(name.replace(/[#-.]|[[-^]|[?|{}]/g, '\\$&'), 'i') } })
       } else if (malID) {
-        data = await hentaiModel.findOne({ malID: malID })
+        data = await hentaiModel.findOne({ malID })
       }
 
       // if there is data in MongoDB save it to Redis

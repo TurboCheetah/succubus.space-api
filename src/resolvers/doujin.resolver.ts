@@ -18,7 +18,7 @@ export class DoujinResolver {
     // if no data in Redis check MongoDB
     if (!data) {
       if (id) {
-        data = await doujinModel.findOne({ id: id })
+        data = await doujinModel.findOne({ id })
       } else {
         data = await doujinModel.findOne({
           $or: [
