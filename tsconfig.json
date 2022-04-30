@@ -36,7 +36,9 @@
       "#routes/*": ["routes/*"],
       "#services/*": ["services/*"],
       "#utils/*": ["utils/*"]
-    }
+    },
+    "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo"
   },
   "include": ["src"],
   "exclude": ["node_modules"]
