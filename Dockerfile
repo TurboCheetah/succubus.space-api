@@ -2,10 +2,9 @@ FROM node:16-alpine AS deps
 
 WORKDIR /app
 
-COPY package.json yarn.lock .yarnrc.yml ./
-COPY .yarn/ .yarn/
+COPY package.json pnpm-lock.yaml ./
 
-RUN yarn workspaces focus --all --production
+RUN pnpm i --prod --frozen-lockfile
 
 FROM node:16-alpine AS builder
 
@@ -33,7 +32,7 @@ RUN adduser \
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-RUN yarn build
+RUN pnpm build
 
 FROM gcr.io/distroless/nodejs:16 as runner
 
