@@ -18,29 +18,54 @@
   "wireit": {
     "start": {
       "command": "cross-env NODE_ENV=production node dist/server.js",
-      "dependencies": ["build"],
-      "packageLocks": ["pnpm-lock.yaml"]
+      "dependencies": [
+        "build"
+      ],
+      "packageLocks": [
+        "pnpm-lock.yaml"
+      ]
     },
     "dev": {
       "command": "cross-env NODE_ENV=development nodemon",
-      "packageLocks": ["pnpm-lock.yaml"]
+      "packageLocks": [
+        "pnpm-lock.yaml"
+      ]
     },
     "build": {
       "command": "tsc --pretty -p tsconfig.prod.json && tsc-alias",
       "clean": "if-file-deleted",
-      "files": ["src/**/*.ts", "tsconfig.prod.json", ".tsbuildinfo"],
-      "output": ["dist/**"],
-      "packageLocks": ["pnpm-lock.yaml"]
+      "files": [
+        "src/**/*.ts",
+        "tsconfig.prod.json",
+        ".tsbuildinfo"
+      ],
+      "output": [
+        "dist/**"
+      ],
+      "packageLocks": [
+        "pnpm-lock.yaml"
+      ]
     },
     "lint": {
       "command": "eslint --ignore-path .gitignore --ext .ts src/",
-      "files": ["src/**/*.ts", ".eslintrc.json"],
-      "packageLocks": ["pnpm-lock.yaml"]
+      "files": [
+        "src/**/*.ts",
+        ".eslintrc.json"
+      ],
+      "packageLocks": [
+        "pnpm-lock.yaml"
+      ]
     },
     "lint:fix": {
       "command": "eslint --ignore-path .gitignore --ext .ts src/ --fix && prettier --write src/",
-      "files": ["src/**/*.ts", ".eslintrc.json", ".prettierrc"],
-      "packageLocks": ["pnpm-lock.yaml"]
+      "files": [
+        "src/**/*.ts",
+        ".eslintrc.json",
+        ".prettierrc"
+      ],
+      "packageLocks": [
+        "pnpm-lock.yaml"
+      ]
     }
   },
   "repository": {
@@ -54,6 +79,7 @@
   "dependencies": {
     "@sentry/node": "6.19.6",
     "apollo-server-cache-redis": "3.3.1",
+    "apollo-server-core": "3.6.7",
     "apollo-server-express": "3.6.7",
     "bull": "4.8.2",
     "class-validator": "0.13.2",
@@ -61,7 +87,6 @@
     "cors": "2.8.5",
     "cross-env": "7.0.3",
     "dotenv-cra": "3.0.2",
-    "eslint-plugin-n": "^15.2.0",
     "express": "4.18.0",
     "graphql": "15.8.0",
     "helmet": "5.0.2",
@@ -77,11 +102,12 @@
     "reflect-metadata": "0.1.13",
     "tsc-alias": "1.6.7",
     "tsconfig-paths": "3.14.1",
+    "tslib": "2.4.0",
     "tsyringe": "4.6.0",
     "type-graphql": "1.1.1",
     "typescript": "4.6.3",
     "winston": "3.7.2",
-    "wireit": "^0.3.0"
+    "wireit": "0.3.0"
   },
   "devDependencies": {
     "@types/bull": "3.15.8",
@@ -102,6 +128,7 @@
     "eslint-config-prettier": "8.5.0",
     "eslint-config-standard": "17.0.0",
     "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-n": "15.2.0",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-promise": "6.0.0",
