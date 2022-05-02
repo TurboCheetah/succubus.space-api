@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY package.json pnpm-lock.yaml ./
 
+RUN sed -i 's/"prepare": "husky install .github\/husky"/"prepare": ""/' ./package.json
+
 RUN npm i -g pnpm
 RUN pnpm i --prod --frozen-lockfile
 
