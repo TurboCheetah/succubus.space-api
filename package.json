@@ -101,7 +101,7 @@
     "redis-json": "6.0.3",
     "reflect-metadata": "0.1.13",
     "tsc-alias": "1.6.7",
-    "tsconfig-paths": "3.14.1",
+    "tsconfig-paths": "4.0.0",
     "tslib": "2.4.0",
     "tsyringe": "4.6.0",
     "type-graphql": "1.1.1",
