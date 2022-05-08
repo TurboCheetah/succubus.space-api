@@ -4,10 +4,9 @@ WORKDIR /app
 
 COPY package.json pnpm-lock.yaml ./
 
-RUN sed -i 's/"prepare": "husky install"/"prepare": ""/' ./package.json
-
-RUN npm i -g pnpm
-RUN pnpm i --prod --frozen-lockfile
+RUN sed -i 's/"prepare": "husky install"/"prepare": ""/' ./package.json \
+    && npm i -g pnpm \
+    && pnpm i --prod --frozen-lockfile
 
 ENV GROUP=nodejs
 ENV USER=succubus
@@ -17,8 +16,8 @@ ENV GID=1001
 RUN addgroup \
     --system \
     --gid "${GID}" \
-    "${GROUP}"
-RUN adduser \
+    "${GROUP}" \
+    && adduser \
     --system \
     --disabled-password \
     --gecos "" \
@@ -29,6 +28,7 @@ RUN adduser \
     "${USER}"
 
 COPY . .
+
 RUN pnpm build
 
 FROM gcr.io/distroless/nodejs:18 as runner
