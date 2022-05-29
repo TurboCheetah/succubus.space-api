@@ -148,5 +148,5 @@
       "pnpm test --bail --watchAll=false --findRelatedTests"
     ]
   },
-  "packageManager": "pnpm@7.1.6"
+  "packageManager": "pnpm@7.1.7"
 }
