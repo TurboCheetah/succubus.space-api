@@ -2,11 +2,10 @@ import { ioRedis, client } from '#databases/redis'
 import { schedule } from 'node-cron'
 import { logger } from '#utils/logger'
 import { nhentai } from '#utils/nhentai'
+import { getLatest } from '#utils/hanime'
 import { hentaiQueue, processQueue as processHentai } from '#queues/hentai.queue'
 import { doujinQueue, processQueue as processDoujin } from '#queues/doujin.queue'
 import { sentry } from '#/config'
-import { LANDING_URL } from '#interfaces/constants'
-import p from 'phin'
 import { captureException } from '@sentry/node'
 
 processHentai()
@@ -17,24 +16,7 @@ schedule('0 * * * *', async () => {
     const oldNewest = await ioRedis.get('hentai_newestID')
 
     // Get latest HAnime upload ID
-    const {
-      body: {
-        sections: [
-          {
-            hentai_video_ids: [newestID]
-          }
-        ]
-      }
-    } = await p<{
-      sections: [
-        {
-          // eslint-disable-next-line camelcase
-          hentai_video_ids: number[]
-        }
-      ]
-    }>({ url: LANDING_URL, parse: 'json' })
-
-    await ioRedis.set('hentai_newestID', newestID)
+    const newestID = await getLatest()
 
     logger.info(`Beginning to scrape data from ${newestID - +oldNewest} new entries`)
 

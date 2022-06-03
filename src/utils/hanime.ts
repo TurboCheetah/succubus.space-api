@@ -1,9 +1,10 @@
 import { APIRaw } from '#interfaces/hanime/APIRaw.interface'
 import { APISearch } from '#interfaces/hanime/APISearch.interface'
 import { APIVideo } from '#interfaces/hanime/APIVideo.interface'
-import { SEARCH_URL, VIDEO_API_URL } from '#interfaces/constants'
+import { LANDING_URL, SEARCH_URL, VIDEO_API_URL } from '#interfaces/constants'
 import p from 'phin'
 import { APIVideoInfo } from '#interfaces/hanime/APIVideoInfo.interface'
+import { ioRedis } from '#databases/redis'
 
 export const hanime = async (query: string | number): Promise<APIVideo> => {
   const search = async (query: string) => {
@@ -43,4 +44,28 @@ export const hanime = async (query: string | number): Promise<APIVideo> => {
   if (!data.hentai_video) return null
 
   return new APIVideo(data)
+}
+
+// Get latest HAnime upload ID
+export const getLatest = async (): Promise<number> => {
+  const {
+    body: {
+      sections: [
+        {
+          hentai_video_ids: [newestID]
+        }
+      ]
+    }
+  } = await p<{
+    sections: [
+      {
+        // eslint-disable-next-line camelcase
+        hentai_video_ids: number[]
+      }
+    ]
+  }>({ url: LANDING_URL, parse: 'json' })
+
+  await ioRedis.set('hentai_newestID', newestID)
+
+  return +newestID
 }

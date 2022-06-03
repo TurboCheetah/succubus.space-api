@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 import { ioRedis, client } from '#databases/redis'
 import { logger } from '#utils/logger'
 import { nhentai } from '#utils/nhentai'
+import { getLatest } from '#utils/hanime'
 import { sentry } from '#/config'
 import { captureException } from '@sentry/node'
 
@@ -10,7 +11,7 @@ const cacheMiddleware = ({ type, random, latest }: { type: 'hentai' | 'doujin'; 
     try {
       if (type === 'hentai') {
         // Fetch data from cache
-        if (latest) req.params.query = await ioRedis.get('hentai_newestID')
+        if (latest) req.params.query = (await ioRedis.get('hentai_newestID')) || `${await getLatest()}`
         if (random) req.params.query = (Math.floor(Math.random() * +(await ioRedis.get('hentai_newestID'))) + 1).toString()
 
         const data = await client.get(`hentai_${req.params.query}`).catch(err => {
