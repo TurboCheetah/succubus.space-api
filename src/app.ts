@@ -64,7 +64,7 @@ class App {
         tracesSampleRate: 1.0
       })
 
-      this.app.use(Handlers.requestHandler({ serverName: false }) as express.RequestHandler)
+      this.app.use(Handlers.requestHandler() as express.RequestHandler)
     }
 
     this.app.use(morgan(log.format, { stream }))
