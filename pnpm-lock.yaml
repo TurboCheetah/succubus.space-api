@@ -35,7 +35,7 @@ specifiers:
   eslint-plugin-promise: 6.0.1
   express: 4.18.1
   graphql: 15.8.0
-  helmet: 5.1.1
+  helmet: 6.0.0
   hpp: 0.2.3
   husky: 8.0.1
   ioredis: 5.2.3
@@ -77,7 +77,7 @@ dependencies:
   dotenv-cra: 3.0.2
   express: 4.18.1
   graphql: 15.8.0
-  helmet: 5.1.1
+  helmet: 6.0.0
   hpp: 0.2.3
   ioredis: 5.2.3
   mongoose: 6.5.4
@@ -3593,9 +3593,9 @@ packages:
     dependencies:
       function-bind: 1.1.1
 
-  /helmet/5.1.1:
-    resolution: {integrity: sha512-/yX0oVZBggA9cLJh8aw3PPCfedBnbd7J2aowjzsaWwZh7/UFY0nccn/aHAggIgWUFfnykX8GKd3a1pSbrmlcVQ==}
-    engines: {node: '>=12.0.0'}
+  /helmet/6.0.0:
+    resolution: {integrity: sha512-FO9RpR1wNJepH/GbLPQVtkE2eESglXL641p7SdyoT4LngHFJcZheHMoyUcjCZF4qpuMMO1u5q6RK0l9Ux8JBcg==}
+    engines: {node: '>=14.0.0'}
     dev: false
 
   /hexoid/1.0.0:
