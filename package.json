@@ -77,7 +77,7 @@
   },
   "homepage": "https://github.com/TurboCheetah/succubus.space-api#readme",
   "dependencies": {
-    "@sentry/node": "7.24.2",
+    "@sentry/node": "7.27.0",
     "apollo-server-cache-redis": "3.3.1",
     "apollo-server-core": "3.11.1",
     "apollo-server-express": "3.11.1",
@@ -114,17 +114,17 @@
     "@types/compression": "1.7.2",
     "@types/cors": "2.8.13",
     "@types/eslint": "8.4.10",
-    "@types/express": "4.17.14",
+    "@types/express": "4.17.15",
     "@types/hpp": "0.2.2",
     "@types/ioredis": "4.28.10",
     "@types/jest": "29.2.4",
     "@types/morgan": "1.9.3",
-    "@types/node": "16.18.8",
+    "@types/node": "16.18.10",
     "@types/node-cron": "3.0.6",
     "@types/supertest": "2.0.12",
-    "@typescript-eslint/eslint-plugin": "5.46.0",
-    "@typescript-eslint/parser": "5.46.0",
-    "eslint": "8.29.0",
+    "@typescript-eslint/eslint-plugin": "5.46.1",
+    "@typescript-eslint/parser": "5.46.1",
+    "eslint": "8.30.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-config-standard": "17.0.0",
     "eslint-plugin-import": "2.26.0",
@@ -148,5 +148,5 @@
       "pnpm test --bail --watchAll=false --findRelatedTests"
     ]
   },
-  "packageManager": "pnpm@7.18.1"
+  "packageManager": "pnpm@7.18.2"
 }
