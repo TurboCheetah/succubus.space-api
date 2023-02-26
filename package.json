@@ -92,7 +92,7 @@
     "helmet": "6.0.1",
     "hpp": "0.2.3",
     "ioredis": "5.3.1",
-    "mongoose": "6.9.2",
+    "mongoose": "6.10.0",
     "morgan": "1.10.0",
     "nhentai": "3.0.0",
     "node-cron": "3.0.2",
@@ -122,9 +122,9 @@
     "@types/node": "16.18.12",
     "@types/node-cron": "3.0.7",
     "@types/supertest": "2.0.12",
-    "@typescript-eslint/eslint-plugin": "5.52.0",
-    "@typescript-eslint/parser": "5.52.0",
-    "eslint": "8.34.0",
+    "@typescript-eslint/eslint-plugin": "5.53.0",
+    "@typescript-eslint/parser": "5.53.0",
+    "eslint": "8.35.0",
     "eslint-config-prettier": "8.6.0",
     "eslint-config-standard": "17.0.0",
     "eslint-plugin-import": "2.27.5",
@@ -148,5 +148,5 @@
       "pnpm test --bail --watchAll=false --findRelatedTests"
     ]
   },
-  "packageManager": "pnpm@7.27.1"
+  "packageManager": "pnpm@7.28.0"
 }
