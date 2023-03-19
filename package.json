@@ -77,7 +77,7 @@
   },
   "homepage": "https://github.com/TurboCheetah/succubus.space-api#readme",
   "dependencies": {
-    "@sentry/node": "7.42.0",
+    "@sentry/node": "7.43.0",
     "apollo-server-cache-redis": "3.3.1",
     "apollo-server-core": "3.12.0",
     "apollo-server-express": "3.12.0",
@@ -92,7 +92,7 @@
     "helmet": "6.0.1",
     "hpp": "0.2.3",
     "ioredis": "5.3.1",
-    "mongoose": "6.10.2",
+    "mongoose": "6.10.3",
     "morgan": "1.10.0",
     "nhentai": "3.0.0",
     "node-cron": "3.0.2",
@@ -113,17 +113,17 @@
     "@types/bull": "3.15.9",
     "@types/compression": "1.7.2",
     "@types/cors": "2.8.13",
-    "@types/eslint": "8.21.1",
+    "@types/eslint": "8.21.2",
     "@types/express": "4.17.17",
     "@types/hpp": "0.2.2",
     "@types/ioredis": "4.28.10",
-    "@types/jest": "29.4.0",
+    "@types/jest": "29.5.0",
     "@types/morgan": "1.9.4",
-    "@types/node": "16.18.14",
+    "@types/node": "16.18.16",
     "@types/node-cron": "3.0.7",
     "@types/supertest": "2.0.12",
-    "@typescript-eslint/eslint-plugin": "5.54.1",
-    "@typescript-eslint/parser": "5.54.1",
+    "@typescript-eslint/eslint-plugin": "5.55.0",
+    "@typescript-eslint/parser": "5.55.0",
     "eslint": "8.36.0",
     "eslint-config-prettier": "8.7.0",
     "eslint-config-standard": "17.0.0",
@@ -148,5 +148,5 @@
       "pnpm test --bail --watchAll=false --findRelatedTests"
     ]
   },
-  "packageManager": "pnpm@7.29.1"
+  "packageManager": "pnpm@7.30.0"
 }
