@@ -119,7 +119,7 @@
     "@types/ioredis": "4.28.10",
     "@types/jest": "29.5.0",
     "@types/morgan": "1.9.4",
-    "@types/node": "16.18.21",
+    "@types/node": "18.18.6",
     "@types/node-cron": "3.0.7",
     "@types/supertest": "2.0.12",
     "@typescript-eslint/eslint-plugin": "5.56.0",
