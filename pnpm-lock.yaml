@@ -46,7 +46,7 @@ specifiers:
   nhentai: 3.0.0
   node-cron: 3.0.3
   nodemon: 2.0.22
-  phin: 3.7.0
+  phin: 3.7.1
   prettier: 2.8.8
   rate-limiter-flexible: 2.4.2
   redis-json: 6.0.3
@@ -84,7 +84,7 @@ dependencies:
   morgan: 1.10.0
   nhentai: 3.0.0
   node-cron: 3.0.3
-  phin: 3.7.0
+  phin: 3.7.1
   rate-limiter-flexible: 2.4.2
   redis-json: 6.0.3
   reflect-metadata: 0.1.13
@@ -3097,8 +3097,12 @@ packages:
     resolution: {integrity: sha512-dXCB1Ufi5VekkH5vygd46PGp0HMW4rxorX7Xl1R51FWLcB21DRPOIgrpxvuM1VHXIs4bu/QQQdQaBneMzq9C2g==}
     dev: true
 
-  /centra/2.6.0:
-    resolution: {integrity: sha512-dgh+YleemrT8u85QL11Z6tYhegAs3MMxsaWAq/oXeAmYJ7VxL3SI9TZtnfaEvNDMAPolj25FXIb3S+HCI4wQaQ==}
+  /centra/2.7.0:
+    resolution: {integrity: sha512-PbFMgMSrmgx6uxCdm57RUos9Tc3fclMvhLSATYN39XsDV29B89zZ3KA89jmY0vwSGazyU+uerqwa6t+KaodPcg==}
+    dependencies:
+      follow-redirects: 1.15.9
+    transitivePeerDependencies:
+      - debug
     dev: false
 
   /chalk/2.4.2:
@@ -4473,6 +4477,16 @@ packages:
 
   /fn.name/1.1.0:
     resolution: {integrity: sha512-GRnmB5gPyJpAhTQdSZTSp9uaPSvl09KoYcMQtsB9rQoOmzs9dH6ffeccH+Z+cv6P68Hu5bC6JjRh4Ah/mHSNRw==}
+    dev: false
+
+  /follow-redirects/1.15.9:
+    resolution: {integrity: sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
     dev: false
 
   /for-each/0.3.3:
@@ -6572,11 +6586,13 @@ packages:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
     engines: {node: '>=8'}
 
-  /phin/3.7.0:
-    resolution: {integrity: sha512-DqnVNrpYhKGBZppNKprD+UJylMeEKOZxHgPB+ZP6mGzf3uA2uox4Ep9tUm+rUc8WLIdHT3HcAE4X8fhwQA9JKg==}
+  /phin/3.7.1:
+    resolution: {integrity: sha512-GEazpTWwTZaEQ9RhL7Nyz0WwqilbqgLahDM3D0hxWwmVDI52nXEybHqiN6/elwpkJBhcuj+WbBu+QfT0uhPGfQ==}
     engines: {node: '>= 8'}
     dependencies:
-      centra: 2.6.0
+      centra: 2.7.0
+    transitivePeerDependencies:
+      - debug
     dev: false
 
   /picocolors/1.0.0:
