@@ -38,7 +38,7 @@ specifiers:
   helmet: 6.2.0
   hpp: 0.2.3
   husky: 8.0.3
-  ioredis: 5.5.0
+  ioredis: 5.6.0
   jest: 29.7.0
   lint-staged: 13.3.0
   mongoose: 6.13.8
@@ -79,7 +79,7 @@ dependencies:
   graphql: 15.10.1
   helmet: 6.2.0
   hpp: 0.2.3
-  ioredis: 5.5.0
+  ioredis: 5.6.0
   mongoose: 6.13.8
   morgan: 1.10.0
   nhentai: 3.0.0
@@ -3037,7 +3037,7 @@ packages:
     dependencies:
       cron-parser: 4.9.0
       get-port: 5.1.1
-      ioredis: 5.5.0
+      ioredis: 5.6.0
       lodash: 4.17.21
       msgpackr: 1.11.2
       semver: 7.5.4
@@ -5182,8 +5182,8 @@ packages:
       - supports-color
     dev: false
 
-  /ioredis/5.5.0:
-    resolution: {integrity: sha512-7CutT89g23FfSa8MDoIFs2GYYa0PaNiW/OrT+nRyjRXHDZd17HmIgy+reOQ/yhh72NznNjGuS8kbCAcA4Ro4mw==}
+  /ioredis/5.6.0:
+    resolution: {integrity: sha512-tBZlIIWbndeWBWCXWZiqtOF/yxf6yZX3tAlTJ7nfo5jhd6dctNxF7QnYlZLZ1a0o0pDoen7CgZqO+zjNaFbJAg==}
     engines: {node: '>=12.22.0'}
     dependencies:
       '@ioredis/commands': 1.2.0
