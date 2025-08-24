@@ -5,7 +5,7 @@ specifiers:
   '@types/bull': 3.15.9
   '@types/compression': 1.8.1
   '@types/cors': 2.8.19
-  '@types/eslint': 8.56.12
+  '@types/eslint': 9.6.1
   '@types/express': 4.17.23
   '@types/hpp': 0.2.6
   '@types/ioredis': 4.28.10
@@ -101,7 +101,7 @@ devDependencies:
   '@types/bull': 3.15.9
   '@types/compression': 1.8.1
   '@types/cors': 2.8.19
-  '@types/eslint': 8.56.12
+  '@types/eslint': 9.6.1
   '@types/express': 4.17.23
   '@types/hpp': 0.2.6
   '@types/ioredis': 4.28.10
@@ -2083,8 +2083,8 @@ packages:
       '@types/node': 16.18.126
     dev: true
 
-  /@types/eslint/8.56.12:
-    resolution: {integrity: sha512-03ruubjWyOHlmljCVoxSuNDdmfZDzsrrz0P2LeJsOXr+ZwFQ+0yQIwNCwt/GYhV7Z31fgtXJTAEs+FYlEL851g==}
+  /@types/eslint/9.6.1:
+    resolution: {integrity: sha512-FXx2pKgId/WyYo2jXw63kk7/+TY7u7AziEJxJAnSFzHlqTAS3Ync6SvgYAN/k4/PQpnnVuzoMuVnByKK2qp0ag==}
     dependencies:
       '@types/estree': 1.0.0
       '@types/json-schema': 7.0.11
